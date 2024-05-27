@@ -5,12 +5,10 @@
 
   home.packages = with pkgs; [
     fzf
-    git
     google-chrome
     nodejs_18
     rustup
     tmux
-    vscode
   ];
 
   home.sessionPath = [
@@ -32,6 +30,13 @@
   programs.vim = {
     enable = true;
     defaultEditor = true;
+  };
+
+  programs.vscode = {
+    enable = true;
+    extensions = with pkgs.vscode-extensions; [
+      bbenoist.nix
+    ];
   };
 
   programs.zsh = {
