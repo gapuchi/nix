@@ -7,7 +7,6 @@
     _1password-gui
     fzf
     google-chrome
-    nodejs_18
     rustup
     signal-desktop
     spotify
@@ -20,7 +19,6 @@
 
   programs.direnv = {
     enable = true;
-    enableZshIntegration = true;
     nix-direnv.enable = true;
   };
 
