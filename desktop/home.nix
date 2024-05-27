@@ -4,10 +4,13 @@
   home.homeDirectory = "/home/gapuchi";
 
   home.packages = with pkgs; [
+    _1password-gui
     fzf
     google-chrome
     nodejs_18
     rustup
+    signal-desktop
+    spotify
     tmux
   ];
 
