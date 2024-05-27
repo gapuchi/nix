@@ -23,6 +23,17 @@
     nix-direnv.enable = true;
   };
 
+  programs.git = {
+    enable = true;
+    userName = "gapuchi";
+    userEmail = "arjun.adhia@gmail.com";
+  };
+
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
