@@ -35,8 +35,10 @@
 
   programs.vscode = {
     enable = true;
+    mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
+      github.vscode-github-actions
     ];
   };
 
