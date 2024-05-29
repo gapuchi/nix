@@ -5,6 +5,7 @@
 
   home.packages = with pkgs; [
     _1password-gui
+    awscli2
     fzf
     google-chrome
     rustup
