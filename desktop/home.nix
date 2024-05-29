@@ -36,7 +36,6 @@
 
   programs.vscode = {
     enable = true;
-    mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
       github.vscode-github-actions
@@ -51,8 +50,19 @@
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "tmux" "fzf" ];
-      theme = "robbyrussell";
     };
+
+    initExtra = ''
+      [[ ! -f ${./p10k.zsh} ]] || source ${./p10k.zsh}
+    '';
+
+    plugins = [
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+      }
+    ];
   };
 
   # The state version is required and should stay at the version you
