@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, stateVersion, ... }: {
 
   home.username = "gapuchi";
   home.homeDirectory = "/home/gapuchi";
@@ -68,7 +68,7 @@
 
   # The state version is required and should stay at the version you
   # originally installed.
-  home.stateVersion = "23.11";
+  home.stateVersion = stateVersion;
 
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;

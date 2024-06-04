@@ -9,22 +9,28 @@
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: 
     let
-      hosts = [
-        "gapuchi-desktop"
-        "gapuchi-laptop"
-      ];
+      hosts = {
+        "gapuchi-desktop" = {
+          stateVersion = "23.05";
+        };
 
-      forAllHosts = nixpkgs.lib.genAttrs hosts;
+        "gapuchi-laptop" = {
+          stateVersion = "23.11";
+        };
+      };
+
+      forAllHosts = nixpkgs.lib.genAttrs (builtins.attrNames hosts);
    in {
-    nixosConfigurations = forAllHosts (host: nixpkgs.lib.nixosSystem {
+    nixosConfigurations = forAllHosts (hostName: nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
-        ./${host}/configuration.nix
+        ./machines/${hostName}/configuration.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.gapuchi = import ./${host}/home.nix;
+          home-manager.users.gapuchi = import ./common/home.nix;
+          home-manager.extraSpecialArgs = hosts.${hostName};
         }
       ];
     });
