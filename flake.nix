@@ -12,10 +12,12 @@
       hostConfigs = {
         "gapuchi-desktop" = {
           stateVersion = "23.05";
+          includeGuiPkgs = true;
         };
 
         "gapuchi-laptop" = {
           stateVersion = "23.11";
+          includeGuiPkgs = true;
         };
       };
 

@@ -1,20 +1,25 @@
-{ pkgs, stateVersion, ... }: {
+{ pkgs, stateVersion, includeGuiPkgs, ... }: {
 
   home.username = "gapuchi";
   home.homeDirectory = "/home/gapuchi";
 
-  home.packages = with pkgs; [
-    _1password-gui
-    awscli2
-    beeper
-    discord
-    fzf
-    google-chrome
-    rustup
-    signal-desktop
-    spotify
-    tmux
-  ];
+  home.packages = 
+    let
+      guiPkgs = with pkgs; [
+        _1password-gui
+        beeper
+        discord
+        google-chrome
+        signal-desktop
+        spotify
+      ];
+    in
+      with pkgs; [
+        awscli2
+        fzf
+        rustup
+        tmux
+      ] ++ (if includeGuiPkgs then guiPkgs else []);
 
   home.sessionPath = [
     "$HOME/.cargo/bin"
