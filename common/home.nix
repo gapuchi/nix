@@ -17,6 +17,7 @@
       with pkgs; [
         awscli2
         fzf
+        go
         rustup
         tmux
       ] ++ (if includeGuiPkgs then guiPkgs else []);
@@ -46,6 +47,7 @@
     extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
       github.vscode-github-actions
+      golang.go
     ];
   };
 
