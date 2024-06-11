@@ -45,6 +45,7 @@
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
+      angular.ng-template
       bbenoist.nix
       github.vscode-github-actions
       golang.go
