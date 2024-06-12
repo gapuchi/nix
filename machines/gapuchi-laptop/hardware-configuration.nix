@@ -18,7 +18,7 @@
       fsType = "ext4";
     };
 
-  fileSystems."/shared" =
+  fileSystems."/home/gapuchi/shared" =
     { device = "/dev/disk/by-uuid/4FD9C9683A9AC95E";
       fsType = "ntfs";
     };
