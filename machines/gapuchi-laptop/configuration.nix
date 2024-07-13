@@ -49,7 +49,7 @@
     desktopManager.gnome.enable = true;
 
     # See https://nixos.wiki/wiki/Displaylink
-    videoDrivers = [ "displaylink" "modesetting" ];
+    # videoDrivers = [ "displaylink" "modesetting" ];
 
     xkb = {
       layout = "us";
