@@ -10,6 +10,7 @@
         beeper
         discord
         google-chrome
+        plex-media-player
         signal-desktop
         spotify
       ];
