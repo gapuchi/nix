@@ -9,6 +9,7 @@
         _1password-gui
         beeper
         discord
+        firefox
         google-chrome
         plex-media-player
         signal-desktop
