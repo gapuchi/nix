@@ -11,7 +11,7 @@
         discord
         firefox
         google-chrome
-        plex-media-player
+        plex-desktop
         signal-desktop
         spotify
       ];
@@ -50,6 +50,7 @@
       bbenoist.nix
       github.vscode-github-actions
       golang.go
+      haskell.haskell
       ms-python.python
     ];
   };
