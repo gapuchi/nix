@@ -47,7 +47,7 @@
 
   programs.vscode = {
     enable = true;
-    extensions = with pkgs.vscode-extensions; [
+    profiles.default.extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
       github.vscode-github-actions
       golang.go
@@ -66,7 +66,7 @@
       plugins = [ "git" "tmux" "fzf" ];
     };
 
-    initExtra = ''
+    initContent = ''
       [[ ! -f ${./p10k.zsh} ]] || source ${./p10k.zsh}
     '';
 
