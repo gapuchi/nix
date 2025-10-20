@@ -1,7 +1,7 @@
 { pkgs, stateVersion, includeGuiPkgs, ... }: {
 
   home.username = "gapuchi";
-  home.homeDirectory = "/home/gapuchi";
+  home.homeDirectory = if pkgs.stdenv.isDarwin then "/Users/gapuchi" else "/home/gapuchi";
 
   home.packages = 
     let
