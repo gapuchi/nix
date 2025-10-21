@@ -22,7 +22,7 @@
         fzf
         go
         rustup
-        tmux
+        zellij
       ] ++ (if includeGuiPkgs then guiPkgs else []);
 
   home.sessionPath = [
@@ -63,7 +63,7 @@
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "tmux" "fzf" ];
+      plugins = [ "git" "fzf" ];
     };
 
     initContent = ''
