@@ -36,8 +36,10 @@
 
   programs.git = {
     enable = true;
-    userName = "gapuchi";
-    userEmail = "arjun.adhia@gmail.com";
+    settings.user = {
+      name = "gapuchi";
+      email = "arjun.adhia@gmail.com";
+    };
   };
 
   programs.vim = {
