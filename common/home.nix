@@ -1,7 +1,12 @@
 { pkgs, stateVersion, includeGuiPkgs, homeDirectory, ... }: {
 
-  home.username = "gapuchi";
-  home.homeDirectory = homeDirectory;
+  home = {
+    username = "gapuchi";
+    homeDirectory = homeDirectory;
+    # The state version is required and should stay at the version you
+    # originally installed.
+    stateVersion = stateVersion;
+  };
 
   home.packages = 
     let
@@ -80,10 +85,6 @@
       }
     ];
   };
-
-  # The state version is required and should stay at the version you
-  # originally installed.
-  home.stateVersion = stateVersion;
 
   # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
