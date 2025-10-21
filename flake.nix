@@ -13,11 +13,7 @@
         "gapuchi-desktop" = {
           stateVersion = "23.05";
           includeGuiPkgs = true;
-        };
-
-        "gapuchi-laptop" = {
-          stateVersion = "23.11";
-          includeGuiPkgs = true;
+          homeDirectory = "/home/gapuchi";
         };
       };
 
@@ -35,5 +31,22 @@
         }
       ];
     });
+
+    homeConfigurations = {
+      "gapuchi@gapuchi-air" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+        extraSpecialArgs = {
+          stateVersion = "25.05";
+          includeGuiPkgs = false;
+          homeDirectory = "/Users/gapuchi";
+        };
+        modules = [ 
+          ./common/home.nix
+          {
+            nixpkgs.config.allowUnfree = true;
+          }
+        ];
+      };
+    };
   };
 }
