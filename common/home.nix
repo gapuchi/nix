@@ -21,6 +21,7 @@
         awscli2
         fzf
         go
+        graphite-cli
         rustup
         zellij
       ] ++ (if includeGuiPkgs then guiPkgs else []);
