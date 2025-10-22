@@ -54,7 +54,7 @@
   };
 
   programs.vscode = {
-    enable = true;
+    enable = includeGuiPkgs;
     profiles.default.extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
       github.vscode-github-actions
