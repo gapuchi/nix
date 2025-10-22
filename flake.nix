@@ -21,8 +21,6 @@
             users.gapuchi = import ./common/home.nix;
             extraSpecialArgs = {
               stateVersion = "23.05";
-              includeGuiPkgs = true;
-              homeDirectory = "/home/gapuchi";
             };
           }
         ];
@@ -40,8 +38,6 @@
         ];
         extraSpecialArgs = {
           stateVersion = "25.05";
-          includeGuiPkgs = false;
-          homeDirectory = "/Users/gapuchi";
         };
       };
     };

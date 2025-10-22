@@ -1,8 +1,8 @@
-{ pkgs, stateVersion, includeGuiPkgs, homeDirectory, ... }: {
+{ pkgs, stateVersion, ... }: {
 
   home = {
     username = "gapuchi";
-    homeDirectory = homeDirectory;
+    homeDirectory = if pkgs.stdenv.isLinux then "/home/gapuchi" else "/Users/gapuchi";
     # The state version is required and should stay at the version you
     # originally installed.
     stateVersion = stateVersion;
@@ -10,6 +10,7 @@
 
   home.packages = 
     let
+      isLinux = pkgs.stdenv.isLinux;
       guiPkgs = with pkgs; [
         _1password-gui
         beeper
@@ -28,7 +29,7 @@
         go
         rustup
         zellij
-      ] ++ (if includeGuiPkgs then guiPkgs else []);
+      ] ++ (if isLinux then guiPkgs else []);
 
   home.sessionPath = [
     "$HOME/.cargo/bin"
@@ -53,7 +54,7 @@
   };
 
   programs.vscode = {
-    enable = includeGuiPkgs;
+    enable = pkgs.stdenv.isLinux;
     profiles.default.extensions = with pkgs.vscode-extensions; [
       bbenoist.nix
       github.vscode-github-actions
