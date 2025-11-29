@@ -27,6 +27,7 @@
         awscli2
         fzf
         go
+        gh
         rustup
         zellij
       ] ++ (if isLinux then guiPkgs else []);
