@@ -27,6 +27,7 @@
         awscli2
         fzf
         go
+        gh
         graphite-cli
         rustup
         zellij
