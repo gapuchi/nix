@@ -3,6 +3,5 @@
 
     my.home = {
         homeDirectory = "/home/gapuchi";
-        stateVersion = "23.05";
     };
 }
