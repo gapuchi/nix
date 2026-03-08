@@ -22,11 +22,6 @@ in
         type = lib.types.str;
         description = "Home directory for user";
       };
-
-      stateVersion = lib.mkOption {
-        type = lib.types.str;
-        description = "State version";
-      };
     };
   };
 
@@ -34,7 +29,7 @@ in
     home = {
       username = "gapuchi";
       homeDirectory = cfg.homeDirectory;
-      stateVersion = cfg.stateVersion;
+      stateVersion = "25.05";
     };
 
     home.packages = with pkgs; [
