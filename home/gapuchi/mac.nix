@@ -2,5 +2,8 @@
 {
   imports = [ ./common.nix ];
 
-  home.homeDirectory = "/Users/gapuchi";
+  my.home = {
+    homeDirectory = "/Users/gapuchi";
+    stateVersion = "25.05";
+  };
 }
