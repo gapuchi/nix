@@ -31,7 +31,7 @@
   programs.vscode = {
     enable = pkgs.stdenv.isLinux;
     profiles.default.extensions = with pkgs.vscode-extensions; [
-      bbenoist.nix
+      jnoortheen.nix-ide
       github.vscode-github-actions
       golang.go
       haskell.haskell
