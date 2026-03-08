@@ -14,14 +14,11 @@
       "gapuchi-desktop" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./machines/gapuchi-desktop/configuration.nix
+          ./hosts/gapuchi-desktop/configuration.nix
           home-manager.nixosModules.home-manager.home-manager {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.gapuchi = import ./common/home.nix;
-            extraSpecialArgs = {
-              stateVersion = "23.05";
-            };
+            users.gapuchi = import ./home/gapuchi/linux.nix;
           }
         ];
       };
@@ -31,14 +28,11 @@
       "gapuchi" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.aarch64-darwin;
         modules = [ 
-          ./common/home.nix
+          ./home/gapuchi/mac.nix
           {
             nixpkgs.config.allowUnfree = true;
           }
         ];
-        extraSpecialArgs = {
-          stateVersion = "25.05";
-        };
       };
     };
   };
