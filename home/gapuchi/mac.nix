@@ -1,5 +1,6 @@
-{ pkgs, ... }: {
-    imports = [ ./common.nix ];
+{ pkgs, ... }:
+{
+  imports = [ ./common.nix ];
 
-    home.homeDirectory = "/Users/gapuchi";
+  home.homeDirectory = "/Users/gapuchi";
 }

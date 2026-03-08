@@ -9,31 +9,37 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, ... }: {
-    nixosConfigurations = {
-      "gapuchi-desktop" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./hosts/gapuchi-desktop/configuration.nix
-          home-manager.nixosModules.home-manager.home-manager {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.gapuchi = import ./home/gapuchi/linux.nix;
-          }
-        ];
+  outputs =
+    { nixpkgs, home-manager, ... }:
+    let
+      username = "gapuchi";
+    in
+    {
+      nixosConfigurations = {
+        "gapuchi-desktop" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/gapuchi-desktop/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.gapuchi = import ./home/${username}/linux.nix;
+            }
+          ];
+        };
       };
-    };
 
-    homeConfigurations = {
-      "gapuchi" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-        modules = [ 
-          ./home/gapuchi/mac.nix
-          {
-            nixpkgs.config.allowUnfree = true;
-          }
-        ];
+      homeConfigurations = {
+        "${username}@tintin" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          modules = [
+            ./home/${username}/mac.nix
+            {
+              nixpkgs.config.allowUnfree = true;
+            }
+          ];
+        };
       };
     };
-  };
 }

@@ -1,6 +1,7 @@
-{ pkgs, ... }: {
-    programs.vim = {    
-        enable = true;
-        defaultEditor = true;
-    };
+{ pkgs, ... }:
+{
+  programs.vim = {
+    enable = true;
+    defaultEditor = true;
+  };
 }
