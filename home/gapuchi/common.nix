@@ -1,4 +1,13 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+
+let
+  cfg = config.my.home;
+in
 {
   imports = [
     ../../modules/home-manager/direnv.nix
@@ -7,38 +16,54 @@
     ../../modules/home-manager/zsh.nix
   ];
 
-  home = {
-    username = "gapuchi";
-    homeDirectory = lib.mkDefault "/home/gapuchi";
-    stateVersion = "25.05";
+  options = {
+    my.home = {
+      homeDirectory = lib.mkOption {
+        type = lib.types.str;
+        description = "Home directory for user";
+      };
+
+      stateVersion = lib.mkOption {
+        type = lib.types.str;
+        description = "State version";
+      };
+    };
   };
 
-  home.packages = with pkgs; [
-    awscli2
-    fzf
-    go
-    gh
-    graphite-cli
-    nixfmt
-    rustup
-    zellij
-  ];
+  config = {
+    home = {
+      username = "gapuchi";
+      homeDirectory = cfg.homeDirectory;
+      stateVersion = cfg.stateVersion;
+    };
 
-  home.sessionPath = [
-    "$HOME/.cargo/bin"
-  ];
-
-  programs.vscode = {
-    enable = pkgs.stdenv.isLinux;
-    profiles.default.extensions = with pkgs.vscode-extensions; [
-      jnoortheen.nix-ide
-      github.vscode-github-actions
-      golang.go
-      haskell.haskell
-      ms-python.python
+    home.packages = with pkgs; [
+      awscli2
+      fzf
+      go
+      gh
+      graphite-cli
+      nixfmt
+      rustup
+      zellij
     ];
-  };
 
-  # Let home Manager install and manage itself.
-  programs.home-manager.enable = true;
+    home.sessionPath = [
+      "$HOME/.cargo/bin"
+    ];
+
+    programs.vscode = {
+      enable = pkgs.stdenv.isLinux;
+      profiles.default.extensions = with pkgs.vscode-extensions; [
+        jnoortheen.nix-ide
+        github.vscode-github-actions
+        golang.go
+        haskell.haskell
+        ms-python.python
+      ];
+    };
+
+    # Let home Manager install and manage itself.
+    programs.home-manager.enable = true;
+  };
 }
