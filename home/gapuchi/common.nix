@@ -1,4 +1,5 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   imports = [
     ../../modules/home-manager/direnv.nix
     ../../modules/home-manager/git.nix
@@ -17,6 +18,7 @@
     fzf
     go
     gh
+    nixfmt
     rustup
     zellij
   ];
