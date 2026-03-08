@@ -1,4 +1,5 @@
-{ pkgs, lib, ... }: {
+{ pkgs, lib, ... }:
+{
   imports = [
     ../../modules/home-manager/direnv.nix
     ../../modules/home-manager/git.nix
@@ -18,6 +19,7 @@
     go
     gh
     graphite-cli
+    nixfmt
     rustup
     zellij
   ];
