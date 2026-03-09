@@ -38,6 +38,8 @@ in
       go
       gh
       graphite-cli
+      just
+      just-lsp # TODO For VS Code
       nixfmt
       rustup
       zellij
