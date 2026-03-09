@@ -37,6 +37,8 @@ in
       fzf
       go
       gh
+      just
+      just-lsp # TODO For VS Code
       nixfmt
       rustup
       zellij
