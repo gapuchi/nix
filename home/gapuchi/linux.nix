@@ -1,7 +1,12 @@
-{ pkgs, ... }: {
-    imports = [ ./common.nix, ./desktop-env.nix ];
+{ pkgs, ... }:
+{
+  imports = [
+    ./common.nix
+    ./desktop-env.nix
+  ];
 
-    my.home = {
-        homeDirectory = "/home/gapuchi";
-    };
+  my.home = {
+    homeDirectory = "/home/gapuchi";
+    hasGui = true;
+  };
 }
