@@ -10,10 +10,11 @@ let
 in
 {
   imports = [
-    ../../modules/home-manager/direnv.nix
-    ../../modules/home-manager/git.nix
-    ../../modules/home-manager/vim.nix
-    ../../modules/home-manager/zsh.nix
+    ./modules/direnv.nix
+    ./modules/git.nix
+    ./modules/vim.nix
+    ./modules/vscode.nix
+    ./modules/zsh.nix
   ];
 
   options = {
@@ -21,6 +22,12 @@ in
       homeDirectory = lib.mkOption {
         type = lib.types.str;
         description = "Home directory for user";
+      };
+
+      hasGui = lib.mkOption {
+        type = lib.types.bool;
+        description = "Does the machine have a desktop env";
+        default = false;
       };
     };
   };
@@ -39,7 +46,6 @@ in
       gh
       graphite-cli
       just
-      just-lsp # TODO For VS Code
       nixfmt
       rustup
       zellij
@@ -48,17 +54,6 @@ in
     home.sessionPath = [
       "$HOME/.cargo/bin"
     ];
-
-    programs.vscode = {
-      enable = pkgs.stdenv.isLinux;
-      profiles.default.extensions = with pkgs.vscode-extensions; [
-        jnoortheen.nix-ide
-        github.vscode-github-actions
-        golang.go
-        haskell.haskell
-        ms-python.python
-      ];
-    };
 
     # Let home Manager install and manage itself.
     programs.home-manager.enable = true;
