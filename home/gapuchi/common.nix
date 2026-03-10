@@ -11,6 +11,7 @@ in
 {
   imports = [
     ./modules/direnv.nix
+    ./modules/ghostty.nix
     ./modules/git.nix
     ./modules/vim.nix
     ./modules/vscode.nix
