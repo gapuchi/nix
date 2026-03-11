@@ -4,6 +4,7 @@
   networking = {
     interfaces.enp42s0.ipv4.addresses = [
       {
+        useDHCP = false;
         address = "192.168.1.2";
         prefixLength = 24;
       }
