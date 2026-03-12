@@ -5,20 +5,20 @@
     enable = true;
 
     openFirewallDNS = true;
-    openFirewallDHCP = true;
     openFirewallWebserver = true;
 
     settings = {
-      dns.upstreams = [
-        "8.8.8.8"
-        "1.1.1.1"
-      ];
+      dns = {
+        hosts = [
+          "192.168.1.1 router"
+          "192.168.1.2 calculus"
+          "192.168.1.3 snowy"
+        ];
 
-      dhcp = {
-        active = false;
-        start = "192.168.1.10";
-        end = "192.168.1.255";
-        router = "192.168.1.1";
+        upstreams = [
+          "8.8.8.8"
+          "1.1.1.1"
+        ];
       };
     };
 
