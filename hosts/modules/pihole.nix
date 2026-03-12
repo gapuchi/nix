@@ -2,9 +2,8 @@
 {
 
   networking = {
-    interfaces.enp42s0.ipv4.addresses = [
+    interfaces.enp3s0.ipv4.addresses = [
       {
-        useDHCP = false;
         address = "192.168.1.2";
         prefixLength = 24;
       }
@@ -38,13 +37,11 @@
     lists = [
       {
         url = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
-        type = "block";
         enabled = true;
         description = "Steven Black's HOSTS";
       }
       {
         url = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt";
-        type = "block";
         enabled = true;
         description = "hagezi blocklist";
       }
