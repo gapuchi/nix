@@ -15,6 +15,11 @@
           "192.168.1.3 snowy"
         ];
 
+        rateLimit = {
+          count = 0;
+          interval = 0;
+        };
+
         upstreams = [
           "8.8.8.8"
           "1.1.1.1"
