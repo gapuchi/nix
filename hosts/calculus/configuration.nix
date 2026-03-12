@@ -17,11 +17,23 @@
     ../modules/pihole.nix
   ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    supportedFilesystems = [ "nfs" ];
 
-  networking.hostName = "calculus"; # Define your hostname.
+    # Use the systemd-boot EFI boot loader.
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+  };
+
+  fileSystems."/mnt/snowy" = {
+    device = "snowy:/Public";
+    fsType = "nfs";
+    options = [ "nfsvers=4.1" ];
+  };
+
+  networking.hostName = "calculus";
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
