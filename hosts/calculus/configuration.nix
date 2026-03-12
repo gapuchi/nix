@@ -14,6 +14,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../modules/plex.nix
+    ../modules/pihole.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
