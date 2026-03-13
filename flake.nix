@@ -7,6 +7,7 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    agenix.url = "github:ryantm/agenix";
     mafia-bot.url = "github:gapuchi/mafia-bot-rust";
   };
 
@@ -15,6 +16,7 @@
       nixpkgs,
       home-manager,
       mafia-bot,
+      agenix,
       ...
     }:
     let
@@ -38,6 +40,7 @@
           specialArgs = { inherit mafia-bot; };
           modules = [
             ./hosts/calculus/configuration.nix
+            agenix.nixosModules.default
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
