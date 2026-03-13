@@ -16,6 +16,7 @@
     ../modules/plex.nix
     ../modules/pihole.nix
     ../modules/mafia-bot.nix
+    ../modules/tailscale.nix
   ];
 
   boot = {
