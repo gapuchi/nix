@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgs-stable, ... }:
 {
 
   networking = {
@@ -15,6 +15,8 @@
 
   services.pihole-ftl = {
     enable = true;
+    # Until https://github.com/NixOS/nixpkgs/pull/496654 is merged
+    package = pkgs-stable.pihole-ftl;
 
     openFirewallDNS = true;
     openFirewallDHCP = true;
@@ -66,6 +68,9 @@
 
   services.pihole-web = {
     enable = true;
+    # Until https://github.com/NixOS/nixpkgs/pull/496654 is merged
+    package = pkgs-stable.pihole-web;
+
     ports = [
       "443s"
       "80"
