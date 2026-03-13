@@ -7,10 +7,16 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mafia-bot.url = "github:gapuchi/mafia-bot-rust";
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }:
+    {
+      nixpkgs,
+      home-manager,
+      mafia-bot,
+      ...
+    }:
     let
       username = "gapuchi";
     in
@@ -29,6 +35,7 @@
           ];
         };
         "calculus" = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit mafia-bot; };
           modules = [
             ./hosts/calculus/configuration.nix
             home-manager.nixosModules.home-manager
