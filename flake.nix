@@ -2,9 +2,10 @@
   description = "NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     agenix.url = "github:ryantm/agenix";
@@ -17,6 +18,7 @@
   outputs =
     {
       nixpkgs,
+      nixpkgs-stable,
       home-manager,
       mafia-bot,
       agenix,
@@ -24,11 +26,12 @@
     }:
     let
       username = "gapuchi";
+      system = "x86_64-linux";
     in
     {
       nixosConfigurations = {
         "gapuchi-desktop" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           modules = [
             ./hosts/gapuchi-desktop/configuration.nix
             home-manager.nixosModules.home-manager
@@ -40,7 +43,6 @@
           ];
         };
         "calculus" = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit mafia-bot; };
           modules = [
             ./hosts/calculus/configuration.nix
             agenix.nixosModules.default
@@ -51,6 +53,10 @@
               home-manager.users.gapuchi = import ./home/${username}/linux-headless.nix;
             }
           ];
+          specialArgs = {
+            inherit mafia-bot;
+            pkgs-stable = import nixpkgs-stable { inherit system; };
+          };
         };
       };
 
