@@ -15,6 +15,7 @@
     ./hardware-configuration.nix
     ../modules/plex.nix
     ../modules/pihole.nix
+    ../modules/mafia-bot.nix
   ];
 
   boot = {
