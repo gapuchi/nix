@@ -17,6 +17,7 @@
     ../modules/pihole.nix
     ../modules/mafia-bot.nix
     ../modules/tailscale.nix
+    ../modules/uptime-kuma.nix
   ];
 
   boot = {
