@@ -13,7 +13,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../modules/caddy.nix
     ../modules/plex.nix
     ../modules/pihole.nix
     ../modules/mafia-bot.nix

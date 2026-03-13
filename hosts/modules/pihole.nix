@@ -43,13 +43,8 @@
   services.pihole-web = {
     enable = true;
     ports = [
-      "8080o"
-      "8443os"
+      "443s"
+      "80"
     ];
   };
-
-  networking.firewall.allowedTCPPorts = [
-    8080
-    8443
-  ];
 }
