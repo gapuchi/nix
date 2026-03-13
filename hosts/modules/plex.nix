@@ -7,6 +7,5 @@
 
   services.tautulli = {
     enable = true;
-    openFirewall = true;
   };
 }

@@ -28,6 +28,12 @@
             tls internal
           ";
       };
+      "grafana.home.arpa" = {
+        extraConfig = "
+            reverse_proxy localhost:3000
+            tls internal
+          ";
+      };
     };
   };
 
