@@ -2,9 +2,16 @@
 {
   programs.git = {
     enable = true;
-    settings.user = {
-      name = "gapuchi";
-      email = "arjun.adhia@gmail.com";
+
+    settings = {
+      user = {
+        name = "gapuchi";
+        email = "arjun.adhia@gmail.com";
+      };
+
+      pull = {
+        rebase = true;
+      };
     };
   };
 }
