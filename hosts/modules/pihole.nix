@@ -21,6 +21,7 @@
     openFirewallDNS = true;
     openFirewallDHCP = true;
     openFirewallWebserver = true;
+    useDnsmasqConfig = true;
 
     settings = {
       dns = {
@@ -72,8 +73,20 @@
     package = pkgs-stable.pihole-web;
 
     ports = [
-      "443s"
-      "80"
+      "8080"
+      "8443s"
     ];
   };
+
+  services.dnsmasq = {
+    enable = false;
+    settings = {
+      address = "/.home.arpa/192.168.1.2";
+    };
+  };
+
+  networking.firewall.allowedTCPPorts = [
+    8080
+    8443
+  ];
 }
