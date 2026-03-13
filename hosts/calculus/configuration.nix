@@ -17,6 +17,7 @@
     ../modules/plex.nix
     ../modules/pihole.nix
     ../modules/mafia-bot.nix
+    ../modules/monitoring.nix
     ../modules/tailscale.nix
     ../modules/uptime-kuma.nix
   ];

@@ -20,7 +20,6 @@
 
     openFirewallDNS = true;
     openFirewallDHCP = true;
-    openFirewallWebserver = true;
     useDnsmasqConfig = true;
 
     settings = {
@@ -84,9 +83,4 @@
       address = "/.home.arpa/192.168.1.2";
     };
   };
-
-  networking.firewall.allowedTCPPorts = [
-    8080
-    8443
-  ];
 }

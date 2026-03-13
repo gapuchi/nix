@@ -7,4 +7,8 @@ in
     tintin
     calculus
   ];
+  "secrets/grafana-key.age".publicKeys = [
+    tintin
+    calculus
+  ];
 }
