@@ -22,6 +22,11 @@
     ../modules/uptime-kuma.nix
   ];
 
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+
   boot = {
     supportedFilesystems = [ "nfs" ];
 
