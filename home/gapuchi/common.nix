@@ -41,12 +41,9 @@ in
     };
 
     home.packages = with pkgs; [
-      awscli2
       fzf
-      go
       gh
       graphite-cli
-      just
       nixfmt
       rustup
       zellij
@@ -56,7 +53,6 @@ in
       "$HOME/.cargo/bin"
     ];
 
-    # Let home Manager install and manage itself.
     programs.home-manager.enable = true;
   };
 }

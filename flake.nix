@@ -24,11 +24,11 @@
     let
       username = "gapuchi";
       system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
     in
     {
       nixosConfigurations = {
         "gapuchi-desktop" = nixpkgs.lib.nixosSystem {
-          inherit system;
           modules = [
             ./hosts/gapuchi-desktop/configuration.nix
             home-manager.nixosModules.home-manager
@@ -39,6 +39,7 @@
             }
           ];
         };
+
         "calculus" = nixpkgs.lib.nixosSystem {
           modules = [
             ./hosts/calculus/configuration.nix
@@ -67,6 +68,10 @@
             }
           ];
         };
+      };
+
+      devShells.${system}.default = pkgs.mkShell {
+        packages = with pkgs; [ just ];
       };
     };
 }
