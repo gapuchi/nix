@@ -24,7 +24,12 @@
     let
       username = "gapuchi";
       system = "x86_64-linux";
-      systems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
       pkgs = import nixpkgs { inherit system; };
     in
     {
@@ -71,8 +76,11 @@
         };
       };
 
-      devShells = nixpkgs.lib.genAttrs systems (system:
-        let pkgs = import nixpkgs { inherit system; }; in
+      devShells = nixpkgs.lib.genAttrs systems (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+        in
         {
           default = pkgs.mkShell {
             packages = with pkgs; [ just ];
