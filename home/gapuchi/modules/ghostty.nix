@@ -6,5 +6,8 @@ in
   programs.ghostty = {
     enable = cfg.hasGui;
     enableZshIntegration = true;
+    settings = {
+      theme = "vercel";
+    };
   };
 }
