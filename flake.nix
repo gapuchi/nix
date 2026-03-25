@@ -4,12 +4,27 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    systems.url = "github:nix-systems/default";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    agenix.url = "github:ryantm/agenix";
-    mafia-bot.url = "github:gapuchi/mafia-bot-rust";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+      inputs.systems.follows = "systems";
+    };
+    flake-utils = {
+      url = "github:numtide/flake-utils";
+      inputs.systems.follows = "systems";
+    };
+    mafia-bot = {
+      url = "github:gapuchi/mafia-bot-rust";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
+    };
   };
 
   outputs =
@@ -19,18 +34,12 @@
       home-manager,
       mafia-bot,
       agenix,
+      flake-utils,
       ...
     }:
     let
       username = "gapuchi";
       system = "x86_64-linux";
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
-      pkgs = import nixpkgs { inherit system; };
     in
     {
       nixosConfigurations = {
@@ -75,17 +84,16 @@
           ];
         };
       };
-
-      devShells = nixpkgs.lib.genAttrs systems (
-        system:
-        let
-          pkgs = import nixpkgs { inherit system; };
-        in
-        {
-          default = pkgs.mkShell {
-            packages = with pkgs; [ just ];
-          };
-        }
-      );
-    };
+    }
+    // flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
+        devShells.default = pkgs.mkShell {
+          packages = with pkgs; [ just ];
+        };
+      }
+    );
 }
