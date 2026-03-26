@@ -15,6 +15,12 @@
 
     initContent = ''
       [[ ! -f ${./p10k.zsh} ]] || source ${./p10k.zsh}
+
+      cdf() {
+        local dir
+        dir=$(ls -d ~/workspace/*/ | xargs -n1 basename | fzf -1 -q "''${1:-}")
+        [[ -n "$dir" ]] && cd ~/workspace/"$dir"
+      }
     '';
 
     plugins = [
