@@ -7,7 +7,7 @@ in
     enable = cfg.hasGui;
     enableZshIntegration = true;
     settings = {
-      theme = "vercel";
+      theme = "Vercel";
     };
   };
 }
