@@ -9,6 +9,7 @@ in
 
   programs.vscode = {
     enable = cfg.hasGui;
+    package = pkgs.code-cursor;
     profiles.default.extensions = with pkgs.vscode-extensions; [
       jnoortheen.nix-ide
       github.vscode-github-actions
