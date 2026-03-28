@@ -11,4 +11,8 @@ in
     tintin
     calculus
   ];
+  "secrets/anthropic-api-key.age".publicKeys = [
+    tintin
+    calculus
+  ];
 }
