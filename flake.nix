@@ -90,7 +90,7 @@
       in
       {
         devShells.default = pkgs.mkShell {
-          packages = with pkgs; [ just ];
+          packages = with pkgs; [ git just ];
         };
       }
     );
