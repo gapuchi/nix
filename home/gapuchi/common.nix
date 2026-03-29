@@ -44,6 +44,7 @@ in
       claude-code
       fzf
       gh
+      jq
       nixfmt
       rustup
       zellij
