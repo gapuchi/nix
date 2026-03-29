@@ -45,6 +45,7 @@ in
       fzf
       gh
       graphite-cli
+      jq
       nixfmt
       rustup
       zellij
