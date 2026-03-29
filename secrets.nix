@@ -15,4 +15,8 @@ in
     tintin
     calculus
   ];
+  "secrets/gateway-token.age".publicKeys = [
+    tintin
+    calculus
+  ];
 }
