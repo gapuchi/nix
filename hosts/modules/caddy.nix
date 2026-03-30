@@ -34,6 +34,12 @@
             tls internal
           ";
       };
+      "openclaw.home.arpa" = {
+        extraConfig = "
+            reverse_proxy localhost:3002
+            tls internal
+          ";
+      };
     };
   };
 

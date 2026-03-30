@@ -159,6 +159,26 @@
         "type": "github"
       }
     },
+    "openclaw": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1775199476,
+        "narHash": "sha256-XceeGkUrPjwGfOpCYp6XXxkfLxuPWTA3GjnT8exVUrc=",
+        "owner": "gapuchi",
+        "repo": "openclaw-nix",
+        "rev": "e9725c02eea0720b6c1d13556138576fb772b031",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gapuchi",
+        "repo": "openclaw-nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -166,7 +186,8 @@
         "home-manager": "home-manager",
         "mafia-bot": "mafia-bot",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-stable": "nixpkgs-stable"
+        "nixpkgs-stable": "nixpkgs-stable",
+        "openclaw": "openclaw"
       }
     },
     "systems": {
