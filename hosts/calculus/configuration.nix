@@ -14,6 +14,7 @@
     ../modules/monitoring.nix
     ../modules/tailscale.nix
     ../modules/uptime-kuma.nix
+    ../modules/openclaw.nix
   ];
 
   nix.settings.experimental-features = [
