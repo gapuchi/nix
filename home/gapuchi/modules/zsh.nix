@@ -21,6 +21,12 @@
         dir=$(ls -d ~/workspace/*/ | xargs -n1 basename | fzf -1 -q "''${1:-}")
         [[ -n "$dir" ]] && cd ~/workspace/"$dir"
       }
+
+      gswf() {
+        local branch
+        branch=$(git for-each-ref --format='%(refname:short)' refs/heads/ | fzf -1 -q "''${1:-}")
+        [[ -n "$branch" ]] && git switch "$branch"
+      }      
     '';
 
     plugins = [
