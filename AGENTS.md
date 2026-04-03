@@ -21,11 +21,6 @@ When adding packages or home options, respect the target:
 | **Linux server** | NixOS, headless | No desktop environment. **Do not** add packages whose main purpose is a GUI. |
 | **Mac** | Standalone Nix | **Do not** add packages whose main purpose is a GUI. |
 
-## Key Machines
-
-- `calculus` is a **Linux server**. Most processes / services run on this machine.
-- `gapuchi-desktop` is a **Linux desktop**
-
 ## Commands
 
 | Command | Use |
