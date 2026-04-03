@@ -90,7 +90,11 @@
       in
       {
         devShells.default = pkgs.mkShell {
-          packages = with pkgs; [ git just ];
+          packages = [
+            pkgs.git
+            pkgs.just
+            agenix.packages.${system}.default
+          ];
         };
       }
     );
