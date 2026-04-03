@@ -7,6 +7,10 @@ in
     tintin
     calculus
   ];
+  "secrets/openclaw-discord-token.age".publicKeys = [
+    tintin
+    calculus
+  ];
   "secrets/grafana-key.age".publicKeys = [
     tintin
     calculus
