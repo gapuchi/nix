@@ -13,17 +13,37 @@
     nameservers = [ "127.0.0.1" ];
   };
 
+  # Allow DNS only on the LAN and Tailscale interfaces — not globally.
+  # This is safer than openFirewallDNS = true (which opens port 53 on all interfaces)
+  # because it keeps the boundary inside NixOS regardless of router config.
+  networking.firewall.interfaces = {
+    "enp3s0" = {
+      allowedTCPPorts = [ 53 ];
+      allowedUDPPorts = [
+        53
+        67
+        68
+      ]; # DNS + DHCP
+    };
+
+    "tailscale0" = {
+      allowedTCPPorts = [ 53 ];
+      allowedUDPPorts = [ 53 ];
+    };
+  };
+
   services.pihole-ftl = {
     enable = true;
     # Until https://github.com/NixOS/nixpkgs/pull/496654 is merged
     package = pkgs-stable.pihole-ftl;
 
-    openFirewallDNS = true;
-    openFirewallDHCP = true;
+    openFirewallDNS = false;
+    openFirewallDHCP = false;
     useDnsmasqConfig = true;
 
     settings = {
       dns = {
+        listeningMode = "ALL";
         hosts = [
           "192.168.1.1 router"
           "192.168.1.2 calculus"
