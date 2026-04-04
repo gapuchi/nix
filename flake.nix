@@ -24,8 +24,7 @@
       inputs.utils.follows = "flake-utils";
     };
     openclaw = {
-      url = "github:gapuchi/openclaw-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:openclaw/nix-openclaw";
     };
   };
 
@@ -68,7 +67,7 @@
               home-manager.useUserPackages = true;
               home-manager.users.gapuchi = import ./home/${username}/linux-headless.nix;
             }
-            openclaw.nixosModules.default
+            openclaw.nixosModules.openclaw-gateway
             { nixpkgs.overlays = [ openclaw.overlays.default ]; }
           ];
           specialArgs = {

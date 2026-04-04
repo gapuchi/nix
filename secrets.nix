@@ -3,15 +3,7 @@ let
   calculus = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE03FhBuQe7q98s/JhnJj9LnNISVhw0hx14S6sLMx9uj root@nixos";
 in
 {
-  "secrets/openclaw-env.age".publicKeys = [
-    tintin
-    calculus
-  ];
   "secrets/discord-token.age".publicKeys = [
-    tintin
-    calculus
-  ];
-  "secrets/openclaw-discord-token.age".publicKeys = [
     tintin
     calculus
   ];
@@ -19,11 +11,7 @@ in
     tintin
     calculus
   ];
-  "secrets/anthropic-api-key.age".publicKeys = [
-    tintin
-    calculus
-  ];
-  "secrets/gateway-token.age".publicKeys = [
+  "secrets/openclaw-gateway-env.age".publicKeys = [
     tintin
     calculus
   ];
