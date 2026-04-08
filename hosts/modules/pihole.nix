@@ -1,4 +1,7 @@
 { pkgs, pkgs-stable, ... }:
+let
+  calculusTailscaleIp = "100.126.118.61";
+in
 {
 
   networking = {
@@ -46,8 +49,24 @@
         listeningMode = "ALL";
         hosts = [
           "192.168.1.1 router"
-          "192.168.1.2 calculus"
+          # calculus resolves to its Tailscale IP (not 192.168.1.2) so the
+          # CNAME chain below directs *.home.arpa through tailscale0 instead
+          # of depending on subnet routing to the LAN address.
+          "${calculusTailscaleIp} calculus calculus.home.arpa"
           "192.168.1.3 snowy"
+        ];
+
+        # Every service reverse-proxied by Caddy on this host gets a CNAME
+        # to `calculus.home.arpa`, which resolves to the Tailscale IP above.
+        # Result: one code path for on-LAN and remote access, no collisions
+        # with remote networks that share 192.168.1.0/24.
+        cnameRecords = [
+          "pihole.home.arpa,calculus.home.arpa"
+          "plex.home.arpa,calculus.home.arpa"
+          "tautulli.home.arpa,calculus.home.arpa"
+          "uptime-kuma.home.arpa,calculus.home.arpa"
+          "grafana.home.arpa,calculus.home.arpa"
+          "openclaw.home.arpa,calculus.home.arpa"
         ];
 
         rateLimit = {
