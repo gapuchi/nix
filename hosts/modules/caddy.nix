@@ -43,7 +43,11 @@
     };
   };
 
-  networking.firewall.allowedTCPPorts = [
+  # 80/443 are only reachable over Tailscale. Nothing is exposed on the WAN
+  # or LAN interface — clients (including on-LAN ones) hit Caddy via the
+  # server's Tailscale IP. Backends remain bound to 127.0.0.1 via the
+  # reverse_proxy targets above.
+  networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
     80
     443
   ];
