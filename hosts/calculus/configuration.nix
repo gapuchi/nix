@@ -67,6 +67,7 @@
     vim
     wget
     ghostty.terminfo
+    openclaw-gateway
   ];
 
   services.openssh = {
