@@ -41,6 +41,7 @@ in
     };
 
     home.packages = with pkgs; [
+      claude-code
       fzf
       gh
       graphite-cli
