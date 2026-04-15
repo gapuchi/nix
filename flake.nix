@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -31,7 +30,6 @@
   outputs =
     {
       nixpkgs,
-      nixpkgs-stable,
       home-manager,
       mafia-bot,
       agenix,
@@ -72,7 +70,6 @@
           ];
           specialArgs = {
             inherit mafia-bot;
-            pkgs-stable = import nixpkgs-stable { inherit system; };
           };
         };
       };

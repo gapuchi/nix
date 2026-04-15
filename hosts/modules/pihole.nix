@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, ... }:
+{ pkgs, ... }:
 let
   calculusTailscaleIp = "100.126.118.61";
 in
@@ -37,8 +37,6 @@ in
 
   services.pihole-ftl = {
     enable = true;
-    # Until https://github.com/NixOS/nixpkgs/pull/496654 is merged
-    package = pkgs-stable.pihole-ftl;
 
     openFirewallDNS = false;
     openFirewallDHCP = false;
@@ -107,8 +105,6 @@ in
 
   services.pihole-web = {
     enable = true;
-    # Until https://github.com/NixOS/nixpkgs/pull/496654 is merged
-    package = pkgs-stable.pihole-web;
 
     ports = [
       "8080"
