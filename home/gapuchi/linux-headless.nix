@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
-  imports = [ ./common.nix ];
+  imports = [
+    ./common.nix
+    ./modules/openclaw.nix
+  ];
 
   my.home = {
     homeDirectory = "/home/gapuchi";
