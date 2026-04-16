@@ -36,7 +36,7 @@
       };
       "openclaw.home.arpa" = {
         extraConfig = "
-            reverse_proxy localhost:3002
+            reverse_proxy localhost:18789
             tls internal
           ";
       };

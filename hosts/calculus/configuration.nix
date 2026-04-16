@@ -14,8 +14,12 @@
     ../modules/monitoring.nix
     ../modules/tailscale.nix
     ../modules/uptime-kuma.nix
-    ../modules/openclaw.nix
   ];
+
+  age.secrets.openclaw-gateway-env = {
+    file = ../../secrets/openclaw-gateway-env.age;
+    owner = "gapuchi";
+  };
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -53,6 +57,7 @@
       "wheel"
     ];
     shell = pkgs.zsh;
+    linger = true;
   };
 
   programs = {
@@ -67,7 +72,6 @@
     vim
     wget
     ghostty.terminfo
-    openclaw-gateway
   ];
 
   services.openssh = {

@@ -63,9 +63,11 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.sharedModules = [
+                openclaw.homeManagerModules.openclaw
+              ];
               home-manager.users.gapuchi = import ./home/${username}/linux-headless.nix;
             }
-            openclaw.nixosModules.openclaw-gateway
             { nixpkgs.overlays = [ openclaw.overlays.default ]; }
           ];
           specialArgs = {
