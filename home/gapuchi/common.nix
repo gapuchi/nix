@@ -20,6 +20,12 @@ in
 
   options = {
     my.home = {
+      username = lib.mkOption {
+        type = lib.types.str;
+        description = "Username for home-manager";
+        default = "gapuchi";
+      };
+
       homeDirectory = lib.mkOption {
         type = lib.types.str;
         description = "Home directory for user";
@@ -30,12 +36,26 @@ in
         description = "Does the machine have a desktop env";
         default = false;
       };
+
+      git = {
+        name = lib.mkOption {
+          type = lib.types.str;
+          description = "Git user name";
+          default = "gapuchi";
+        };
+
+        email = lib.mkOption {
+          type = lib.types.str;
+          description = "Git user email";
+          default = "arjun.adhia@gmail.com";
+        };
+      };
     };
   };
 
   config = {
     home = {
-      username = "gapuchi";
+      username = cfg.username;
       homeDirectory = cfg.homeDirectory;
       stateVersion = "25.05";
     };
