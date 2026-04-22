@@ -1,12 +1,15 @@
-{ pkgs, ... }:
+{ config, ... }:
+let
+  cfg = config.my.home.git;
+in
 {
   programs.git = {
     enable = true;
 
     settings = {
       user = {
-        name = "gapuchi";
-        email = "arjun.adhia@gmail.com";
+        name = cfg.name;
+        email = cfg.email;
       };
 
       pull = {

@@ -84,6 +84,16 @@
             }
           ];
         };
+        "arjun@arjun-gt" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+          modules = [
+            # TODO - make username accurate
+            ./home/${username}/work-mac.nix
+            {
+              nixpkgs.config.allowUnfree = true;
+            }
+          ];
+        };
       };
     }
     // flake-utils.lib.eachDefaultSystem (
