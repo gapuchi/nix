@@ -17,7 +17,10 @@
       };
 
       agents.defaults = {
-        model = "anthropic/claude-sonnet-4-6";
+        model = {
+          primary = "anthropic/claude-haiku-4-5";
+          fallbacks = [ "anthropic/claude-sonnet-4-6" ];
+        };
       };
 
       channels.discord = {
