@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-utils = {
       url = "github:numtide/flake-utils";
     };
@@ -31,6 +35,7 @@
     {
       nixpkgs,
       home-manager,
+      nix-darwin,
       mafia-bot,
       agenix,
       openclaw,
@@ -76,16 +81,21 @@
         };
       };
 
-      homeConfigurations = {
-        "${username}@tintin" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+      darwinConfigurations = {
+        "tintin" = nix-darwin.lib.darwinSystem {
           modules = [
-            ./home/${username}/mac.nix
+            ./hosts/tintin/configuration.nix
+            home-manager.darwinModules.home-manager
             {
-              nixpkgs.config.allowUnfree = true;
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${username} = import ./home/${username}/mac.nix;
             }
           ];
         };
+      };
+
+      homeConfigurations = {
         "arjun@arjun-gt" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages.aarch64-darwin;
           modules = [
