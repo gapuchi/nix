@@ -1,18 +1,19 @@
 { pkgs, ... }:
 let
-  calculusTailscaleIp = "100.126.118.61";
+  devices = import ../devices.nix;
+  calculusHostname = "calculus.home.arpa";
 in
 {
 
   networking = {
     interfaces.enp3s0.ipv4.addresses = [
       {
-        address = "192.168.1.2";
+        address = devices.calculus.ip;
         prefixLength = 24;
       }
     ];
 
-    defaultGateway = "192.168.1.1";
+    defaultGateway = devices.router.ip;
     nameservers = [ "127.0.0.1" ];
   };
 
@@ -46,12 +47,12 @@ in
       dns = {
         listeningMode = "ALL";
         hosts = [
-          "192.168.1.1 router"
-          # calculus resolves to its Tailscale IP (not 192.168.1.2) so the
+          "${devices.router.ip} router"
+          # calculus resolves to its Tailscale IP (not its LAN IP) so the
           # CNAME chain below directs *.home.arpa through tailscale0 instead
           # of depending on subnet routing to the LAN address.
-          "${calculusTailscaleIp} calculus calculus.home.arpa"
-          "192.168.1.3 snowy"
+          "${devices.calculus.tailscaleIp} calculus ${calculusHostname}"
+          "${devices.snowy.ip} snowy"
         ];
 
         # Every service reverse-proxied by Caddy on this host gets a CNAME
@@ -59,12 +60,12 @@ in
         # Result: one code path for on-LAN and remote access, no collisions
         # with remote networks that share 192.168.1.0/24.
         cnameRecords = [
-          "pihole.home.arpa,calculus.home.arpa"
-          "plex.home.arpa,calculus.home.arpa"
-          "tautulli.home.arpa,calculus.home.arpa"
-          "uptime-kuma.home.arpa,calculus.home.arpa"
-          "grafana.home.arpa,calculus.home.arpa"
-          "openclaw.home.arpa,calculus.home.arpa"
+          "pihole.home.arpa,${calculusHostname}"
+          "plex.home.arpa,${calculusHostname}"
+          "tautulli.home.arpa,${calculusHostname}"
+          "uptime-kuma.home.arpa,${calculusHostname}"
+          "grafana.home.arpa,${calculusHostname}"
+          "openclaw.home.arpa,${calculusHostname}"
         ];
 
         rateLimit = {
@@ -82,9 +83,9 @@ in
         active = true;
         start = "192.168.1.100";
         end = "192.168.1.254";
-        router = "192.168.1.1";
+        router = devices.router.ip;
         hosts = [
-          "24:5E:BE:45:A2:F0,192.168.1.3,snowy"
+          "${devices.snowy.mac},${devices.snowy.ip},snowy"
         ];
       };
     };
@@ -115,7 +116,7 @@ in
   services.dnsmasq = {
     enable = false;
     settings = {
-      address = "/.home.arpa/192.168.1.2";
+      address = "/.home.arpa/${devices.calculus.ip}";
     };
   };
 }
