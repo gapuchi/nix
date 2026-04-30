@@ -4,6 +4,9 @@
   pkgs,
   ...
 }:
+let
+  devices = import ../devices.nix;
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -36,7 +39,7 @@
   };
 
   fileSystems."/mnt/snowy" = {
-    device = "snowy:/Public";
+    device = "${devices.snowy.ip}:/Public";
     fsType = "nfs";
     options = [ "nfsvers=4.1" ];
   };
