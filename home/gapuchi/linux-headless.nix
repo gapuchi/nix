@@ -2,7 +2,6 @@
 {
   imports = [
     ./common.nix
-    ./modules/openclaw.nix
   ];
 
   my.home = {
