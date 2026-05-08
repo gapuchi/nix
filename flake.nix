@@ -67,6 +67,7 @@
                 openclaw.homeManagerModules.openclaw
               ];
               home-manager.users.gapuchi = import ./home/${username}/linux-headless.nix;
+              home-manager.users.openclaw = import ./home/openclaw/default.nix;
             }
             { nixpkgs.overlays = [ openclaw.overlays.default ]; }
           ];

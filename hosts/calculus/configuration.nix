@@ -21,7 +21,7 @@ in
 
   age.secrets.openclaw-gateway-env = {
     file = ../../secrets/openclaw-gateway-env.age;
-    owner = "gapuchi";
+    owner = "openclaw";
   };
 
   nix.settings.experimental-features = [
@@ -52,15 +52,28 @@ in
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
 
-  users.users.gapuchi = {
-    isNormalUser = true;
-    description = "Arjun Adhia";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-    shell = pkgs.zsh;
-    linger = true;
+  users = {
+    users = {
+      gapuchi = {
+        isNormalUser = true;
+        description = "Arjun Adhia";
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+        ];
+        shell = pkgs.zsh;
+      };
+
+      openclaw = {
+        isNormalUser = true;
+        home = "/var/lib/openclaw";
+        group = "openclaw";
+        linger = true;
+        shell = pkgs.bash;
+      };
+    };
+
+    groups.openclaw = { };
   };
 
   programs = {
