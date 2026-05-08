@@ -71,6 +71,8 @@
     Service = {
       EnvironmentFile = osConfig.age.secrets.openclaw-gateway-env.path;
       RestartSec = lib.mkForce "5s";
+      StandardOutput = lib.mkForce "file:/var/lib/openclaw/gateway.log";
+      StandardError = lib.mkForce "file:/var/lib/openclaw/gateway.log";
     };
   };
 }
