@@ -22,9 +22,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
     };
-    openclaw = {
-      url = "github:openclaw/nix-openclaw";
-    };
   };
 
   outputs =
@@ -33,7 +30,6 @@
       home-manager,
       mafia-bot,
       agenix,
-      openclaw,
       flake-utils,
       ...
     }:
@@ -63,13 +59,8 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.sharedModules = [
-                openclaw.homeManagerModules.openclaw
-              ];
               home-manager.users.gapuchi = import ./home/${username}/linux-headless.nix;
-              home-manager.users.openclaw = import ./home/openclaw/default.nix;
             }
-            { nixpkgs.overlays = [ openclaw.overlays.default ]; }
           ];
           specialArgs = {
             inherit mafia-bot;

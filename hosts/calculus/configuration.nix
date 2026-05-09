@@ -19,11 +19,6 @@ in
     ../modules/uptime-kuma.nix
   ];
 
-  age.secrets.openclaw-gateway-env = {
-    file = ../../secrets/openclaw-gateway-env.age;
-    owner = "openclaw";
-  };
-
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -52,28 +47,14 @@ in
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
 
-  users = {
-    users = {
-      gapuchi = {
-        isNormalUser = true;
-        description = "Arjun Adhia";
-        extraGroups = [
-          "networkmanager"
-          "wheel"
-        ];
-        shell = pkgs.zsh;
-      };
-
-      openclaw = {
-        isNormalUser = true;
-        home = "/var/lib/openclaw";
-        group = "openclaw";
-        linger = true;
-        shell = pkgs.bash;
-      };
-    };
-
-    groups.openclaw = { };
+  users.users.gapuchi = {
+    isNormalUser = true;
+    description = "Arjun Adhia";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    shell = pkgs.zsh;
   };
 
   programs = {

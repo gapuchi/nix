@@ -14,9 +14,4 @@ in
     calculus
     gapuchiCalculus
   ];
-  "secrets/openclaw-gateway-env.age".publicKeys = [
-    tintin
-    calculus
-    gapuchiCalculus
-  ];
 }
