@@ -65,7 +65,6 @@ in
           "tautulli.home.arpa,${calculusHostname}"
           "uptime-kuma.home.arpa,${calculusHostname}"
           "grafana.home.arpa,${calculusHostname}"
-          "openclaw.home.arpa,${calculusHostname}"
         ];
 
         rateLimit = {
