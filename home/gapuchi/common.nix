@@ -66,6 +66,7 @@ in
       gh
       graphite-cli
       jq
+      fastfetch
       nixfmt
       rustup
       zellij
