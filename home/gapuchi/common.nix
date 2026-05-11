@@ -65,6 +65,7 @@ in
       fzf
       gh
       jq
+      fastfetch
       nixfmt
       rustup
       zellij
