@@ -9,7 +9,7 @@ let
     name = "mafia-bot-kuma-push";
     runtimeInputs = [ pkgs.curl pkgs.systemd ];
     text = ''
-      url=$(< ${config.age.secrets.mafia-bot-kuma-push-url.path})
+      url=$(< ${config.age.secrets.kuma-push-url.path})
       if systemctl is-active --quiet mafia-bot.service; then
         curl -fsS "$url?status=up&msg=OK&ping="
       else
@@ -20,8 +20,8 @@ let
 in
 {
   age.secrets = {
-    discord-token.file = ../../secrets/discord-token.age;
-    mafia-bot-kuma-push-url.file = ../../secrets/mafia-bot-kuma-push-url.age;
+    discord-token.file = ../../secrets/mafia-bot-discord-token.age;
+    kuma-push-url.file = ../../secrets/mafia-bot-kuma-push-url.age;
   };
 
   systemd.services.mafia-bot = {

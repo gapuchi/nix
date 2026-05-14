@@ -4,7 +4,7 @@ let
   gapuchiCalculus = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIN4+R9vr9Ww8Ci7h9XaxXRj6YDldv7KOOGc/D6cM/pOJ gapuchi@calculus";
 in
 {
-  "secrets/discord-token.age".publicKeys = [
+  "secrets/mafia-bot-discord-token.age".publicKeys = [
     tintin
     calculus
     gapuchiCalculus
