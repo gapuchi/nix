@@ -18,7 +18,7 @@
   boot.loader.grub.device = "nodev";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "gapuchi-desktop"; # Define your hostname.
+  networking.hostName = "haddock"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
