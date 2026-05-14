@@ -39,9 +39,9 @@
     in
     {
       nixosConfigurations = {
-        "gapuchi-desktop" = nixpkgs.lib.nixosSystem {
+        "haddock" = nixpkgs.lib.nixosSystem {
           modules = [
-            ./hosts/gapuchi-desktop/configuration.nix
+            ./hosts/haddock/configuration.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
