@@ -12,8 +12,15 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot = {
+      enable = true;
+      extraInstallCommands = ''
+        ${pkgs.gnused}/bin/sed -i 's/^default.*$/default @saved/' /boot/loader/loader.conf
+      '';
+    };
+    efi.canTouchEfiVariables = true;
+  };
 
   networking.hostName = "haddock"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
