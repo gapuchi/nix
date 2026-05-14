@@ -14,9 +14,4 @@ in
     calculus
     gapuchiCalculus
   ];
-  "secrets/mafia-bot-kuma-push-url.age".publicKeys = [
-    tintin
-    calculus
-    gapuchiCalculus
-  ];
 }
