@@ -12,7 +12,7 @@ For flakes, `just` commands, machine categories (server vs desktop), and agenix 
 | `hosts/<hostname>/hardware-configuration.nix` | Hardware / disks (often generated) |
 | `hosts/modules/*.nix` | Shared NixOS modules; imported by hosts that need them |
 
-Flake `nixosConfigurations` names in `flake.nix` match these hostnames (e.g. `calculus`, `gapuchi-desktop`).
+Flake `nixosConfigurations` names in `flake.nix` match these hostnames (e.g. `calculus`, `haddock`).
 
 ## Key machines
 
@@ -22,7 +22,7 @@ Home server: long-running services, reasonably hardened. Uses **Caddy** (`module
 
 This host uses **agenix** and Home Manager with `home/gapuchi/linux-headless.nix`. Treat it as the **Linux server** category in root `AGENTS.md`.
 
-### `gapuchi-desktop` (Linux desktop)
+### `haddock` (Linux desktop)
 
 NixOS workstation. Imports only its own `hardware-configuration.nix` in `configuration.nix` (no `hosts/modules/` stack from calculus). Home Manager uses `home/gapuchi/linux.nix`.
 
