@@ -8,101 +8,22 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-utils = {
-      url = "github:numtide/flake-utils";
-    };
+
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:vic/import-tree";
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
-      inputs.systems.follows = "flake-utils/systems";
     };
+
     mafia-bot = {
       url = "github:gapuchi/mafia-bot-rust";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "flake-utils";
     };
   };
 
-  outputs =
-    {
-      nixpkgs,
-      home-manager,
-      mafia-bot,
-      agenix,
-      flake-utils,
-      ...
-    }:
-    let
-      username = "gapuchi";
-      system = "x86_64-linux";
-    in
-    {
-      nixosConfigurations = {
-        "haddock" = nixpkgs.lib.nixosSystem {
-          modules = [
-            ./hosts/haddock/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.gapuchi = import ./home/${username}/linux.nix;
-            }
-          ];
-        };
-
-        "calculus" = nixpkgs.lib.nixosSystem {
-          modules = [
-            ./hosts/calculus/configuration.nix
-            agenix.nixosModules.default
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.gapuchi = import ./home/${username}/linux-headless.nix;
-            }
-          ];
-          specialArgs = {
-            inherit mafia-bot;
-          };
-        };
-      };
-
-      homeConfigurations = {
-        "${username}@tintin" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-          modules = [
-            ./home/${username}/mac.nix
-            {
-              nixpkgs.config.allowUnfree = true;
-            }
-          ];
-        };
-        "arjun@arjun-gt" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-          modules = [
-            # TODO - make username accurate
-            ./home/${username}/work-mac.nix
-            {
-              nixpkgs.config.allowUnfree = true;
-            }
-          ];
-        };
-      };
-    }
-    // flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-      in
-      {
-        devShells.default = pkgs.mkShell {
-          packages = [
-            pkgs.git
-            pkgs.just
-            agenix.packages.${system}.default
-          ];
-        };
-      }
-    );
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; }
+    (inputs.import-tree ./modules);
 }
