@@ -41,7 +41,7 @@ Secrets are managed with **agenix**. Do not commit plaintext secrets, private ke
 
 1. Add a rule in `secrets.nix` (path under `secrets/*.age` and `publicKeys` — SSH public keys allowed to decrypt).
 2. Create or edit the encrypted file in `secrets/` (e.g. with `agenix` from this repo’s dev shell).
-3. Wire it in Nix where it is used: `age.secrets.<name>.file = …` pointing at the `.age` file. A line in `secrets.nix` alone does nothing until Nix references the file — search for `age.secrets` and `secrets/` in `hosts/` to match existing patterns (e.g. `hosts/modules/`).
+3. Wire it in Nix where it is used: `age.secrets.<name>.file = …` pointing at the `.age` file. A line in `secrets.nix` alone does nothing until Nix references the file — search for `age.secrets` in `modules/nixos/` and `modules/machines/` for existing patterns.
 
 | Command | Use |
 |---------|-----|
