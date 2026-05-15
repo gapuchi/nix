@@ -2,7 +2,7 @@
 
 This directory contains **NixOS** host configurations: per-machine `configuration.nix` under `hosts/<hostname>/` and shared modules under `hosts/modules/`.
 
-For flakes, `just` commands, machine categories (server vs desktop), and agenix secrets, see the root [`AGENTS.md`](../AGENTS.md).
+For flakes, `just` commands, machine categories (server vs desktop), and agenix secrets, see the root [`CLAUDE.md`](../CLAUDE.md).
 
 ## Layout
 
