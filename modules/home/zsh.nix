@@ -8,6 +8,8 @@
 
       shellAliases = {
         vim = "nvim";
+        za = "zellij attach";
+        zs = "zellij -s";
       };
 
       oh-my-zsh = {
