@@ -7,6 +7,7 @@ in
     imports = with hmMods; [
       base
       direnv
+      eza
       git
       vim
       zsh

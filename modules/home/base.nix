@@ -38,13 +38,14 @@
           stateVersion = "25.05";
         };
         home.packages = with pkgs; [
+          btop
           claude-code
+          fastfetch
           fzf
           gh
           graphite-cli
           jq
           just-lsp
-          fastfetch
           nixfmt
           rustup
           zellij
