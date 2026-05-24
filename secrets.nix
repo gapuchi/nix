@@ -9,9 +9,4 @@ in
     calculus
     gapuchiCalculus
   ];
-  "secrets/grafana-key.age".publicKeys = [
-    tintin
-    calculus
-    gapuchiCalculus
-  ];
 }

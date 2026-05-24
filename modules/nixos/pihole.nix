@@ -51,7 +51,7 @@ in
             "plex.home.arpa,${calculusHostname}"
             "tautulli.home.arpa,${calculusHostname}"
             "uptime-kuma.home.arpa,${calculusHostname}"
-            "grafana.home.arpa,${calculusHostname}"
+            "netdata.home.arpa,${calculusHostname}"
           ];
           rateLimit = {
             count = 0;
