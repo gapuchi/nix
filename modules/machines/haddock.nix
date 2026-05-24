@@ -3,6 +3,7 @@
 let
   hmMods = config.flake.modules.homeManager;
   nixosMods = config.flake.modules.nixos;
+  sshKeys = import ../_lib/ssh-keys.nix;
 in
 {
   flake.nixosConfigurations.haddock = inputs.nixpkgs.lib.nixosSystem {
@@ -69,6 +70,10 @@ in
             "wheel"
           ];
           shell = pkgs.zsh;
+          openssh.authorizedKeys.keys = with sshKeys; [
+            calculus
+            tintin
+          ];
         };
 
         nix = {
@@ -87,7 +92,13 @@ in
 
         programs.zsh.enable = true;
 
-        networking.firewall.allowedTCPPorts = [ 8081 ];
+        services.openssh = {
+          enable = true;
+          settings.PasswordAuthentication = false;
+          settings.KbdInteractiveAuthentication = false;
+        };
+
+        networking.firewall.allowedTCPPorts = [ 22 8081 ];
 
         system.stateVersion = "25.11";
 
