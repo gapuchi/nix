@@ -20,8 +20,8 @@
           reverse_proxy localhost:8080
           tls internal
         '';
-        "grafana.home.arpa".extraConfig = ''
-          reverse_proxy localhost:3000
+        "netdata.home.arpa".extraConfig = ''
+          reverse_proxy localhost:19999
           tls internal
         '';
       };
