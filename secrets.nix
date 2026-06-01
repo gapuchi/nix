@@ -7,4 +7,5 @@ in
     rootCalculus
     calculus
   ];
+  "secrets/arjun-gt-initContent".publicKeys = with sshKeys; [ arjunGt ];
 }

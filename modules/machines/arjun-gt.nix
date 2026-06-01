@@ -1,4 +1,8 @@
-{ inputs, config, ... }:
+{
+  inputs,
+  config,
+  ...
+}:
 
 let
   hmMods = config.flake.modules.homeManager;
@@ -8,8 +12,10 @@ in
     pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
     modules = with hmMods; [
       gapuchiTerminal
-      {
+      inputs.agenix.homeManagerModules.default
+      ({ config, lib, ... }: {
         nixpkgs.config.allowUnfree = true;
+
         my.home = {
           username = "arjun";
           homeDirectory = "/Users/arjun";
@@ -18,8 +24,16 @@ in
             email = "arjun.adhia@graphite.com";
           };
         };
+
         programs.mise.enable = true;
-      }
+
+        age.secrets.arjun-gt-initContent.file = ../../secrets/arjun-gt-initContent;
+
+        programs.zsh.initContent = lib.mkAfter ''
+          [[ -f ${config.age.secrets.arjun-gt-initContent.path} ]] && \
+            source ${config.age.secrets.arjun-gt-initContent.path}
+        '';
+      })
     ];
   };
 }
