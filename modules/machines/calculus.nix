@@ -50,6 +50,7 @@ in
           shell = pkgs.zsh;
           openssh.authorizedKeys.keys = with sshKeys; [
             tintin
+            haddock
           ];
         };
 
