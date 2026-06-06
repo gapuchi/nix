@@ -2,6 +2,7 @@
 
 let
   devices = import ../_lib/devices.nix;
+  sshKeys = import ../_lib/ssh-keys.nix;
   hmMods = config.flake.modules.homeManager;
   nixosMods = config.flake.modules.nixos;
 in
@@ -47,6 +48,9 @@ in
             "wheel"
           ];
           shell = pkgs.zsh;
+          openssh.authorizedKeys.keys = with sshKeys; [
+            tintin
+          ];
         };
 
         programs = {
