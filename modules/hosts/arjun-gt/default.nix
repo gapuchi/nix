@@ -6,6 +6,7 @@
 
 let
   hmMods = config.flake.modules.homeManager;
+  identity = inputs.nix-private.identity;
 in
 {
   flake.homeConfigurations."arjun@arjun-gt" = inputs.home-manager.lib.homeManagerConfiguration {
@@ -22,14 +23,12 @@ in
             username = "arjun";
             homeDirectory = "/Users/arjun";
             git = {
-              name = "arjun";
-              email = "arjun.adhia@graphite.com";
+              name = identity.git.work.name;
+              email = identity.git.work.email;
             };
           };
 
-          programs.mise.enable = true;
-
-          age.secrets.arjun-gt-initContent.file = "${inputs.nix-private}/secrets/arjun-gt-initContent";
+          age.secrets.arjun-gt-initContent.file = "${inputs.nix-private}/secrets/arjun-gt-initContent.age";
 
           programs.zsh.initContent = lib.mkAfter ''
             [[ -f ${config.age.secrets.arjun-gt-initContent.path} ]] && \

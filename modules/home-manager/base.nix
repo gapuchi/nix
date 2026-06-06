@@ -1,4 +1,8 @@
-{ ... }:
+{ inputs, ... }:
+
+let
+  identity = inputs.nix-private.identity;
+in
 {
   flake.modules.homeManager.base =
     {
@@ -22,11 +26,11 @@
         git = {
           name = lib.mkOption {
             type = lib.types.str;
-            default = "gapuchi";
+            default = identity.git.personal.name;
           };
           email = lib.mkOption {
             type = lib.types.str;
-            default = "arjun.adhia@gmail.com";
+            default = identity.git.personal.email;
           };
         };
       };
@@ -35,22 +39,27 @@
         home = {
           username = cfg.username;
           homeDirectory = cfg.homeDirectory;
-          stateVersion = "25.05";
+          stateVersion = "25.11";
         };
         home.packages = with pkgs; [
           btop
-          claude-code
+          cowsay
           fastfetch
           fzf
           gh
-          graphite-cli
+          gocryptfs
           jq
           just-lsp
+          nixd
           nixfmt
+          nixfmt-tree
           rustup
           zellij
         ];
-        home.sessionPath = [ "$HOME/.cargo/bin" ];
+        home.sessionPath = [
+          "$HOME/.cargo/bin"
+          "$HOME/.local/bin"
+        ];
         programs.home-manager.enable = true;
       };
     };
