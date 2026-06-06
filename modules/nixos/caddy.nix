@@ -8,10 +8,6 @@
           reverse_proxy localhost:32400
           tls internal
         '';
-        "tautulli.home.arpa".extraConfig = ''
-          reverse_proxy localhost:8181
-          tls internal
-        '';
         "uptime-kuma.home.arpa".extraConfig = ''
           reverse_proxy localhost:3001
           tls internal

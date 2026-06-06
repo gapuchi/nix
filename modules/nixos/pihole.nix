@@ -49,7 +49,6 @@ in
           cnameRecords = [
             "pihole.home.arpa,${calculusHostname}"
             "plex.home.arpa,${calculusHostname}"
-            "tautulli.home.arpa,${calculusHostname}"
             "uptime-kuma.home.arpa,${calculusHostname}"
             "netdata.home.arpa,${calculusHostname}"
           ];
