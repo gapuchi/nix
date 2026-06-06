@@ -11,9 +11,10 @@ For flakes, `just` commands, machine categories, and agenix secrets, see the roo
 | `hosts/<hostname>/hardware-configuration.nix` | Disks, boot, kernel modules (NixOS only; often generated) |
 | `modules/hosts/<hostname>/default.nix` | Flake configuration for that machine |
 | `modules/nixos/*.nix` | Shared NixOS feature modules |
+| `modules/darwin/*.nix` | Shared nix-darwin feature and bundle modules |
 | `modules/home-manager/*.nix` | Shared Home Manager feature and bundle modules |
 
-Flake output names match host directories: `calculus`, `haddock`, `gapuchi@tintin`, `arjun@arjun-gt`.
+Flake output names match host directories: `calculus`, `haddock`, `tintin`, `arjun@arjun-gt`.
 
 ## Module tree
 
@@ -26,6 +27,7 @@ modules/
   hosts/         # per-machine flake output wiring
   home-manager/  # Home Manager: features (git, vim, …) + bundles (gapuchi-terminal, gapuchi-desktop)
   nixos/         # NixOS features (caddy, pihole, …)
+  darwin/        # nix-darwin: base + bundles (gapuchi-base, gapuchi-defaults)
   _lib/          # Shared non-module helpers
 ```
 
@@ -41,9 +43,13 @@ Home server: Caddy, Pi-hole, Plex, monitoring, mafia-bot, etc. See `modules/host
 
 NixOS workstation with GNOME. See `modules/hosts/haddock/default.nix`. Home Manager uses `gapuchiDesktop`.
 
-### `tintin` / `arjun-gt` (macOS)
+### `tintin` (macOS)
 
-Standalone Home Manager via `modules/hosts/tintin/default.nix` and `modules/hosts/arjun-gt/default.nix`. Both use `gapuchiTerminal`.
+nix-darwin via `modules/hosts/tintin/default.nix` (`darwinConfigurations.tintin`). Uses `gapuchiBase`, `gapuchiDefaults`, and Home Manager `gapuchiTerminal`.
+
+### `arjun-gt` (macOS)
+
+Standalone Home Manager via `modules/hosts/arjun-gt/default.nix`. Uses `gapuchiTerminal`.
 
 ## Add a new site behind Caddy (`*.home.arpa`)
 
