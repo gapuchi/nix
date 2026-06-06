@@ -8,7 +8,7 @@ in
 {
   flake.nixosConfigurations.calculus = inputs.nixpkgs.lib.nixosSystem {
     modules = [
-      ../../hosts/calculus/hardware-configuration.nix
+      ../../../hosts/calculus/hardware-configuration.nix
       inputs.agenix.nixosModules.default
       nixosMods.gapuchiServer
       nixosMods.caddy

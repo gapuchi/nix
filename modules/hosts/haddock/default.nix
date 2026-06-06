@@ -7,7 +7,7 @@ in
 {
   flake.nixosConfigurations.haddock = inputs.nixpkgs.lib.nixosSystem {
     modules = [
-      ../../hosts/haddock/hardware-configuration.nix
+      ../../../hosts/haddock/hardware-configuration.nix
       nixosMods.gapuchiLinuxDesktop
       nixosMods.tailscale
       {
