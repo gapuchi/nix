@@ -1,9 +1,11 @@
 { ... }:
 {
-  flake.modules.homeManager.eza = { ... }: {
-    programs.eza = {
-      enable = true;
-      enableZshIntegration = true;
+  flake.modules.homeManager.eza =
+    { ... }:
+    {
+      programs.eza = {
+        enable = true;
+        enableZshIntegration = true;
+      };
     };
-  };
 }

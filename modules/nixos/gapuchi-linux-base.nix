@@ -4,9 +4,12 @@ let
 in
 {
   flake.modules.nixos.gapuchiLinuxBase = {
-    imports = with nixosMods; [ base ] ++ [
-      inputs.home-manager.nixosModules.home-manager
-    ];
+    imports =
+      with nixosMods;
+      [ base ]
+      ++ [
+        inputs.home-manager.nixosModules.home-manager
+      ];
 
     boot.loader = {
       systemd-boot.enable = true;
