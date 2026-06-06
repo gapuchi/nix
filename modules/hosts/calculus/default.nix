@@ -1,14 +1,14 @@
 { inputs, config, ... }:
 
 let
-  devices = import ../_lib/devices.nix;
-  sshKeys = import ../_lib/ssh-keys.nix;
+  devices = import ../../_lib/devices.nix;
+  sshKeys = import ../../_lib/ssh-keys.nix;
   nixosMods = config.flake.modules.nixos;
 in
 {
   flake.nixosConfigurations.calculus = inputs.nixpkgs.lib.nixosSystem {
     modules = [
-      ../../hosts/calculus/hardware-configuration.nix
+      ../../../hosts/calculus/hardware-configuration.nix
       inputs.agenix.nixosModules.default
       nixosMods.gapuchiServer
       nixosMods.caddy
