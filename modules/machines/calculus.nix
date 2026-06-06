@@ -85,7 +85,11 @@ in
           settings.KbdInteractiveAuthentication = false;
         };
 
-        system.stateVersion = "25.11";
+        system = {
+          stateVersion = "25.11";
+          configurationRevision = inputs.self.rev or inputs.self.dirtyRev;
+          nixos.label = inputs.self.rev or inputs.self.dirtyRev;
+        };
 
         home-manager = {
           useGlobalPkgs = true;
