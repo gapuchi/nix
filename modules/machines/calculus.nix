@@ -3,7 +3,6 @@
 let
   devices = import ../_lib/devices.nix;
   sshKeys = import ../_lib/ssh-keys.nix;
-  hmMods = config.flake.modules.homeManager;
   nixosMods = config.flake.modules.nixos;
 in
 {
@@ -11,7 +10,7 @@ in
     modules = [
       ../../hosts/calculus/hardware-configuration.nix
       inputs.agenix.nixosModules.default
-      inputs.home-manager.nixosModules.home-manager
+      nixosMods.gapuchiServer
       nixosMods.caddy
       nixosMods.plex
       nixosMods.pihole
@@ -19,27 +18,13 @@ in
       nixosMods.monitoring
       nixosMods.tailscale
       nixosMods.uptimeKuma
-      ({ pkgs, ... }: {
-        nix = {
-          settings.experimental-features = [
-            "nix-command"
-            "flakes"
+      {
+        my.nixos = {
+          hostName = "calculus";
+          authorizedKeys = with sshKeys; [
+            tintin
+            haddock
           ];
-          gc = {
-            automatic = true;
-            dates = "weekly";
-            options = "--delete-older-than 30d";
-          };
-          optimise = {
-            automatic = true;
-            dates = "weekly";
-          };
-        };
-
-        boot = {
-          supportedFilesystems = [ "nfs" ];
-          loader.systemd-boot.enable = true;
-          loader.efi.canTouchEfiVariables = true;
         };
 
         fileSystems."/mnt/snowy" = {
@@ -48,58 +33,11 @@ in
           options = [ "nfsvers=4.1" ];
         };
 
-        networking.hostName = "calculus";
-        networking.networkmanager.enable = true;
-
-        users.users.gapuchi = {
-          isNormalUser = true;
-          description = "Arjun Adhia";
-          extraGroups = [
-            "networkmanager"
-            "wheel"
-          ];
-          shell = pkgs.zsh;
-          openssh.authorizedKeys.keys = with sshKeys; [
-            tintin
-            haddock
-          ];
-        };
-
-        programs = {
-          nix-ld.enable = true;
-          zsh.enable = true;
-        };
-
-        nixpkgs.config.allowUnfree = true;
-
-        environment.systemPackages = with pkgs; [
-          git
-          vim
-          wget
-          ghostty.terminfo
-        ];
-
-        services.openssh = {
-          enable = true;
-          settings.PasswordAuthentication = false;
-          settings.KbdInteractiveAuthentication = false;
-        };
-
         system = {
-          stateVersion = "25.11";
           configurationRevision = inputs.self.rev or inputs.self.dirtyRev;
           nixos.label = inputs.self.rev or inputs.self.dirtyRev;
         };
-
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          users.gapuchi = {
-            imports = with hmMods; [ gapuchiTerminal ];
-            my.home.homeDirectory = "/home/gapuchi";
-          };
-        };
-      })
+      }
     ];
   };
 }
