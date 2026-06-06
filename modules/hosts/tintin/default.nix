@@ -1,16 +1,21 @@
 { inputs, config, ... }:
 
 let
+  darwinMods = config.flake.modules.darwin;
   hmMods = config.flake.modules.homeManager;
 in
 {
-  flake.homeConfigurations."gapuchi@tintin" = inputs.home-manager.lib.homeManagerConfiguration {
-    pkgs = inputs.nixpkgs.legacyPackages.aarch64-darwin;
-    modules = with hmMods; [
-      gapuchiTerminal
+  flake.darwinConfigurations.tintin = inputs.nix-darwin.lib.darwinSystem {
+    system = "aarch64-darwin";
+    specialArgs = { inherit inputs; };
+    modules = with darwinMods; [
+      gapuchiBase
+      gapuchiDefaults
       {
-        nixpkgs.config.allowUnfree = true;
-        my.home.homeDirectory = "/Users/gapuchi";
+        my.darwin = {
+          hostName = "tintin";
+          homeImports = with hmMods; [ gapuchiTerminal ];
+        };
       }
     ];
   };
