@@ -46,6 +46,7 @@
           graphite-cli
           jq
           just-lsp
+          nixd
           nixfmt
           rustup
           zellij

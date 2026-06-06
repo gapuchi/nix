@@ -20,6 +20,7 @@ modules/hosts/<hostname>/default.nix       # per-machine flake outputs
 modules/
   home-manager/   # user features + bundles (gapuchi-terminal, gapuchi-desktop)
   nixos/          # Linux system features + bundles
+  darwin/         # macOS system features + bundles
   _lib/           # shared helpers (ssh keys, devices)
 ```
 
@@ -33,7 +34,7 @@ When adding packages or home options, respect the target:
 |----------|----------|--------|
 | **Linux desktop** | NixOS | Full desktop is OK. |
 | **Linux server** | NixOS, headless | No desktop environment. **Do not** add packages whose main purpose is a GUI. |
-| **Mac** | Standalone Nix | **Do not** add packages whose main purpose is a GUI. |
+| **Mac** | nix-darwin or standalone Home Manager | **Do not** add packages whose main purpose is a GUI. |
 
 ## Commands
 
