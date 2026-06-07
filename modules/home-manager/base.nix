@@ -47,7 +47,7 @@
           jq
           just-lsp
           nixd
-          nixfmt
+          nixfmt-tree
           rustup
           zellij
         ];
