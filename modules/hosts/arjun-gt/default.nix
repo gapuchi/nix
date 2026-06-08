@@ -27,8 +27,6 @@ in
             };
           };
 
-          programs.mise.enable = true;
-
           age.secrets.arjun-gt-initContent.file = ../../../secrets/arjun-gt-initContent;
 
           programs.zsh.initContent = lib.mkAfter ''
