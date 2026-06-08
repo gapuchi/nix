@@ -49,10 +49,10 @@ in
               "${devices.snowy.ip} snowy"
             ];
             cnameRecords = [
-              "pihole.home.arpa,${calculusHostname}"
-              "plex.home.arpa,${calculusHostname}"
-              "uptime-kuma.home.arpa,${calculusHostname}"
-              "netdata.home.arpa,${calculusHostname}"
+              "pihole.lab.adhia.net,${calculusHostname}"
+              "plex.lab.adhia.net,${calculusHostname}"
+              "uptime-kuma.lab.adhia.net,${calculusHostname}"
+              "netdata.lab.adhia.net,${calculusHostname}"
             ];
             rateLimit = {
               count = 0;

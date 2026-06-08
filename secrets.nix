@@ -7,5 +7,10 @@ in
     rootCalculus
     calculus
   ];
+  "secrets/caddy-dns-token.age".publicKeys = with sshKeys; [
+    tintin
+    rootCalculus
+    calculus
+  ];
   "secrets/arjun-gt-initContent".publicKeys = with sshKeys; [ arjunGt ];
 }
