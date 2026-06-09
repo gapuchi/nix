@@ -15,6 +15,7 @@ in
       nixosMods.plex
       nixosMods.pihole
       nixosMods.mafiaBot
+      nixosMods.worldCupBot
       nixosMods.monitoring
       nixosMods.tailscale
       nixosMods.uptimeKuma
