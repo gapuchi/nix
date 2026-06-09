@@ -27,6 +27,11 @@
       url = "github:gapuchi/mafia-bot-rust";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    world-cup-bot = {
+      url = "github:gapuchi/world-cup-bot";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);

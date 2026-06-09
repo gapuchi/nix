@@ -39,8 +39,7 @@
 
       # Cloudflare API token (Zone:DNS:Edit on adhia.net) as `CF_API_TOKEN=...`.
       age.secrets.caddy-dns-token.file = ../../secrets/caddy-dns-token.age;
-      systemd.services.caddy.serviceConfig.EnvironmentFile =
-        config.age.secrets.caddy-dns-token.path;
+      systemd.services.caddy.serviceConfig.EnvironmentFile = config.age.secrets.caddy-dns-token.path;
 
       # 80/443 are only reachable over Tailscale.
       networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
