@@ -30,7 +30,11 @@
 
     world-cup-bot = {
       url = "github:gapuchi/world-cup-bot";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        crane.follows = "mafia-bot/crane";
+        utils.follows = "mafia-bot/utils";
+      };
     };
   };
 

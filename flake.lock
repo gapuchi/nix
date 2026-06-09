@@ -40,21 +40,6 @@
         "type": "github"
       }
     },
-    "crane_2": {
-      "locked": {
-        "lastModified": 1780532242,
-        "narHash": "sha256-D+BsdpxmtUwtqGoY0IXPhHgTlmqgcZKCEo1oMyn7ep0=",
-        "owner": "ipetkov",
-        "repo": "crane",
-        "rev": "59a82a1222dd3b2080b5cc52a1a2e8d5f1b77f37",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ipetkov",
-        "repo": "crane",
-        "type": "github"
-      }
-    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -245,21 +230,6 @@
         "type": "github"
       }
     },
-    "systems_3": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
     "utils": {
       "inputs": {
         "systems": "systems_2"
@@ -278,38 +248,26 @@
         "type": "github"
       }
     },
-    "utils_2": {
-      "inputs": {
-        "systems": "systems_3"
-      },
-      "locked": {
-        "lastModified": 1731533236,
-        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "world-cup-bot": {
       "inputs": {
-        "crane": "crane_2",
+        "crane": [
+          "mafia-bot",
+          "crane"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": "utils_2"
+        "utils": [
+          "mafia-bot",
+          "utils"
+        ]
       },
       "locked": {
-        "lastModified": 1781059918,
-        "narHash": "sha256-UXEdjfrGz15VBf5RbFf+SkqlAP18QBpMluPOJUT05xI=",
+        "lastModified": 1781213034,
+        "narHash": "sha256-Lf1Hu2SnYtdPus0Fy1tYzmqiOaQwaYMow5ynbUGY/WM=",
         "owner": "gapuchi",
         "repo": "world-cup-bot",
-        "rev": "c08ee3890cafb8e713fd8f239b801ce9704403cc",
+        "rev": "1e8c03c3c7f2ca0319a3ac6bb960f21bf74327d4",
         "type": "github"
       },
       "original": {
