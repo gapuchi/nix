@@ -12,5 +12,5 @@ in
     rootCalculus
     calculus
   ];
-  "secrets/arjun-gt-initContent".publicKeys = with sshKeys; [ arjunGt ];
+  "secrets/arjun-gt-initContent.age".publicKeys = with sshKeys; [ arjunGt ];
 }
