@@ -16,6 +16,11 @@ in
           hostName = "tintin";
           homeImports = with hmMods; [ gapuchiTerminal ];
         };
+
+        system = {
+          configurationRevision = inputs.self.rev or inputs.self.dirtyRev;
+          darwinLabel = inputs.self.rev or inputs.self.dirtyRev;
+        };
       }
     ];
   };
