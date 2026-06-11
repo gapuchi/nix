@@ -7,8 +7,8 @@ alias u := update
 alias c := check
 alias v := version
 
-update:
-    nix flake update
+update *inputs:
+    nix flake update {{inputs}}
 
 switch:
     {{switch_cmd}} --flake .
