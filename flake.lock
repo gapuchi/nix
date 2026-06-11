@@ -124,11 +124,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1778648777,
-        "narHash": "sha256-GzSxSVdixsncHyNeXO2Itka/6DGMzlKrwBZrc1GSzEk=",
+        "lastModified": 1781215774,
+        "narHash": "sha256-mpSLYCmLe3RH629qzDYK2COne5qWyfrrIqE3NVuR9m8=",
         "owner": "gapuchi",
         "repo": "mafia-bot-rust",
-        "rev": "c973e7d0de0b836acf9b5a7a1a052f8a1bc58b67",
+        "rev": "00f8c5aef9bb41f9237b2808e805f97df1e6737f",
         "type": "github"
       },
       "original": {
