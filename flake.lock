@@ -263,11 +263,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1781213034,
-        "narHash": "sha256-Lf1Hu2SnYtdPus0Fy1tYzmqiOaQwaYMow5ynbUGY/WM=",
+        "lastModified": 1781387629,
+        "narHash": "sha256-XhUy3asZ4NU7ReiN8T63REywiTOGeB5YZ6kwLbutXUM=",
         "owner": "gapuchi",
         "repo": "world-cup-bot",
-        "rev": "1e8c03c3c7f2ca0319a3ac6bb960f21bf74327d4",
+        "rev": "59a1319f0e102b5a57f021b2e7b4b896afb26027",
         "type": "github"
       },
       "original": {
