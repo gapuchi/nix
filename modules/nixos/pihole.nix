@@ -87,10 +87,7 @@ in
 
       services.pihole-web = {
         enable = true;
-        ports = [
-          "8080"
-          "8443s"
-        ];
+        ports = [ "127.0.0.1:8080" ];
       };
 
       services.dnsmasq = {
