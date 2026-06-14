@@ -6,7 +6,7 @@ let
 in
 {
   flake.modules.nixos.pihole =
-    { pkgs, ... }:
+    { ... }:
     {
       networking = {
         interfaces.enp3s0.ipv4.addresses = [
