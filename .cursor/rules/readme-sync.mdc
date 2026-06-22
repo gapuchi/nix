@@ -1,0 +1,21 @@
+---
+description: Keep README.md in sync with user-facing behavior
+globs: README.md,.justfile,flake.nix
+alwaysApply: false
+---
+
+# README sync
+
+`README.md` is the human-facing quick start. Update it in the **same change** when the setup or the commands a person runs change.
+
+## Update README when you change
+
+- The `just` task names or aliases used to apply/update the config (`switch`, `update`, …).
+- Setup or prerequisites needed to use the repo.
+
+## Skip README for
+
+- Adding/editing feature or host modules with no change to how a person applies config.
+- Secrets, internal refactors, package tweaks.
+
+Architecture and module conventions live in `AGENTS.md` — not `README.md`.

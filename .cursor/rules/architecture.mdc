@@ -1,0 +1,16 @@
+---
+description: Core project architecture — read AGENTS.md
+alwaysApply: true
+---
+
+# Architecture
+
+`AGENTS.md` is the source of truth for this repo — read it before substantive changes.
+
+Quick guardrails (details in `AGENTS.md`):
+
+- Two tiers: **module library** (`modules/{nixos,darwin,home-manager}/` — features at top level, role presets in `bundles/`, register `flake.modules.<class>.<camelName>`) → **host wiring** (`modules/hosts/<host>/default.nix` selects modules + sets `my.*`).
+- `import-tree` auto-loads `modules/**/*.nix` (skips `/_` paths); never add a manual import list to `flake.nix`.
+- Hosts select modules via `my.*` + `homeImports`. Features may be reusable or single-host; don't branch on host identity inside a feature.
+- Secrets / private values: live in `inputs.nix-private` (encrypted `.age` + `identity` / `sshKeys` / `devices` / `lab`). Wire with `"${inputs.nix-private}/secrets/…"` or the flake outputs. Never commit plaintext or put secrets back in this public repo.
+- `AGENTS.md` records constraints the Nix does not make obvious. Ports, paths, umasks, and service inventories stay in the module.
