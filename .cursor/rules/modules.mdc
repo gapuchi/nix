@@ -1,0 +1,33 @@
+---
+description: Module library conventions (flake.modules registry)
+globs: modules/**/*.nix
+alwaysApply: false
+---
+
+# Module library
+
+Files here register reusable modules; they do not build machine configs. Host files (`modules/hosts/<host>/default.nix`) assemble outputs.
+
+**Layout** under `modules/{nixos,darwin,home-manager}/`:
+- `base.nix` — `options.my.*` contract + baseline
+- top-level `*.nix` — **features** (one concern; localize `age.secrets`, systemd, packages, …)
+- `bundles/*.nix` — **bundles** / role presets:
+  - Home Manager: mostly `imports = with hmMods; [ … ];` (small inlines OK)
+  - NixOS: machine-category baseline (boot, DE, nix settings, …) and usually `homeImports`, not a pure import list
+
+**Features:** prefer portable config when reuse is likely. Single-host / lab modules (e.g. calculus `caddy`, `homepage`, `pihole`) may hardcode host facts when only that host selects them — don't invent `my.*` options or a mega-bundle until a second consumer appears. Don't branch on host identity inside a feature; selection stays in host wiring.
+
+**Belongs here:**
+- Register modules into `flake.modules.{nixos,darwin,homeManager}.<camelName>`.
+- New `options.my.*` go in the relevant `base.nix` only.
+
+**Belongs in host wiring (not here):**
+- Choosing which modules a machine gets and setting `my.*` (hostName, homeImports, authorizedKeys, …).
+- Per-machine values that aren't owned by a single-host feature (firewall ports, fileSystems, NFS mounts).
+
+**Conventions:**
+- File names are kebab-case; registered module names are camelCase (`gapuchi-terminal.nix` → `gapuchiTerminal`).
+- Reference siblings via `let nixosMods = config.flake.modules.nixos; in … imports = with nixosMods; [ … ];`.
+- External-flake packages: `inputs.<name>.packages.${pkgs.stdenv.hostPlatform.system}.default`.
+- Private values / secrets: `inputs.nix-private.{identity,sshKeys,devices,lab}` and `"${inputs.nix-private}/secrets/<name>.age"` — do not hardcode emails, LAN topology, or the lab domain here.
+- Respect machine categories (no GUI packages on server/macOS targets).
