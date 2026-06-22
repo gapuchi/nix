@@ -1,0 +1,15 @@
+---
+description: Core project architecture — read AGENTS.md
+alwaysApply: true
+---
+
+# Architecture
+
+`AGENTS.md` is the source of truth for this repo — read it before substantive changes.
+
+Quick guardrails (details in `AGENTS.md`):
+
+- Two tiers: **module library** (`modules/{nixos,darwin,home-manager}/*.nix` register `flake.modules.<class>.<camelName>`) → **host wiring** (`modules/hosts/<host>/default.nix` selects modules + sets `my.*`).
+- `import-tree` auto-loads every `modules/**/*.nix`; never add a manual import list to `flake.nix`.
+- Features stay generic; hosts select them and configure via `my.*` options + `homeImports`. Don't branch a feature on host identity.
+- Secrets: `secrets.nix` rule + `secrets/<name>.age` + an `age.secrets` reference. Never commit plaintext.

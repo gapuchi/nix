@@ -1,0 +1,26 @@
+---
+description: Module library conventions (flake.modules registry)
+globs: modules/**/*.nix
+alwaysApply: false
+---
+
+# Module library
+
+Files here register reusable modules; they do not build machine configs. Host files (`modules/hosts/<host>/default.nix`) assemble outputs.
+
+**Belongs here:**
+- Register one or more modules into `flake.modules.{nixos,darwin,homeManager}.<camelName>`.
+- **feature** = one concern (a service, program, or package set); localize its own effects (`age.secrets`, `systemd.services`, `home.packages`).
+- **bundle** = compose features via `imports = with <class>Mods; [ … ];`.
+- New `options.my.*` go in the relevant `base.nix` only.
+
+**Belongs in host wiring (not here):**
+- Choosing which modules a machine gets and setting `my.*` (hostName, homeImports, authorizedKeys, …).
+- Per-machine values (IPs, firewall ports, fileSystems).
+
+**Conventions:**
+- File names are kebab-case; registered module names are camelCase (`gapuchi-terminal.nix` → `gapuchiTerminal`).
+- Reference siblings via `let nixosMods = config.flake.modules.nixos; in … imports = with nixosMods; [ … ];`.
+- External-flake packages: `inputs.<name>.packages.${pkgs.stdenv.hostPlatform.system}.default`.
+- Don't read `my.*` to branch behavior by host — keep features generic.
+- Respect machine categories (no GUI packages on server/macOS targets).
