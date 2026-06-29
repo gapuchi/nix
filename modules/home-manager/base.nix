@@ -43,7 +43,6 @@
           fastfetch
           fzf
           gh
-          graphite-cli
           jq
           just-lsp
           nixd
