@@ -31,6 +31,14 @@
             [[ -n "$dir" ]] && cd ~/workspace/"$dir"
           }
 
+          cdww() {
+            local base=~/.cursor/worktrees repo worktree
+            repo=$(ls -d "$base"/*/ 2>/dev/null | xargs -n1 basename | fzf -1 -q "''${1:-}")
+            [[ -z "$repo" ]] && return
+            worktree=$(ls -d "$base/$repo"/*/ 2>/dev/null | xargs -n1 basename | fzf -1 -q "''${2:-}")
+            [[ -n "$worktree" ]] && cd "$base/$repo/$worktree"
+          }
+
           gswf() {
             local branch
             branch=$(git for-each-ref --format='%(refname:short)' refs/heads/ | fzf -1 -q "''${1:-}")
