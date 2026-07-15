@@ -28,7 +28,6 @@
 
     mafia-bot = {
       url = "github:gapuchi/mafia-bot-rust";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     world-cup-bot = {
