@@ -7,7 +7,7 @@ in
     rootCalculus
     calculus
   ];
-  "secrets/world-cup-bot.env.age".publicKeys = with sshKeys; [
+  "secrets/league-bot.env.age".publicKeys = with sshKeys; [
     tintin
     rootCalculus
     calculus

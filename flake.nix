@@ -27,8 +27,8 @@
       url = "github:gapuchi/mafia-bot-rust";
     };
 
-    world-cup-bot = {
-      url = "github:gapuchi/world-cup-bot";
+    league-bot = {
+      url = "github:gapuchi/league-bot";
     };
   };
 
