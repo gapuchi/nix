@@ -14,6 +14,8 @@
             email = cfg.email;
           };
           pull.rebase = true;
+          rebase.autoStash = true;
+          merge.ff = "only";
         };
       };
     };
