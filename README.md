@@ -10,7 +10,7 @@ Flake Update
 just update # u
 ```
 
-Rebuild + Switch
+Rebuild and Switch
 
 ```bash
 just switch # s
