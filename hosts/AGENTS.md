@@ -17,7 +17,7 @@ A host file builds one output (`nixosSystem` / `darwinSystem` / `homeManagerConf
 
 ### `calculus` (Linux server)
 
-Home server: `gapuchiServer` bundle plus `caddy`, `plex`, `pihole`, `mafiaBot`, `leagueBot`, `monitoring`, `tailscale`, `uptimeKuma`. Home Manager uses `gapuchiTerminal` (via `gapuchiServer`). See `modules/hosts/calculus/default.nix`.
+Home server: `gapuchiServer` bundle plus `caddy`, `homepage`, `plex`, `pihole`, `mafiaBot`, `leagueBot`, `monitoring`, `tailscale`, `uptimeKuma`. The `homepage` dashboard at `home.lab.adhia.net` links the other services from one spot. Home Manager uses `gapuchiTerminal` (via `gapuchiServer`). See `modules/hosts/calculus/default.nix`.
 
 ### `haddock` (Linux desktop)
 

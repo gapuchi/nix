@@ -1,0 +1,65 @@
+{ ... }:
+{
+  flake.modules.nixos.homepage =
+    { ... }:
+    {
+      services.homepage-dashboard = {
+        enable = true;
+        listenPort = 8082;
+        allowedHosts = "home.lab.adhia.net,localhost:8082,127.0.0.1:8082";
+
+        settings = {
+          title = "calculus";
+          headerStyle = "clean";
+          statusStyle = "dot";
+          layout = [
+            { Services.style = "row"; }
+          ];
+        };
+
+        widgets = [
+          { resources = { cpu = true; memory = true; disk = "/"; }; }
+          { datetime.format = { dateStyle = "long"; timeStyle = "short"; }; }
+        ];
+
+        services = [
+          {
+            Services = [
+              {
+                "Pi-hole" = {
+                  href = "https://pihole.lab.adhia.net";
+                  siteMonitor = "http://127.0.0.1:8080/api/info/version";
+                  description = "DNS sinkhole and DHCP";
+                  icon = "pi-hole.png";
+                };
+              }
+              {
+                "Uptime Kuma" = {
+                  href = "https://uptime-kuma.lab.adhia.net";
+                  siteMonitor = "http://127.0.0.1:3001/";
+                  description = "Service uptime monitoring";
+                  icon = "uptime-kuma.png";
+                };
+              }
+              {
+                "Netdata" = {
+                  href = "https://netdata.lab.adhia.net";
+                  siteMonitor = "http://127.0.0.1:19999/";
+                  description = "System metrics";
+                  icon = "netdata.png";
+                };
+              }
+              {
+                "Plex" = {
+                  href = "https://plex.lab.adhia.net";
+                  siteMonitor = "http://127.0.0.1:32400/web";
+                  description = "Media library";
+                  icon = "plex.png";
+                };
+              }
+            ];
+          }
+        ];
+      };
+    };
+}
