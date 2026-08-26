@@ -34,14 +34,6 @@
                 };
               }
               {
-                "Uptime Kuma" = {
-                  href = "https://uptime-kuma.lab.adhia.net";
-                  siteMonitor = "http://127.0.0.1:3001/";
-                  description = "Service uptime monitoring";
-                  icon = "uptime-kuma.png";
-                };
-              }
-              {
                 "Netdata" = {
                   href = "https://netdata.lab.adhia.net";
                   siteMonitor = "http://127.0.0.1:19999/";
