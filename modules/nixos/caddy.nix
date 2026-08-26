@@ -18,6 +18,10 @@
           hash = "sha256-7GoH8YLCoPmPExQxoga2FHB58zQDoZVf1BBwkVi0SsQ=";
         };
         virtualHosts = {
+          "home.lab.adhia.net".extraConfig = ''
+            reverse_proxy localhost:8082
+            ${tls}
+          '';
           "plex.lab.adhia.net".extraConfig = ''
             reverse_proxy localhost:32400
             ${tls}

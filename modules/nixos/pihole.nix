@@ -49,6 +49,7 @@ in
               "${devices.snowy.ip} snowy"
             ];
             cnameRecords = [
+              "home.lab.adhia.net,${calculusHostname}"
               "pihole.lab.adhia.net,${calculusHostname}"
               "plex.lab.adhia.net,${calculusHostname}"
               "uptime-kuma.lab.adhia.net,${calculusHostname}"
