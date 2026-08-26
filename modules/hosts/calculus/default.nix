@@ -12,6 +12,7 @@ in
       inputs.agenix.nixosModules.default
       nixosMods.gapuchiServer
       nixosMods.caddy
+      nixosMods.homepage
       nixosMods.plex
       nixosMods.pihole
       nixosMods.mafiaBot
