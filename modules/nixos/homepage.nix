@@ -14,6 +14,7 @@
           statusStyle = "dot";
           layout = [
             { Services.style = "row"; }
+            { Bots.style = "row"; }
           ];
         };
 
@@ -47,6 +48,22 @@
                   siteMonitor = "http://127.0.0.1:32400/web";
                   description = "Media library";
                   icon = "plex.png";
+                };
+              }
+            ];
+          }
+          {
+            Bots = [
+              {
+                "Mafia Bot" = {
+                  description = "Discord mafia game bot";
+                  icon = "mdi-domino-mask";
+                };
+              }
+              {
+                "League Bot" = {
+                  description = "Discord League of Legends bot";
+                  icon = "league-of-legends.png";
                 };
               }
             ];
