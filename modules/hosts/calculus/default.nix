@@ -19,7 +19,6 @@ in
       nixosMods.leagueBot
       nixosMods.serviceHealth
       nixosMods.tailscale
-      nixosMods.uptimeKuma
       {
         my.nixos = {
           hostName = "calculus";
