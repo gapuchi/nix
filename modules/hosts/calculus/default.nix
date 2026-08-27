@@ -18,7 +18,6 @@ in
       nixosMods.mafiaBot
       nixosMods.leagueBot
       nixosMods.serviceHealth
-      nixosMods.monitoring
       nixosMods.tailscale
       nixosMods.uptimeKuma
       {

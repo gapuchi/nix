@@ -34,10 +34,6 @@
             reverse_proxy localhost:8080
             ${tls}
           '';
-          "netdata.lab.adhia.net".extraConfig = ''
-            reverse_proxy localhost:19999
-            ${tls}
-          '';
         };
       };
 

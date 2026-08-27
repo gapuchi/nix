@@ -17,7 +17,7 @@ A host file builds one output (`nixosSystem` / `darwinSystem` / `homeManagerConf
 
 ### `calculus` (Linux server)
 
-Home server: `gapuchiServer` bundle plus `caddy`, `homepage`, `plex`, `pihole`, `mafiaBot`, `leagueBot`, `monitoring`, `tailscale`, `uptimeKuma`, `serviceHealth`. The `homepage` dashboard at `home.lab.adhia.net` links the other services from one spot; `serviceHealth` exposes a loopback HTTP endpoint mapping `systemctl is-active` to 200/503 so headless systemd units (the bots) get up/down status on the dashboard. Home Manager uses `gapuchiTerminal` (via `gapuchiServer`). See `modules/hosts/calculus/default.nix`.
+Home server: `gapuchiServer` bundle plus `caddy`, `homepage`, `plex`, `pihole`, `mafiaBot`, `leagueBot`, `tailscale`, `uptimeKuma`, `serviceHealth`. The `homepage` dashboard at `home.lab.adhia.net` links the other services from one spot; `serviceHealth` exposes a loopback HTTP endpoint mapping `systemctl is-active` to 200/503 so headless systemd units (the bots) get up/down status on the dashboard. Home Manager uses `gapuchiTerminal` (via `gapuchiServer`). See `modules/hosts/calculus/default.nix`.
 
 ### `haddock` (Linux desktop)
 

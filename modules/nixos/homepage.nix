@@ -46,14 +46,6 @@
                 };
               }
               {
-                "Netdata" = {
-                  href = "https://netdata.lab.adhia.net";
-                  siteMonitor = "http://127.0.0.1:19999/";
-                  description = "System metrics";
-                  icon = "netdata.png";
-                };
-              }
-              {
                 "Plex" = {
                   href = "https://plex.lab.adhia.net";
                   siteMonitor = "http://127.0.0.1:32400/web";

@@ -53,7 +53,6 @@ in
               "pihole.lab.adhia.net,${calculusHostname}"
               "plex.lab.adhia.net,${calculusHostname}"
               "uptime-kuma.lab.adhia.net,${calculusHostname}"
-              "netdata.lab.adhia.net,${calculusHostname}"
             ];
             rateLimit = {
               count = 0;
