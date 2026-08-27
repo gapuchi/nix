@@ -26,10 +26,6 @@
             reverse_proxy localhost:32400
             ${tls}
           '';
-          "uptime-kuma.lab.adhia.net".extraConfig = ''
-            reverse_proxy localhost:3001
-            ${tls}
-          '';
           "pihole.lab.adhia.net".extraConfig = ''
             reverse_proxy localhost:8080
             ${tls}

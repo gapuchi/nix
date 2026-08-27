@@ -43,7 +43,7 @@ Hosts and bundles only ever set `my.*`; they never reach into a feature's intern
 
 ## Key patterns
 
-- **File name vs module name**: files are **kebab-case** (`gapuchi-terminal.nix`), registered module names are **camelCase** (`gapuchiTerminal`, `mafiaBot`, `leagueBot`, `uptimeKuma`).
+- **File name vs module name**: files are **kebab-case** (`gapuchi-terminal.nix`), registered module names are **camelCase** (`gapuchiTerminal`, `mafiaBot`, `leagueBot`).
 - Reference other registered modules via `config.flake.modules.<class>` (commonly aliased `nixosMods` / `hmMods` / `darwinMods` in a `let`), then `imports = with nixosMods; [ … ]`.
 - A feature that wraps an external flake reads its package from `inputs.<name>.packages.${pkgs.stdenv.hostPlatform.system}.default`.
 
