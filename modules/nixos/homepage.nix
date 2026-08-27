@@ -19,8 +19,19 @@
         };
 
         widgets = [
-          { resources = { cpu = true; memory = true; disk = "/"; }; }
-          { datetime.format = { dateStyle = "long"; timeStyle = "short"; }; }
+          {
+            resources = {
+              cpu = true;
+              memory = true;
+              disk = "/";
+            };
+          }
+          {
+            datetime.format = {
+              dateStyle = "long";
+              timeStyle = "short";
+            };
+          }
         ];
 
         services = [
