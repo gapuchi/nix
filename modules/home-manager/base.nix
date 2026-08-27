@@ -39,7 +39,6 @@
         };
         home.packages = with pkgs; [
           btop
-          claude-code
           fastfetch
           fzf
           gh
