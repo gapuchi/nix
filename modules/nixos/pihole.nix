@@ -6,7 +6,7 @@ let
 in
 {
   flake.modules.nixos.pihole =
-    { ... }:
+    { config, ... }:
     {
       networking = {
         interfaces.enp3s0.ipv4.addresses = [
@@ -94,5 +94,8 @@ in
         enable = false;
         settings.address = "/.home.arpa/${devices.calculus.ip}";
       };
+
+      systemd.services.pihole-ftl-setup.unitConfig.ConditionPathExists =
+        "!${config.services.pihole-ftl.settings.files.gravity}";
     };
 }
