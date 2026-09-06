@@ -15,6 +15,7 @@ in
       nixosMods.homepage
       nixosMods.plex
       nixosMods.pihole
+      nixosMods.golink
       nixosMods.mafiaBot
       nixosMods.leagueBot
       nixosMods.serviceHealth
