@@ -21,6 +21,12 @@ in
       nixosMods.cachix
       nixosMods.serviceHealth
       nixosMods.tailscale
+      (
+        { config, ... }:
+        {
+          users.users.${config.my.nixos.username}.extraGroups = [ "league-bot" ];
+        }
+      )
       {
         my.nixos = {
           hostName = "calculus";
