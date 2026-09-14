@@ -18,6 +18,7 @@ in
       nixosMods.golink
       nixosMods.mafiaBot
       nixosMods.leagueBot
+      nixosMods.cachix
       nixosMods.serviceHealth
       nixosMods.tailscale
       {
