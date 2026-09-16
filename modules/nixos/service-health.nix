@@ -4,6 +4,7 @@ let
   units = [
     "mafia-bot"
     "league-bot"
+    "nixos-upgrade.timer"
   ];
 in
 {

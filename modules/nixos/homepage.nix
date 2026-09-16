@@ -63,6 +63,13 @@
                   icon = "plex.png";
                 };
               }
+              {
+                "Auto Upgrade" = {
+                  siteMonitor = "http://127.0.0.1:8083/nixos-upgrade.timer";
+                  description = "Polls calculus tag every 5 min";
+                  icon = "mdi-update";
+                };
+              }
             ];
           }
           {
