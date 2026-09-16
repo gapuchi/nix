@@ -25,7 +25,7 @@ NixOS workstation with GNOME via `gapuchiLinuxDesktop` (Home Manager `gapuchiDes
 
 ### `tintin` (macOS)
 
-nix-darwin (`darwinConfigurations.tintin`) using `gapuchiBase`, `gapuchiDefaults`, and Home Manager `gapuchiTerminal`. See `modules/hosts/tintin/default.nix`.
+nix-darwin (`darwinConfigurations.tintin`) using `base`, `gapuchiDefaults`, Home Manager, and `homeImports` of `gapuchiTerminal` + `ghostty`. See `modules/hosts/tintin/default.nix`.
 
 ### `arjun-gt` (macOS)
 

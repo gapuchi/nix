@@ -29,7 +29,7 @@ This is the boundary agents must respect. Module files do **not** produce machin
 
 - **base** (`base.nix`) — declares `options.my.{nixos,darwin,home}` and baseline config. The contract every host fills in.
 - **feature** — one concern, e.g. `caddy`, `plex`, `git`, `zsh`, `mafiaBot`. Localizes its own effects (secrets, systemd units, packages).
-- **bundle** — composes features via `imports`, e.g. `gapuchiTerminal`, `gapuchiDesktop`, `gapuchiServer`, `gapuchiLinuxBase`, `gapuchiBase`.
+- **bundle** — composes features via `imports`, e.g. `gapuchiTerminal`, `gapuchiDesktop`, `gapuchiServer`, `gapuchiLinuxDesktop`.
 
 ### The `my.*` contract + `homeImports` seam
 
