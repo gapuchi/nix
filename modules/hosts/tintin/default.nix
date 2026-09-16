@@ -14,7 +14,10 @@ in
       {
         my.darwin = {
           hostName = "tintin";
-          homeImports = with hmMods; [ gapuchiTerminal ];
+          homeImports = with hmMods; [
+            gapuchiTerminal
+            ghostty
+          ];
         };
 
         system = {
