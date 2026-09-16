@@ -1,6 +1,6 @@
 { ... }:
 {
-  flake.modules.homeManager.vim =
+  flake.modules.homeManager.neovim =
     { ... }:
     {
       programs.neovim = {
