@@ -4,7 +4,6 @@ Unify machine setup with **Nix** across NixOS and macOS. Prefer small, correct c
 
 ## Related docs
 
-- **Cross-repo** — `coding-philosophy` rule; `scope-and-plan` / `execute-increment` skills (`workspace/ai`)
 - [`hosts/AGENTS.md`](hosts/AGENTS.md) — per-machine details, hardware files, host wiring, Caddy sites
 - [`.cursor/rules/`](.cursor/rules/) — scoped reminders (`architecture`, `modules`, `secrets`, `readme-sync`)
 
@@ -12,7 +11,7 @@ Unify machine setup with **Nix** across NixOS and macOS. Prefer small, correct c
 
 Personal Nix configuration for several machines. **Flakes** are the entry point (`flake.nix`, pinned by `flake.lock`); **Home Manager** owns user config, **nix-darwin** owns macOS systems, **agenix** manages secrets. `just` runs common tasks and `direnv` loads the dev shell on `cd`.
 
-The flake is built with **flake-parts** + **import-tree**: `flake.nix` is tiny and `inputs.import-tree ./modules` auto-imports *every* `modules/**/*.nix`. There is no manual import list — adding a file under `modules/` is enough to load it.
+The flake is built with **flake-parts** + **import-tree**: `flake.nix` is tiny and `inputs.import-tree ./modules` auto-imports `modules/**/*.nix` (directories named with a leading `_`, like `_lib`, are skipped). There is no manual import list — adding a file under `modules/` is enough to load it.
 
 ## Two tiers
 
@@ -20,16 +19,20 @@ This is the boundary agents must respect. Module files do **not** produce machin
 
 | Tier | Path | Role |
 |------|------|------|
-| **Module library** | `modules/{nixos,darwin,home-manager}/*.nix` | Register named modules into `config.flake.modules.{nixos,darwin,homeManager}.<name>` |
+| **Module library** | `modules/{nixos,darwin,home-manager}/` | Register named modules into `config.flake.modules.{nixos,darwin,homeManager}.<name>` |
 | **Host wiring** | `modules/hosts/<host>/default.nix` | Build `flake.{nixosConfigurations,darwinConfigurations,homeConfigurations}` by selecting registered modules + setting `my.*` options |
 | **Flake plumbing** | `modules/{options,systems,devshell}.nix` | flake-parts setup, supported systems, dev shell |
-| **Shared helpers** | `modules/_lib/*.nix` | Plain attrsets (`ssh-keys.nix`, `devices.nix`), `import`ed directly — not flake modules |
+| **Shared helpers** | `modules/_lib/*.nix` | Plain attrsets (`ssh-keys.nix`, `devices.nix`), `import`ed directly — not flake modules. Paths under `/_` are not auto-imported by import-tree. |
 
-### Module kinds (in the library)
+Within each class directory:
 
-- **base** (`base.nix`) — declares `options.my.{nixos,darwin,home}` and baseline config. The contract every host fills in.
-- **feature** — one concern, e.g. `caddy`, `plex`, `git`, `zsh`, `mafiaBot`. Localizes its own effects (secrets, systemd units, packages).
-- **bundle** — composes features via `imports`, e.g. `gapuchiTerminal`, `gapuchiDesktop`, `gapuchiServer`, `gapuchiLinuxDesktop`.
+| Path | Role |
+|------|------|
+| `base.nix` | Declares `options.my.*` and baseline config — the contract every host fills in |
+| `*.nix` (top level) | **Features** — one concern each (a service, program, or package set) |
+| `bundles/*.nix` | **Bundles** — role presets: HM ones mostly `imports` of features; NixOS ones are machine-category baselines (boot, DE, nix settings, `homeImports`, …) plus any needed `imports` |
+
+**Features** may be reusable (`git`, `tailscale`, `plex`) or single-host (`caddy`, `homepage`, `pihole`, `serviceHealth` for calculus). Prefer portable settings when reuse is likely; hardcoding lab/host facts is fine when only that host selects the module — do not invent `my.*` knobs or a mega-bundle until a second consumer appears. Don't branch on host identity inside a feature; selection stays in host wiring.
 
 ### The `my.*` contract + `homeImports` seam
 
@@ -70,6 +73,7 @@ Plaintext secrets, private keys, and credential env files must never be committe
 | Task | Where |
 |------|-------|
 | Add a feature module | New `modules/<class>/<kebab>.nix` registering `flake.modules.<class>.<camel>`; add to a bundle's `imports` or a host's module list |
+| Add a bundle | New `modules/<class>/bundles/<kebab>.nix` — HM: compose features; NixOS: role baseline (+ `homeImports` / `imports` as needed) |
 | Add a package for a user | `modules/home-manager/base.nix` (`home.packages`) or the relevant HM feature/bundle |
 | Add a NixOS service | New `modules/nixos/<svc>.nix`; import it in `modules/hosts/<host>/default.nix` |
 | Add a machine | New `modules/hosts/<host>/default.nix` (+ `hosts/<host>/hardware-configuration.nix` for NixOS); see `hosts/AGENTS.md` |
@@ -78,8 +82,8 @@ Plaintext secrets, private keys, and credential env files must never be committe
 
 ## What not to do
 
-- Don't add a manual import list to `flake.nix` — `import-tree` already loads every `modules/**/*.nix`.
-- Don't set machine config in a feature file or read `my.*` to branch behavior across hosts; features stay generic and hosts select them.
+- Don't add a manual import list to `flake.nix` — `import-tree` already loads every `modules/**/*.nix` (except `/_` paths).
+- Don't read `my.*` to branch behavior across hosts; hosts select modules. Single-host features may hardcode lab facts; don't pretend they're portable when they aren't.
 - Don't have a host reach into a feature's internals — go through `my.*` options and `homeImports`.
 - Don't add GUI packages to server or macOS targets (see machine categories).
 - Don't commit plaintext secrets or key material; don't add a `secrets.nix` rule without a corresponding `age.secrets` reference.

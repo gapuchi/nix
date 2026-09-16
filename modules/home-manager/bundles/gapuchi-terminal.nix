@@ -7,7 +7,7 @@ in
     imports = with hmMods; [
       base
       git
-      vim
+      neovim
       zsh
     ];
 

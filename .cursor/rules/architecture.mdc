@@ -9,7 +9,7 @@ alwaysApply: true
 
 Quick guardrails (details in `AGENTS.md`):
 
-- Two tiers: **module library** (`modules/{nixos,darwin,home-manager}/*.nix` register `flake.modules.<class>.<camelName>`) → **host wiring** (`modules/hosts/<host>/default.nix` selects modules + sets `my.*`).
-- `import-tree` auto-loads every `modules/**/*.nix`; never add a manual import list to `flake.nix`.
-- Features stay generic; hosts select them and configure via `my.*` options + `homeImports`. Don't branch a feature on host identity.
+- Two tiers: **module library** (`modules/{nixos,darwin,home-manager}/` — features at top level, role presets in `bundles/`, register `flake.modules.<class>.<camelName>`) → **host wiring** (`modules/hosts/<host>/default.nix` selects modules + sets `my.*`).
+- `import-tree` auto-loads `modules/**/*.nix` (skips `/_` paths); never add a manual import list to `flake.nix`.
+- Hosts select modules via `my.*` + `homeImports`. Features may be reusable or single-host; don't branch on host identity inside a feature.
 - Secrets: `secrets.nix` rule + `secrets/<name>.age` + an `age.secrets` reference. Never commit plaintext.

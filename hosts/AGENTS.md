@@ -17,11 +17,11 @@ A host file builds one output (`nixosSystem` / `darwinSystem` / `homeManagerConf
 
 ### `calculus` (Linux server)
 
-Home server: `gapuchiServer` bundle plus `caddy`, `homepage`, `plex`, `pihole`, `mafiaBot`, `leagueBot`, `tailscale`, `serviceHealth`. The `homepage` dashboard at `home.lab.adhia.net` links the other services from one spot; `serviceHealth` exposes a loopback HTTP endpoint mapping `systemctl is-active` to 200/503 so headless systemd units (the bots) get up/down status on the dashboard. Home Manager uses `gapuchiTerminal` (via `gapuchiServer`). See `modules/hosts/calculus/default.nix`.
+Home server: `gapuchiServer` plus calculus/lab modules (`caddy`, `homepage`, `plex`, `pihole`, `golink`, `mafiaBot`, `leagueBot`, `cachix`, `serviceHealth`, `tailscale`). Those lab modules are single-host features (hardcoded `*.lab.adhia.net`, LAN, dashboard) selected only here — not a shared bundle. The `homepage` dashboard at `home.lab.adhia.net` links the other services from one spot; `serviceHealth` exposes a loopback HTTP endpoint mapping `systemctl is-active` to 200/503 so headless systemd units (the bots) get up/down status on the dashboard. Home Manager uses `gapuchiTerminal` (via `gapuchiServer`). See `modules/hosts/calculus/default.nix`.
 
 ### `haddock` (Linux desktop)
 
-NixOS workstation with GNOME via `gapuchiLinuxDesktop` (Home Manager `gapuchiDesktop`) + `tailscale`. See `modules/hosts/haddock/default.nix`.
+NixOS workstation with GNOME via `gapuchiLinuxDesktop` (Home Manager `gapuchiTerminal` + `gapuchiDesktop`) + `tailscale`. See `modules/hosts/haddock/default.nix`.
 
 ### `tintin` (macOS)
 

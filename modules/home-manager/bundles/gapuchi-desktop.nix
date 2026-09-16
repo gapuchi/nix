@@ -7,9 +7,8 @@ in
     { pkgs, ... }:
     {
       imports = with hmMods; [
-        gapuchiTerminal
         ghostty
-        vscode
+        cursor
       ];
 
       home.packages = with pkgs; [

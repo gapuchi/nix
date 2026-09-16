@@ -14,7 +14,10 @@ in
           inputs.home-manager.nixosModules.home-manager
         ];
 
-      my.nixos.homeImports = with hmMods; [ gapuchiDesktop ];
+      my.nixos.homeImports = with hmMods; [
+        gapuchiTerminal
+        gapuchiDesktop
+      ];
 
       boot.loader = {
         systemd-boot.enable = true;
