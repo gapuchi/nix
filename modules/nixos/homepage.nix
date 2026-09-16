@@ -1,7 +1,10 @@
 { ... }:
 {
   flake.modules.nixos.homepage =
-    { ... }:
+    { config, ... }:
+    let
+      rev = config.system.configurationRevision;
+    in
     {
       services.homepage-dashboard = {
         enable = true;
@@ -30,6 +33,12 @@
             datetime.format = {
               dateStyle = "long";
               timeStyle = "short";
+            };
+          }
+          {
+            greeting = {
+              text_size = "sm";
+              text = "nix rev ${if rev == null then "dirty" else rev}";
             };
           }
         ];
