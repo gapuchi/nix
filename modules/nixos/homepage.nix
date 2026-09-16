@@ -13,6 +13,7 @@
 
         settings = {
           title = "calculus";
+          favicon = "/calculus.jpeg";
           headerStyle = "clean";
           statusStyle = "dot";
           layout = [
@@ -70,14 +71,14 @@
                 "Mafia Bot" = {
                   siteMonitor = "http://127.0.0.1:8083/mafia-bot";
                   description = "Discord mafia game bot";
-                  icon = "mdi-domino-mask";
+                  icon = "/rokt-leeg.jpg";
                 };
               }
               {
                 "League Bot" = {
                   siteMonitor = "http://127.0.0.1:8083/league-bot";
                   description = "Discord League of Legends bot";
-                  icon = "league-of-legends.png";
+                  icon = "mdi-trophy";
                 };
               }
             ];

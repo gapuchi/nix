@@ -19,6 +19,14 @@
         };
         virtualHosts = {
           "home.lab.adhia.net".extraConfig = ''
+            handle /calculus.jpeg {
+              root * ${./assets}
+              file_server
+            }
+            handle /rokt-leeg.jpg {
+              root * ${./assets}
+              file_server
+            }
             reverse_proxy localhost:8082
             ${tls}
           '';
