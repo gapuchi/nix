@@ -1,4 +1,4 @@
-{ config, ... }:
+{ inputs, config, ... }:
 let
   hmMods = config.flake.modules.homeManager;
   nixosMods = config.flake.modules.nixos;
@@ -7,13 +7,24 @@ in
   flake.modules.nixos.gapuchiLinuxDesktop =
     { pkgs, ... }:
     {
-      imports = with nixosMods; [ gapuchiLinuxBase ];
+      imports =
+        with nixosMods;
+        [ base ]
+        ++ [
+          inputs.home-manager.nixosModules.home-manager
+        ];
 
       my.nixos.homeImports = with hmMods; [ gapuchiDesktop ];
 
-      boot.loader.systemd-boot.extraInstallCommands = ''
-        ${pkgs.gnused}/bin/sed -i 's/^default.*$/default @saved/' /boot/loader/loader.conf
-      '';
+      boot.loader = {
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+        systemd-boot.extraInstallCommands = ''
+          ${pkgs.gnused}/bin/sed -i 's/^default.*$/default @saved/' /boot/loader/loader.conf
+        '';
+      };
+
+      networking.networkmanager.enable = true;
 
       time.timeZone = "America/New_York";
       time.hardwareClockInLocalTime = true;

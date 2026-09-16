@@ -9,8 +9,9 @@ in
     system = "aarch64-darwin";
     specialArgs = { inherit inputs; };
     modules = with darwinMods; [
-      gapuchiBase
+      base
       gapuchiDefaults
+      inputs.home-manager.darwinModules.home-manager
       {
         my.darwin = {
           hostName = "tintin";

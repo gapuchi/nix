@@ -6,11 +6,19 @@ in
   flake.modules.homeManager.gapuchiTerminal = {
     imports = with hmMods; [
       base
-      direnv
-      eza
       git
       vim
       zsh
     ];
+
+    programs.direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
+
+    programs.eza = {
+      enable = true;
+      enableZshIntegration = true;
+    };
   };
 }
