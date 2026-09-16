@@ -17,7 +17,7 @@ A host file builds one output (`nixosSystem` / `darwinSystem` / `homeManagerConf
 
 ### `calculus` (Linux server)
 
-Home server: `gapuchiServer` plus calculus/lab modules (`caddy`, `homepage`, `plex`, `pihole`, `golink`, `mafiaBot`, `leagueBot`, `cachix`, `serviceHealth`, `tailscale`). Those lab modules are single-host features (hardcoded `*.lab.adhia.net`, LAN, dashboard) selected only here — not a shared bundle. The `homepage` dashboard at `home.lab.adhia.net` links the other services from one spot; `serviceHealth` exposes a loopback HTTP endpoint mapping `systemctl is-active` to 200/503 so headless systemd units (the bots) get up/down status on the dashboard. Home Manager uses `gapuchiTerminal` (via `gapuchiServer`). See `modules/hosts/calculus/default.nix`.
+Home server: `gapuchiServer` plus calculus/lab modules (`caddy`, `homepage`, `plex`, `pihole`, `golink`, `mafiaBot`, `leagueBot`, `cachix`, `serviceHealth`, `calculusDeploy`, `tailscale`). Those lab modules are single-host features (hardcoded `*.lab.adhia.net`, LAN, dashboard) selected only here — not a shared bundle. The `homepage` dashboard at `home.lab.adhia.net` links the other services from one spot; `serviceHealth` exposes a loopback HTTP endpoint mapping `systemctl is-active` to 200/503 so headless systemd units (the bots) get up/down status on the dashboard. `calculusDeploy` enables `system.autoUpgrade` against the floating `calculus` tag (~every 5 min); move the tag with `just deploy-calculus`. Running revision stays `nixos-version --configuration-revision`. Home Manager uses `gapuchiTerminal` (via `gapuchiServer`). See `modules/hosts/calculus/default.nix`.
 
 ### `haddock` (Linux desktop)
 

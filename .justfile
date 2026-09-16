@@ -6,6 +6,7 @@ alias s := switch
 alias u := update
 alias c := check
 alias v := version
+alias dc := deploy-calculus
 
 update *inputs:
     nix flake update {{inputs}}
@@ -18,3 +19,7 @@ check:
 
 version:
     {{version_cmd}} --configuration-revision
+
+deploy-calculus:
+    git tag -f calculus
+    git push -f origin refs/tags/calculus
