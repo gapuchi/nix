@@ -52,6 +52,7 @@ in
               "home.lab.adhia.net,${calculusHostname}"
               "pihole.lab.adhia.net,${calculusHostname}"
               "plex.lab.adhia.net,${calculusHostname}"
+              "hass.lab.adhia.net,${calculusHostname}"
             ];
             rateLimit = {
               count = 0;

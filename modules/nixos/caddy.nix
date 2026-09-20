@@ -38,6 +38,10 @@
             reverse_proxy localhost:8080
             ${tls}
           '';
+          "hass.lab.adhia.net".extraConfig = ''
+            reverse_proxy 127.0.0.1:8123
+            ${tls}
+          '';
         };
       };
 

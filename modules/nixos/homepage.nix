@@ -64,6 +64,14 @@
                 };
               }
               {
+                "Home Assistant" = {
+                  href = "https://hass.lab.adhia.net";
+                  siteMonitor = "http://127.0.0.1:8123";
+                  description = "Home automation";
+                  icon = "home-assistant.png";
+                };
+              }
+              {
                 "Auto Upgrade" = {
                   siteMonitor = "http://127.0.0.1:8083/nixos-upgrade.timer";
                   description = "Polls calculus tag every 5 min";
