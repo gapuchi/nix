@@ -15,12 +15,13 @@ in
       nixosMods.homepage
       nixosMods.plex
       nixosMods.pihole
+      nixosMods.homeAssistant
       nixosMods.golink
       nixosMods.mafiaBot
       nixosMods.leagueBot
       nixosMods.cachix
       nixosMods.serviceHealth
-      nixosMods.calculusDeploy
+      # nixosMods.calculusDeploy
       nixosMods.tailscale
       (
         { config, ... }:
