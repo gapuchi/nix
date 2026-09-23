@@ -30,6 +30,10 @@
     league-bot = {
       url = "github:gapuchi/league-bot";
     };
+
+    rummy = {
+      url = "github:Adhias/rummy";
+    };
   };
 
   outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./modules);

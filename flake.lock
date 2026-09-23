@@ -253,6 +253,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1790046670,
+        "narHash": "sha256-MYiI+CzL0tuWgRPjGsKCDHqYs2T3OzMlMQWOYWG0qso=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6774f7bc253789b113a4f39285dc0fa100abeacc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -262,7 +278,26 @@
         "league-bot": "league-bot",
         "mafia-bot": "mafia-bot",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_3",
+        "rummy": "rummy"
+      }
+    },
+    "rummy": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "lastModified": 1790130668,
+        "narHash": "sha256-mSX/uPov28Q+4MK8GmW4eoyXXpk1LJEvyH72aDWLa2Q=",
+        "owner": "Adhias",
+        "repo": "rummy",
+        "rev": "0d0a11b3ead9eef81aa53b4fd9e6412b377758ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Adhias",
+        "repo": "rummy",
+        "type": "github"
       }
     },
     "systems": {
