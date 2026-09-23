@@ -40,6 +40,7 @@
             (check "Services" "Pi-hole" "http://127.0.0.1:8080/api/info/version")
             (check "Services" "Plex" "http://127.0.0.1:32400/web")
             (check "Services" "Home Assistant" "http://127.0.0.1:8123")
+            (check "Services" "Rummy" "http://127.0.0.1:3000")
             (check "Services" "Auto Upgrade" "http://127.0.0.1:8083/nixos-upgrade.timer")
             (check "Bots" "Mafia Bot" "http://127.0.0.1:8083/mafia-bot")
             (check "Bots" "League Bot" "http://127.0.0.1:8084/health")

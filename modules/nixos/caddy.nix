@@ -42,6 +42,10 @@
             reverse_proxy 127.0.0.1:8085
             ${tls}
           '';
+          "rummy.lab.adhia.net".extraConfig = ''
+            reverse_proxy localhost:3000
+            ${tls}
+          '';
         };
       };
 

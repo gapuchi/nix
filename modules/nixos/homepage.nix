@@ -67,6 +67,13 @@
                 };
               }
               {
+                "Rummy" = {
+                  href = "https://rummy.lab.adhia.net";
+                  description = "Points Rummy score sheet";
+                  icon = "mdi-cards-playing";
+                };
+              }
+              {
                 "Gatus" = {
                   href = "https://gatus.lab.adhia.net";
                   description = "Uptime alerts";
