@@ -15,10 +15,8 @@
           title = "calculus";
           favicon = "/calculus.jpeg";
           headerStyle = "clean";
-          statusStyle = "dot";
           layout = [
             { Services.style = "row"; }
-            { Bots.style = "row"; }
           ];
         };
 
@@ -50,7 +48,6 @@
               {
                 "Pi-hole" = {
                   href = "https://pihole.lab.adhia.net";
-                  siteMonitor = "http://127.0.0.1:8080/api/info/version";
                   description = "DNS sinkhole and DHCP";
                   icon = "pi-hole.png";
                 };
@@ -58,7 +55,6 @@
               {
                 "Plex" = {
                   href = "https://plex.lab.adhia.net";
-                  siteMonitor = "http://127.0.0.1:32400/web";
                   description = "Media library";
                   icon = "plex.png";
                 };
@@ -66,34 +62,19 @@
               {
                 "Home Assistant" = {
                   href = "https://hass.lab.adhia.net";
-                  siteMonitor = "http://127.0.0.1:8123";
                   description = "Home automation";
                   icon = "home-assistant.png";
                 };
               }
               {
-                "Auto Upgrade" = {
-                  siteMonitor = "http://127.0.0.1:8083/nixos-upgrade.timer";
-                  description = "Polls calculus tag every 5 min";
-                  icon = "mdi-update";
-                };
-              }
-            ];
-          }
-          {
-            Bots = [
-              {
-                "Mafia Bot" = {
-                  siteMonitor = "http://127.0.0.1:8083/mafia-bot";
-                  description = "Discord mafia game bot";
-                  icon = "/rokt-leeg.jpg";
-                };
-              }
-              {
-                "League Bot" = {
-                  siteMonitor = "http://127.0.0.1:8084/health";
-                  description = "Discord League of Legends bot";
-                  icon = "mdi-trophy";
+                "Gatus" = {
+                  href = "https://gatus.lab.adhia.net";
+                  description = "Uptime alerts";
+                  icon = "gatus.png";
+                  widget = {
+                    type = "gatus";
+                    url = "http://127.0.0.1:8085";
+                  };
                 };
               }
             ];

@@ -12,6 +12,11 @@ in
     rootCalculus
     calculus
   ];
+  "secrets/gatus-discord-webhook.age".publicKeys = with sshKeys; [
+    tintin
+    rootCalculus
+    calculus
+  ];
   "secrets/caddy-dns-token.age".publicKeys = with sshKeys; [
     tintin
     rootCalculus

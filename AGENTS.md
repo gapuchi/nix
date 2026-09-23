@@ -32,7 +32,7 @@ Within each class directory:
 | `*.nix` (top level) | **Features** — one concern each (a service, program, or package set) |
 | `bundles/*.nix` | **Bundles** — role presets: HM ones mostly `imports` of features; NixOS ones are machine-category baselines (boot, DE, nix settings, `homeImports`, …) plus any needed `imports` |
 
-**Features** may be reusable (`git`, `tailscale`, `plex`) or single-host (`caddy`, `homepage`, `pihole`, `homeAssistant`, `serviceHealth` for calculus). Prefer portable settings when reuse is likely; hardcoding lab/host facts is fine when only that host selects the module — do not invent `my.*` knobs or a mega-bundle until a second consumer appears. Don't branch on host identity inside a feature; selection stays in host wiring.
+**Features** may be reusable (`git`, `tailscale`, `plex`) or single-host (`caddy`, `homepage`, `pihole`, `homeAssistant`, `serviceHealth`, `gatus` for calculus). Prefer portable settings when reuse is likely; hardcoding lab/host facts is fine when only that host selects the module — do not invent `my.*` knobs or a mega-bundle until a second consumer appears. Don't branch on host identity inside a feature; selection stays in host wiring.
 
 ### The `my.*` contract + `homeImports` seam
 
