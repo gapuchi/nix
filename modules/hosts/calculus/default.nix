@@ -20,6 +20,7 @@ in
       nixosMods.golink
       nixosMods.mafiaBot
       nixosMods.leagueBot
+      nixosMods.rummy
       nixosMods.cachix
       nixosMods.serviceHealth
       # nixosMods.calculusDeploy

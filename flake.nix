@@ -20,7 +20,6 @@
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
     };
 
       nix-private.url = "github:gapuchi/nix-private";
@@ -32,6 +31,10 @@
 
     league-bot = {
       url = "github:gapuchi/league-bot";
+    };
+
+    rummy = {
+      url = "github:Adhias/rummy/multi-device-sessions";
     };
   };
 
