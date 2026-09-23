@@ -91,7 +91,7 @@
               }
               {
                 "League Bot" = {
-                  siteMonitor = "http://127.0.0.1:8083/league-bot";
+                  siteMonitor = "http://127.0.0.1:8084/health";
                   description = "Discord League of Legends bot";
                   icon = "mdi-trophy";
                 };
