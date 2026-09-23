@@ -17,6 +17,9 @@
       systemd.services.league-bot = {
         description = "League Bot";
         wantedBy = [ "multi-user.target" ];
+        environment = {
+          HEALTH_CHECK_ADDR = "127.0.0.1:8084";
+        };
         serviceConfig = {
           ExecStart = "${league-bot}/bin/league-bot";
           EnvironmentFile = config.age.secrets.league-bot-env.path;
