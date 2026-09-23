@@ -3,40 +3,26 @@
   flake.modules.nixos.calculusDeploy =
     {
       config,
+      lib,
       pkgs,
       ...
     }:
     let
       branch = "calculus";
-      flakeRef = "github:gapuchi/nix/${branch}";
       repoUrl = "https://github.com/gapuchi/nix";
       tagRef = "refs/tags/${branch}";
-    in
-    {
-      systemd.services.calculus-deploy = {
-        description = "Deploy the ${branch} tag, but only when it fast-forwards the running system";
-        after = [ "network-online.target" ];
-        wants = [ "network-online.target" ];
-
-        path = [
-          pkgs.gitMinimal
-          config.system.build.nixos-rebuild
-          config.nix.package.out
-        ];
-
-        environment.SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
-
-        serviceConfig.Type = "oneshot";
-
-        script = ''
-          set -euo pipefail
-
+      # Exit 0 to deploy, 1 to skip, 255 when the check itself fails.
+      # ExecCondition treats 1 as "skip", not a failed unit.
+      mayDeploy = pkgs.writeShellApplication {
+        name = "calculus-deploy-may-proceed";
+        runtimeInputs = [ pkgs.gitMinimal ];
+        text = ''
           current=$(/run/current-system/sw/bin/nixos-version --configuration-revision)
 
           case "$current" in
             "" | *-dirty)
               echo "Running a local/dirty build ($current); skipping to avoid overwriting local testing."
-              exit 0
+              exit 1
               ;;
           esac
 
@@ -44,30 +30,36 @@
           trap 'rm -rf "$work"' EXIT
 
           git -C "$work" init -q
-          git -C "$work" fetch -q ${repoUrl} "${tagRef}:${tagRef}"
-          target=$(git -C "$work" rev-parse "${tagRef}^{commit}")
+          git -C "$work" fetch -q "${repoUrl}" "${tagRef}:${tagRef}" || exit 255
+          target=$(git -C "$work" rev-parse "${tagRef}^{commit}") || exit 255
 
           if [ "$current" = "$target" ]; then
             echo "Already at the ${branch} tag ($target); nothing to do."
-            exit 0
+            exit 1
           fi
 
-          if ! git -C "$work" merge-base --is-ancestor "$current" "$target" 2>/dev/null; then
+          status=0
+          git -C "$work" merge-base --is-ancestor "$current" "$target" 2>/dev/null || status=$?
+          if [ "$status" -ne 0 ]; then
             echo "The ${branch} tag ($target) is not ahead of the running revision ($current); skipping."
-            exit 0
+            exit 1
           fi
 
           echo "The ${branch} tag moves forward ($current -> $target); deploying."
-          exec nixos-rebuild switch --flake "${flakeRef}"
         '';
       };
+    in
+    {
+      system.autoUpgrade = {
+        enable = true;
+        flake = "github:gapuchi/nix/${branch}";
+        dates = "*:0/5";
+        upgrade = false;
+      };
 
-      systemd.timers.calculus-deploy = {
-        wantedBy = [ "timers.target" ];
-        timerConfig = {
-          OnCalendar = "*:0/5";
-          Persistent = true;
-        };
+      systemd.services.nixos-upgrade = {
+        serviceConfig.ExecCondition = lib.getExe mayDeploy;
+        environment.SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
       };
     };
 }

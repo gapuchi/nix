@@ -73,8 +73,8 @@
               }
               {
                 "Auto Upgrade" = {
-                  siteMonitor = "http://127.0.0.1:8083/calculus-deploy.timer";
-                  description = "Polls calculus tag every 5 min (fast-forward only)";
+                  siteMonitor = "http://127.0.0.1:8083/nixos-upgrade.timer";
+                  description = "Deploys the calculus tag when it moves forward";
                   icon = "mdi-update";
                 };
               }
