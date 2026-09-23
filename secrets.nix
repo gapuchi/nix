@@ -12,6 +12,16 @@ in
     rootCalculus
     calculus
   ];
+  "secrets/rummy.env.age".publicKeys = with sshKeys; [
+    tintin
+    rootCalculus
+    calculus
+  ];
+  "secrets/rummy-google-sa.age".publicKeys = with sshKeys; [
+    tintin
+    rootCalculus
+    calculus
+  ];
   "secrets/gatus-discord-webhook.age".publicKeys = with sshKeys; [
     tintin
     rootCalculus
