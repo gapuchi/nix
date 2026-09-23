@@ -13,6 +13,7 @@ in
       nixosMods.gapuchiServer
       nixosMods.caddy
       nixosMods.homepage
+      nixosMods.gatus
       nixosMods.plex
       nixosMods.pihole
       nixosMods.homeAssistant
