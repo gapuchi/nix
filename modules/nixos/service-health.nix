@@ -3,7 +3,6 @@ let
   port = 8083;
   units = [
     "mafia-bot"
-    "league-bot"
     "nixos-upgrade.timer"
   ];
 in
