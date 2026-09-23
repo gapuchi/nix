@@ -21,7 +21,7 @@ in
       nixosMods.leagueBot
       nixosMods.cachix
       nixosMods.serviceHealth
-      # nixosMods.calculusDeploy
+      nixosMods.calculusDeploy
       nixosMods.tailscale
       (
         { config, ... }:

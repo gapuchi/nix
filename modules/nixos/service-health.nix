@@ -3,7 +3,7 @@ let
   port = 8083;
   units = [
     "mafia-bot"
-    "nixos-upgrade.timer"
+    "calculus-deploy.timer"
   ];
 in
 {
