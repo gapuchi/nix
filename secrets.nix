@@ -32,5 +32,10 @@ in
     rootCalculus
     calculus
   ];
+  "secrets/mullvad-wg.age".publicKeys = with sshKeys; [
+    tintin
+    rootCalculus
+    calculus
+  ];
   "secrets/arjun-gt-initContent.age".publicKeys = with sshKeys; [ arjunGt ];
 }
