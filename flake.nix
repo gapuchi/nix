@@ -25,6 +25,8 @@
       nix-private.url = "github:gapuchi/nix-private";
     
 
+    vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
+
     mafia-bot = {
       url = "github:gapuchi/mafia-bot-rust";
     };
