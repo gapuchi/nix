@@ -15,6 +15,8 @@ in
       nixosMods.homepage
       nixosMods.gatus
       nixosMods.plex
+      nixosMods.qbittorrent
+      nixosMods.arr
       nixosMods.pihole
       nixosMods.homeAssistant
       nixosMods.golink
