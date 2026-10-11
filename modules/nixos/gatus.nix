@@ -39,6 +39,10 @@
           endpoints = [
             (check "Services" "Pi-hole" "http://127.0.0.1:8080/api/info/version")
             (check "Services" "Plex" "http://127.0.0.1:32400/web")
+            (check "Services" "Prowlarr" "http://127.0.0.1:9696")
+            (check "Services" "Sonarr" "http://127.0.0.1:8989")
+            (check "Services" "Radarr" "http://127.0.0.1:7878")
+            (check "Services" "Overseerr" "http://127.0.0.1:5055")
             (check "Services" "Home Assistant" "http://127.0.0.1:8123")
             (check "Services" "Rummy" "http://127.0.0.1:3000")
             (check "Services" "Auto Upgrade" "http://127.0.0.1:8083/nixos-upgrade.timer")

@@ -22,6 +22,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
+
     mafia-bot = {
       url = "github:gapuchi/mafia-bot-rust";
     };

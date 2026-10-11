@@ -30,6 +30,26 @@
             reverse_proxy localhost:32400
             ${tls}
           '';
+          "qbittorrent.lab.adhia.net".extraConfig = ''
+            reverse_proxy 192.168.15.1:8090
+            ${tls}
+          '';
+          "prowlarr.lab.adhia.net".extraConfig = ''
+            reverse_proxy 127.0.0.1:9696
+            ${tls}
+          '';
+          "sonarr.lab.adhia.net".extraConfig = ''
+            reverse_proxy 127.0.0.1:8989
+            ${tls}
+          '';
+          "radarr.lab.adhia.net".extraConfig = ''
+            reverse_proxy 127.0.0.1:7878
+            ${tls}
+          '';
+          "overseerr.lab.adhia.net".extraConfig = ''
+            reverse_proxy 127.0.0.1:5055
+            ${tls}
+          '';
           "pihole.lab.adhia.net".extraConfig = ''
             reverse_proxy localhost:8080
             ${tls}

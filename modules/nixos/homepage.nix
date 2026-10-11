@@ -60,6 +60,41 @@
                 };
               }
               {
+                "qBittorrent" = {
+                  href = "https://qbittorrent.lab.adhia.net";
+                  description = "Download client";
+                  icon = "qbittorrent.png";
+                };
+              }
+              {
+                "Prowlarr" = {
+                  href = "https://prowlarr.lab.adhia.net";
+                  description = "Indexer manager";
+                  icon = "prowlarr.png";
+                };
+              }
+              {
+                "Sonarr" = {
+                  href = "https://sonarr.lab.adhia.net";
+                  description = "TV shows";
+                  icon = "sonarr.png";
+                };
+              }
+              {
+                "Radarr" = {
+                  href = "https://radarr.lab.adhia.net";
+                  description = "Movies";
+                  icon = "radarr.png";
+                };
+              }
+              {
+                "Overseerr" = {
+                  href = "https://overseerr.lab.adhia.net";
+                  description = "Media requests";
+                  icon = "overseerr.png";
+                };
+              }
+              {
                 "Home Assistant" = {
                   href = "https://hass.lab.adhia.net";
                   description = "Home automation";
