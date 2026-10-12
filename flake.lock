@@ -110,11 +110,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1790128760,
-        "narHash": "sha256-dbDqCvSHohEJdZwXs7brYJZCAtnifTiOF5BdtnePDbY=",
+        "lastModified": 1791752044,
+        "narHash": "sha256-8jyq/xjOi5GmrTcymYr4VYLFdC1fm7fXUuaQM0hVIVQ=",
         "owner": "gapuchi",
         "repo": "league-bot",
-        "rev": "53f70be0ebf2cc5b419e66ccd1bf55b126e1f3c7",
+        "rev": "58f55604bc6abb6c69243506d772caac897f1bd8",
         "type": "github"
       },
       "original": {
