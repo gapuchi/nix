@@ -42,6 +42,7 @@
           fastfetch
           fzf
           gh
+          gocryptfs
           jq
           just-lsp
           nixd
