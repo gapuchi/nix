@@ -10,7 +10,7 @@ in
       webuiPort = 8090;
       torrentingPort = 50413;
       vpn = "mullvad";
-      downloadDir = "/mnt/snowy/downloads";
+      downloadDir = "${devices.snowy.mountPoint}/downloads";
       incompleteDir = "/var/lib/qBittorrent/.incomplete";
     in
     {
@@ -45,7 +45,17 @@ in
             DefaultSavePath = downloadDir;
             TempPath = incompleteDir;
             TempPathEnabled = true;
+
+            QueueingSystemEnabled = true;
+            MaxActiveDownloads = 10;
+            MaxActiveTorrents = 50;
+            IgnoreSlowTorrentsForQueueing = true;
+
+            GlobalMaxRatio = 1;
+            GlobalMaxSeedingMinutes = 1440;
           };
+
+          Network.PortForwardingEnabled = false;
 
           Preferences.WebUI = {
             Address = "*";
@@ -63,7 +73,7 @@ in
       users.users.qbittorrent.extraGroups = [ "media" ];
 
       systemd.services.qbittorrent = {
-        unitConfig.RequiresMountsFor = [ "/mnt/snowy" ];
+        unitConfig.RequiresMountsFor = [ devices.snowy.mountPoint ];
         serviceConfig = {
           PrivateUsers = lib.mkForce false;
           UMask = "0002";
