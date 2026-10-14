@@ -45,7 +45,6 @@
             (check "Services" "Overseerr" "http://127.0.0.1:5055")
             (check "Services" "Home Assistant" "http://127.0.0.1:8123")
             (check "Services" "Rummy" "http://127.0.0.1:3000")
-            (check "Services" "Auto Upgrade" "http://127.0.0.1:8083/nixos-upgrade.timer")
             (check "Bots" "Mafia Bot" "http://127.0.0.1:8083/mafia-bot")
             (check "Bots" "League Bot" "http://127.0.0.1:8084/health")
           ];

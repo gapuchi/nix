@@ -15,9 +15,3 @@ Rebuild + Switch
 ```bash
 just switch # s
 ```
-
-Deploy to calculus (moves `calculus` tag; host polls about every 5 minutes)
-
-```bash
-just deploy-calculus # dc
-```

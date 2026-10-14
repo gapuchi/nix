@@ -25,7 +25,6 @@ in
       nixosMods.rummy
       nixosMods.cachix
       nixosMods.serviceHealth
-      # nixosMods.calculusDeploy
       nixosMods.tailscale
       (
         { config, ... }:
