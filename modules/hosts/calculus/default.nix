@@ -41,7 +41,7 @@ in
           ];
         };
 
-        fileSystems."/mnt/snowy" = {
+        fileSystems.${devices.snowy.mountPoint} = {
           device = "${devices.snowy.ip}:/Public";
           fsType = "nfs";
           options = [ "nfsvers=4.1" ];

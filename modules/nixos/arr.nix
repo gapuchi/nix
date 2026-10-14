@@ -1,8 +1,13 @@
 { lib, ... }:
+
+let
+  devices = import ../_lib/devices.nix;
+in
 {
   flake.modules.nixos.arr =
-    { ... }:
+    { utils, ... }:
     let
+      snowyMount = "${utils.escapeSystemdPath devices.snowy.mountPoint}.mount";
       bind = "127.0.0.1";
       server = host: port: {
         inherit port;
@@ -14,8 +19,8 @@
         trustcgnatipaddresses = true;
       };
       media = {
-        after = [ "mnt-snowy.mount" ];
-        requires = [ "mnt-snowy.mount" ];
+        after = [ snowyMount ];
+        requires = [ snowyMount ];
         serviceConfig = {
           PrivateUsers = lib.mkForce false;
           UMask = lib.mkForce "0002";

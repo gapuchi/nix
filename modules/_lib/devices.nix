@@ -9,5 +9,6 @@
   snowy = {
     ip = "192.168.1.3";
     mac = "24:5E:BE:45:A2:F0";
+    mountPoint = "/mnt/snowy";
   };
 }
