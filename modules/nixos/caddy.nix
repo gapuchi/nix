@@ -50,6 +50,10 @@
             reverse_proxy 127.0.0.1:5055
             ${tls}
           '';
+          "tdarr.lab.adhia.net".extraConfig = ''
+            reverse_proxy 127.0.0.1:8265
+            ${tls}
+          '';
           "pihole.lab.adhia.net".extraConfig = ''
             reverse_proxy localhost:8080
             ${tls}

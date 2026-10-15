@@ -95,6 +95,13 @@
                 };
               }
               {
+                "Tdarr" = {
+                  href = "https://tdarr.lab.adhia.net";
+                  description = "Media transcoding";
+                  icon = "tdarr.png";
+                };
+              }
+              {
                 "Home Assistant" = {
                   href = "https://hass.lab.adhia.net";
                   description = "Home automation";

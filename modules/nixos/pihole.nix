@@ -57,6 +57,7 @@ in
               "sonarr.lab.adhia.net,${calculusHostname}"
               "radarr.lab.adhia.net,${calculusHostname}"
               "overseerr.lab.adhia.net,${calculusHostname}"
+              "tdarr.lab.adhia.net,${calculusHostname}"
               "hass.lab.adhia.net,${calculusHostname}"
               "gatus.lab.adhia.net,${calculusHostname}"
               "rummy.lab.adhia.net,${calculusHostname}"
