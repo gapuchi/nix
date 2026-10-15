@@ -33,26 +33,43 @@ in
           users.users.${config.my.nixos.username}.extraGroups = [ "league-bot" ];
         }
       )
-      {
-        my.nixos = {
-          hostName = "calculus";
-          authorizedKeys = with sshKeys; [
-            tintin
-            haddock
+      (
+        { pkgs, ... }:
+        {
+          hardware.graphics = {
+            enable = true;
+            extraPackages = with pkgs; [
+              intel-media-driver
+              intel-compute-runtime
+            ];
+          };
+
+          services.plex.accelerationDevices = [ "/dev/dri/renderD128" ];
+          users.users.plex.extraGroups = [
+            "video"
+            "render"
           ];
-        };
 
-        fileSystems.${devices.snowy.mountPoint} = {
-          device = "${devices.snowy.ip}:/Public";
-          fsType = "nfs";
-          options = [ "nfsvers=4.1" ];
-        };
+          my.nixos = {
+            hostName = "calculus";
+            authorizedKeys = with sshKeys; [
+              tintin
+              haddock
+            ];
+          };
 
-        system = {
-          configurationRevision = inputs.self.rev or inputs.self.dirtyRev;
-          nixos.label = inputs.self.rev or inputs.self.dirtyRev;
-        };
-      }
+          fileSystems.${devices.snowy.mountPoint} = {
+            device = "${devices.snowy.ip}:/Public";
+            fsType = "nfs";
+            options = [ "nfsvers=4.1" ];
+          };
+
+          system = {
+            configurationRevision = inputs.self.rev or inputs.self.dirtyRev;
+            nixos.label = inputs.self.rev or inputs.self.dirtyRev;
+          };
+        }
+      )
     ];
   };
 }
