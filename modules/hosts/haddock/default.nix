@@ -10,6 +10,7 @@ in
       ../../../hosts/haddock/hardware-configuration.nix
       nixosMods.gapuchiLinuxDesktop
       nixosMods.tailscale
+      nixosMods.tdarrNode
       {
         my.nixos = {
           hostName = "haddock";
