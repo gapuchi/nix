@@ -44,6 +44,10 @@
             branch=$(git for-each-ref --format='%(refname:short)' refs/heads/ | fzf -1 -q "''${1:-}")
             [[ -n "$branch" ]] && git switch "$branch"
           }
+
+          nixshell() {
+            nix shell "''${@/#/nixpkgs#}"
+          }
         '';
 
         plugins = [
