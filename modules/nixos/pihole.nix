@@ -76,7 +76,10 @@ in
             start = "192.168.1.100";
             end = "192.168.1.254";
             router = devices.router.ip;
-            hosts = [ "${devices.snowy.mac},${devices.snowy.ip},snowy" ];
+            hosts = [
+              "${devices.snowy.mac},${devices.snowy.ip},snowy"
+              "${devices.tv.mac},${devices.tv.ip},set:tv,tv"
+            ];
           };
         };
         lists = [

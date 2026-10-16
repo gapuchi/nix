@@ -11,4 +11,8 @@
     mac = "24:5E:BE:45:A2:F0";
     mountPoint = "/mnt/snowy";
   };
+  tv = {
+    ip = "192.168.1.198";
+    mac = "04:E4:B6:AF:EE:BA";
+  };
 }

@@ -19,6 +19,7 @@ in
       nixosMods.arr
       nixosMods.tdarr
       nixosMods.pihole
+      nixosMods.jantarmantarWireguard
       nixosMods.homeAssistant
       nixosMods.golink
       nixosMods.mafiaBot
