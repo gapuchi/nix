@@ -116,6 +116,20 @@
                 };
               }
               {
+                "Calibre" = {
+                  href = "https://calibre.lab.adhia.net";
+                  description = "Ebook library";
+                  icon = "calibre-web.png";
+                };
+              }
+              {
+                "Bookkeep" = {
+                  href = "https://bookkeep.lab.adhia.net";
+                  description = "Book requests";
+                  icon = "mdi-book-search";
+                };
+              }
+              {
                 "Gatus" = {
                   href = "https://gatus.lab.adhia.net";
                   description = "Uptime alerts";

@@ -27,6 +27,11 @@ in
     rootCalculus
     calculus
   ];
+  "secrets/bookkeep.env.age".publicKeys = with sshKeys; [
+    tintin
+    rootCalculus
+    calculus
+  ];
   "secrets/caddy-dns-token.age".publicKeys = with sshKeys; [
     tintin
     rootCalculus

@@ -15,6 +15,8 @@ in
       nixosMods.homepage
       nixosMods.gatus
       nixosMods.plex
+      nixosMods.calibreWeb
+      nixosMods.bookkeep
       nixosMods.qbittorrent
       nixosMods.arr
       nixosMods.tdarr

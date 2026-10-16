@@ -46,6 +46,8 @@
             (check "Services" "Tdarr" "http://127.0.0.1:8265")
             (check "Services" "Home Assistant" "http://127.0.0.1:8123")
             (check "Services" "Rummy" "http://127.0.0.1:3000")
+            (check "Services" "Calibre" "http://127.0.0.1:8086")
+            (check "Services" "Bookkeep" "http://127.0.0.1:8087/docs")
             (check "Bots" "Mafia Bot" "http://127.0.0.1:8083/mafia-bot")
             (check "Bots" "League Bot" "http://127.0.0.1:8084/health")
           ];

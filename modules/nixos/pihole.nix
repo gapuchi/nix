@@ -61,6 +61,8 @@ in
               "hass.lab.adhia.net,${calculusHostname}"
               "gatus.lab.adhia.net,${calculusHostname}"
               "rummy.lab.adhia.net,${calculusHostname}"
+              "calibre.lab.adhia.net,${calculusHostname}"
+              "bookkeep.lab.adhia.net,${calculusHostname}"
             ];
             rateLimit = {
               count = 0;

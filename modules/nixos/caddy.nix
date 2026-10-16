@@ -70,6 +70,14 @@
             reverse_proxy localhost:3000
             ${tls}
           '';
+          "calibre.lab.adhia.net".extraConfig = ''
+            reverse_proxy 127.0.0.1:8086
+            ${tls}
+          '';
+          "bookkeep.lab.adhia.net".extraConfig = ''
+            reverse_proxy 127.0.0.1:8087
+            ${tls}
+          '';
         };
       };
 

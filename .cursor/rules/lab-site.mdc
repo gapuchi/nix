@@ -13,6 +13,6 @@ A service on `calculus` is not reachable at `*.lab.adhia.net` until every item b
 3. Add `"<name>.lab.adhia.net,${calculusHostname}"` to `cnameRecords` in `modules/nixos/pihole.nix`.
 4. Add a link in `modules/nixos/homepage.nix`.
 5. Add a loopback check in `modules/nixos/gatus.nix`.
-6. Mention the service in the `calculus` section of `hosts/AGENTS.md`.
+6. Add a sentence to the `calculus` section of `hosts/AGENTS.md` only when the service has a constraint the host module list does not show, such as a namespace, mount, secret, or startup requirement.
 
 qBittorrent is the exception: it runs inside the Mullvad namespace, so Caddy uses `reverse_proxy 192.168.15.1:8090`.
