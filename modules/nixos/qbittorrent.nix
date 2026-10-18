@@ -75,6 +75,7 @@ in
       systemd.services.qbittorrent = {
         unitConfig.RequiresMountsFor = [ devices.snowy.mountPoint ];
         serviceConfig = {
+          Group = lib.mkForce "media";
           PrivateUsers = lib.mkForce false;
           UMask = "0002";
         };

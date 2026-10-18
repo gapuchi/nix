@@ -22,12 +22,14 @@ in
         after = [ snowyMount ];
         requires = [ snowyMount ];
         serviceConfig = {
+          Group = lib.mkForce "media";
           PrivateUsers = lib.mkForce false;
           UMask = lib.mkForce "0002";
         };
       };
     in
     {
+      users.groups.media = { };
       users.users = {
         sonarr.extraGroups = [ "media" ];
         radarr.extraGroups = [ "media" ];

@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 
 let
   devices = import ../_lib/devices.nix;
@@ -18,6 +18,7 @@ in
     systemd.services.tdarr-server = {
       unitConfig.RequiresMountsFor = [ devices.snowy.mountPoint ];
       serviceConfig = {
+        Group = lib.mkForce "media";
         UMask = "0002";
         ReadWritePaths = [ devices.snowy.mountPoint ];
       };
