@@ -4,7 +4,7 @@ Unify machine setup with **Nix** across NixOS and macOS. Prefer small, correct c
 
 ## Related docs
 
-- [`hosts/AGENTS.md`](hosts/AGENTS.md) — per-machine details, hardware files, host wiring, Caddy sites
+- [`hosts/AGENTS.md`](hosts/AGENTS.md) — per-machine constraints, hardware files, host wiring, Caddy sites
 - [`.cursor/rules/`](.cursor/rules/) — scoped reminders (`architecture`, `modules`, `secrets`, `readme-sync`)
 
 ## Project overview
@@ -87,6 +87,7 @@ Plaintext secrets, private keys, and credential env files must never be committe
 - Don't have a host reach into a feature's internals — go through `my.*` options and `homeImports`.
 - Don't add GUI packages to server or macOS targets (see machine categories).
 - Don't commit plaintext secrets or key material; don't add a `secrets.nix` rule without a corresponding `age.secrets` reference.
+- Don't restate module settings in `AGENTS.md` or `hosts/AGENTS.md`. A host note is for a constraint the code does not make obvious (qBittorrent is inside the Mullvad namespace, so Caddy cannot use localhost; haddock has no Snowy mount). Ports, paths, umasks, queue limits, and a list of every service belong in the Nix.
 
 ## Running checks
 
