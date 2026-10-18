@@ -30,7 +30,10 @@ in
       (
         { config, ... }:
         {
-          users.users.${config.my.nixos.username}.extraGroups = [ "league-bot" ];
+          users.users.${config.my.nixos.username}.extraGroups = [
+            "league-bot"
+            "media"
+          ];
         }
       )
       (
