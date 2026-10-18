@@ -11,6 +11,11 @@ in
       zsh
     ];
 
+    programs.broot = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
     programs.direnv = {
       enable = true;
       nix-direnv.enable = true;
