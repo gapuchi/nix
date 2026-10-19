@@ -40,6 +40,12 @@ in
     services.tdarr.nodes.worker = {
       serverURL = "http://${devices.calculus.tailscaleIp}:${toString serverPort}";
       type = "mapped";
+      workers = {
+        transcodeGPU = 1;
+        transcodeCPU = 0;
+        healthcheckGPU = 0;
+        healthcheckCPU = 1;
+      };
     };
 
     systemd.services.tdarr-node-worker = {
