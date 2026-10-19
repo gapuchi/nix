@@ -19,11 +19,11 @@ A host file builds one output (`nixosSystem` / `darwinSystem` / `homeManagerConf
 
 Home server. `modules/hosts/calculus/default.nix` selects `gapuchiServer` and the lab modules. Those lab modules are single-host features selected only here.
 
-Snowy (`devices.snowy`) is the NFS library, mounted only on calculus. qBittorrent runs inside the Mullvad namespace (`vpnNamespaces.mullvad`): a dropped tunnel has no route out, and Caddy reaches the WebUI at `192.168.15.1:8090` because port mappings are PREROUTING-only. The arr apps stay on the host network and import from that download directory. Tdarr's server runs here; the worker is on haddock, so nothing transcodes while that PC is off.
+Snowy (`devices.snowy`) is the NFS library, mounted here and on haddock at the same path. qBittorrent runs inside the Mullvad namespace (`vpnNamespaces.mullvad`): a dropped tunnel has no route out, and Caddy reaches the WebUI at `192.168.15.1:8090` because port mappings are PREROUTING-only. The arr apps stay on the host network and import from that download directory. Tdarr's server runs here; the worker is on haddock, so nothing transcodes while that PC is off.
 
 ### `haddock` (Linux desktop)
 
-NixOS workstation with GNOME via `gapuchiLinuxDesktop` (Home Manager `gapuchiTerminal` + `gapuchiDesktop`), plus `tailscale` and `tdarrNode`. The worker is an unmapped node: calculus copies each file to the PC and writes the result back. Haddock has no Snowy mount, and the worker runs only while the PC is on.
+NixOS workstation with GNOME via `gapuchiLinuxDesktop` (Home Manager `gapuchiTerminal` + `gapuchiDesktop`), plus `tailscale` and `tdarrNode`. Snowy is mounted at the same path as on calculus, so the worker is a mapped node. The mount is `nofail` (the desktop still boots when Snowy is down) and uses Snowy's LAN address, so the worker only sees the library on the home network, and only while the PC is on.
 
 ### `tintin` (macOS)
 

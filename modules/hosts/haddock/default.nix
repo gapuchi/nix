@@ -1,6 +1,7 @@
 { inputs, config, ... }:
 
 let
+  devices = import ../../_lib/devices.nix;
   sshKeys = import ../../_lib/ssh-keys.nix;
   nixosMods = config.flake.modules.nixos;
 in
@@ -17,6 +18,17 @@ in
           authorizedKeys = with sshKeys; [
             calculus
             tintin
+          ];
+        };
+
+        boot.supportedFilesystems = [ "nfs" ];
+
+        fileSystems.${devices.snowy.mountPoint} = {
+          device = "${devices.snowy.ip}:/Public";
+          fsType = "nfs";
+          options = [
+            "nfsvers=4.1"
+            "nofail"
           ];
         };
 
