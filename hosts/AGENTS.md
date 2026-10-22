@@ -23,7 +23,7 @@ Snowy (`devices.snowy`) is the NFS library, mounted here and on haddock at the s
 
 ### `haddock` (Linux desktop)
 
-NixOS workstation with GNOME via `gapuchiLinuxDesktop` (Home Manager `gapuchiTerminal` + `gapuchiDesktop`), plus `tailscale` and `tdarrNode`. Snowy is mounted at the same path as on calculus, so the worker is a mapped node. The mount is `nofail` (the desktop still boots when Snowy is down) and uses Snowy's LAN address, so the worker only sees the library on the home network, and only while the PC is on.
+NixOS workstation with GNOME via `gapuchiLinuxDesktop` (Home Manager `gapuchiTerminal` + `gapuchiDesktop`), plus `tailscale`, `tdarrNode`, and `steam`. Snowy is mounted at the same path as on calculus, so the worker is a mapped node. The mount is `nofail` (the desktop still boots when Snowy is down) and uses Snowy's LAN address, so the worker only sees the library on the home network, and only while the PC is on.
 
 ### `tintin` (macOS)
 
