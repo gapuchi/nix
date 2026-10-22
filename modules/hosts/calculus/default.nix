@@ -15,6 +15,7 @@ in
       nixosMods.homepage
       nixosMods.gatus
       nixosMods.plex
+      nixosMods.jellyfin
       nixosMods.qbittorrent
       nixosMods.arr
       nixosMods.tdarr
@@ -49,6 +50,10 @@ in
 
           services.plex.accelerationDevices = [ "/dev/dri/renderD128" ];
           users.users.plex.extraGroups = [
+            "video"
+            "render"
+          ];
+          users.users.jellyfin.extraGroups = [
             "video"
             "render"
           ];
