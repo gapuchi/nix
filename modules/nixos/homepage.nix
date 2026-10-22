@@ -60,6 +60,13 @@
                 };
               }
               {
+                "Jellyfin" = {
+                  href = "https://jellyfin.lab.adhia.net";
+                  description = "Media library";
+                  icon = "jellyfin.png";
+                };
+              }
+              {
                 "qBittorrent" = {
                   href = "https://qbittorrent.lab.adhia.net";
                   description = "Download client";

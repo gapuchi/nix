@@ -30,6 +30,10 @@
             reverse_proxy localhost:32400
             ${tls}
           '';
+          "jellyfin.lab.adhia.net".extraConfig = ''
+            reverse_proxy 127.0.0.1:8096
+            ${tls}
+          '';
           "qbittorrent.lab.adhia.net".extraConfig = ''
             reverse_proxy 192.168.15.1:8090
             ${tls}

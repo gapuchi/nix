@@ -52,6 +52,7 @@ in
               "home.lab.adhia.net,${calculusHostname}"
               "pihole.lab.adhia.net,${calculusHostname}"
               "plex.lab.adhia.net,${calculusHostname}"
+              "jellyfin.lab.adhia.net,${calculusHostname}"
               "qbittorrent.lab.adhia.net,${calculusHostname}"
               "prowlarr.lab.adhia.net,${calculusHostname}"
               "sonarr.lab.adhia.net,${calculusHostname}"
