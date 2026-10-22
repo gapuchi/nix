@@ -12,6 +12,7 @@ in
       nixosMods.gapuchiLinuxDesktop
       nixosMods.tailscale
       nixosMods.tdarrNode
+      nixosMods.steam
       {
         my.nixos = {
           hostName = "haddock";
