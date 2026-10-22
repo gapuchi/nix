@@ -39,6 +39,7 @@
         };
         home.packages = with pkgs; [
           btop
+          cowsay
           fastfetch
           fzf
           gh
