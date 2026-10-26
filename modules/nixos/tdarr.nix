@@ -1,18 +1,27 @@
-{ lib, ... }:
+{ inputs, lib, ... }:
 
 let
   devices = import ../_lib/devices.nix;
   webUIPort = 8265;
   serverPort = 8266;
+  tdarrPackage =
+    pkgs:
+    (import inputs.nixpkgs-tdarr {
+      system = pkgs.stdenv.hostPlatform.system;
+      config.allowUnfree = pkgs.config.allowUnfree;
+    }).tdarr;
 in
 {
-  flake.modules.nixos.tdarr = {
+  flake.modules.nixos.tdarr = { pkgs, ... }: {
     users.groups.media = { };
     users.users.tdarr.extraGroups = [ "media" ];
 
-    services.tdarr.server = {
-      enable = true;
-      inherit serverPort webUIPort;
+    services.tdarr = {
+      package = tdarrPackage pkgs;
+      server = {
+        enable = true;
+        inherit serverPort webUIPort;
+      };
     };
 
     systemd.services.tdarr-server = {
@@ -27,7 +36,7 @@ in
     networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ serverPort ];
   };
 
-  flake.modules.nixos.tdarrNode = {
+  flake.modules.nixos.tdarrNode = { pkgs, ... }: {
     users.groups.media = { };
     users.groups.video = { };
     users.groups.render = { };
@@ -36,6 +45,8 @@ in
       "video"
       "render"
     ];
+
+    services.tdarr.package = tdarrPackage pkgs;
 
     services.tdarr.nodes.worker = {
       serverURL = "http://${devices.calculus.tailscaleIp}:${toString serverPort}";
