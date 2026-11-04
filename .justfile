@@ -1,5 +1,5 @@
 os := `uname -s`
-switch_cmd := if os == "Darwin" { "sudo darwin-rebuild switch" } else { "sudo nixos-rebuild switch" }
+rebuild := if os == "Darwin" { "darwin-rebuild" } else { "nixos-rebuild" }
 version_cmd := if os == "Darwin" { "darwin-version" } else { "nixos-version" }
 
 alias s := switch
@@ -10,8 +10,16 @@ alias v := version
 update *inputs:
     nix flake update {{inputs}}
 
+# sudo drops the environment; pass NIX_CONFIG through so a token from
+# .envrc.local (or the shell) can fetch inputs.nix-private on NixOS and Darwin.
 switch:
-    {{switch_cmd}} --flake .
+    #!/usr/bin/env bash
+    set -euo pipefail
+    if [[ -n "${NIX_CONFIG:-}" ]]; then
+      sudo env NIX_CONFIG="$NIX_CONFIG" {{rebuild}} switch --flake .
+    else
+      sudo {{rebuild}} switch --flake .
+    fi
 
 check:
     nix flake check --all-systems
