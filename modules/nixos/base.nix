@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.base =
     {
@@ -42,7 +42,7 @@
 
         users.users.${cfg.username} = {
           isNormalUser = true;
-          description = "Arjun Adhia";
+          description = inputs.nix-private.identity.fullName;
           extraGroups = [
             "networkmanager"
             "wheel"

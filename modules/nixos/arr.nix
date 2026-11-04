@@ -1,7 +1,8 @@
-{ lib, ... }:
+{ inputs, lib, ... }:
 
 let
-  devices = import ../_lib/devices.nix;
+  devices = inputs.nix-private.devices;
+  lab = inputs.nix-private.lab;
 in
 {
   flake.modules.nixos.arr =
@@ -12,7 +13,7 @@ in
       server = host: port: {
         inherit port;
         bindaddress = bind;
-        allowedhosts = "${host}.lab.adhia.net,localhost,127.0.0.1";
+        allowedhosts = "${host}.${lab.domain},localhost,127.0.0.1";
       };
       auth = {
         required = "DisabledForLocalAddresses";

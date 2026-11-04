@@ -29,4 +29,5 @@ Files here register reusable modules; they do not build machine configs. Host fi
 - File names are kebab-case; registered module names are camelCase (`gapuchi-terminal.nix` → `gapuchiTerminal`).
 - Reference siblings via `let nixosMods = config.flake.modules.nixos; in … imports = with nixosMods; [ … ];`.
 - External-flake packages: `inputs.<name>.packages.${pkgs.stdenv.hostPlatform.system}.default`.
+- Private values / secrets: `inputs.nix-private.{identity,sshKeys,devices,lab}` and `"${inputs.nix-private}/secrets/<name>.age"` — do not hardcode emails, LAN topology, or the lab domain here.
 - Respect machine categories (no GUI packages on server/macOS targets).

@@ -1,4 +1,9 @@
-{ ... }:
+{ inputs, ... }:
+
+let
+  lab = inputs.nix-private.lab;
+  href = name: "https://${name}.${lab.domain}";
+in
 {
   flake.modules.nixos.homepage =
     { config, ... }:
@@ -9,7 +14,7 @@
       services.homepage-dashboard = {
         enable = true;
         listenPort = 8082;
-        allowedHosts = "home.lab.adhia.net,localhost:8082,127.0.0.1:8082";
+        allowedHosts = "home.${lab.domain},localhost:8082,127.0.0.1:8082";
 
         settings = {
           title = "calculus";
@@ -47,84 +52,84 @@
             Services = [
               {
                 "Pi-hole" = {
-                  href = "https://pihole.lab.adhia.net";
+                  href = href "pihole";
                   description = "DNS sinkhole and DHCP";
                   icon = "pi-hole.png";
                 };
               }
               {
                 "Plex" = {
-                  href = "https://plex.lab.adhia.net";
+                  href = href "plex";
                   description = "Media library";
                   icon = "plex.png";
                 };
               }
               {
                 "Jellyfin" = {
-                  href = "https://jellyfin.lab.adhia.net";
+                  href = href "jellyfin";
                   description = "Media library";
                   icon = "jellyfin.png";
                 };
               }
               {
                 "qBittorrent" = {
-                  href = "https://qbittorrent.lab.adhia.net";
+                  href = href "qbittorrent";
                   description = "Download client";
                   icon = "qbittorrent.png";
                 };
               }
               {
                 "Prowlarr" = {
-                  href = "https://prowlarr.lab.adhia.net";
+                  href = href "prowlarr";
                   description = "Indexer manager";
                   icon = "prowlarr.png";
                 };
               }
               {
                 "Sonarr" = {
-                  href = "https://sonarr.lab.adhia.net";
+                  href = href "sonarr";
                   description = "TV shows";
                   icon = "sonarr.png";
                 };
               }
               {
                 "Radarr" = {
-                  href = "https://radarr.lab.adhia.net";
+                  href = href "radarr";
                   description = "Movies";
                   icon = "radarr.png";
                 };
               }
               {
                 "Overseerr" = {
-                  href = "https://overseerr.lab.adhia.net";
+                  href = href "overseerr";
                   description = "Media requests";
                   icon = "overseerr.png";
                 };
               }
               {
                 "Tdarr" = {
-                  href = "https://tdarr.lab.adhia.net";
+                  href = href "tdarr";
                   description = "Media transcoding";
                   icon = "tdarr.png";
                 };
               }
               {
                 "Home Assistant" = {
-                  href = "https://hass.lab.adhia.net";
+                  href = href "hass";
                   description = "Home automation";
                   icon = "home-assistant.png";
                 };
               }
               {
                 "Rummy" = {
-                  href = "https://rummy.lab.adhia.net";
+                  href = href "rummy";
                   description = "Points Rummy score sheet";
                   icon = "mdi-cards-playing";
                 };
               }
               {
                 "Gatus" = {
-                  href = "https://gatus.lab.adhia.net";
+                  href = href "gatus";
                   description = "Uptime alerts";
                   icon = "gatus.png";
                   widget = {

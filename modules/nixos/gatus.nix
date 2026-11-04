@@ -1,4 +1,4 @@
-{ ... }:
+{ inputs, ... }:
 {
   flake.modules.nixos.gatus =
     { config, ... }:
@@ -12,7 +12,7 @@
         };
     in
     {
-      age.secrets.gatus-discord-webhook.file = ../../secrets/gatus-discord-webhook.age;
+      age.secrets.gatus-discord-webhook.file = "${inputs.nix-private}/secrets/gatus-discord-webhook.age";
 
       services.gatus = {
         enable = true;

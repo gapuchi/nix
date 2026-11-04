@@ -6,7 +6,7 @@
       mafia-bot = inputs.mafia-bot.packages.${pkgs.stdenv.hostPlatform.system}.default;
     in
     {
-      age.secrets.discord-token.file = ../../secrets/mafia-bot-discord-token.age;
+      age.secrets.discord-token.file = "${inputs.nix-private}/secrets/mafia-bot-discord-token.age";
 
       systemd.services.mafia-bot = {
         description = "Mafia Bot";

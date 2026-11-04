@@ -1,8 +1,8 @@
 { inputs, config, ... }:
 
 let
-  devices = import ../../_lib/devices.nix;
-  sshKeys = import ../../_lib/ssh-keys.nix;
+  devices = inputs.nix-private.devices;
+  sshKeys = inputs.nix-private.sshKeys;
   nixosMods = config.flake.modules.nixos;
 in
 {

@@ -6,7 +6,7 @@
       league-bot = inputs.league-bot.packages.${pkgs.stdenv.hostPlatform.system}.default;
     in
     {
-      age.secrets.league-bot-env.file = ../../secrets/league-bot.env.age;
+      age.secrets.league-bot-env.file = "${inputs.nix-private}/secrets/league-bot.env.age";
 
       users.users.league-bot = {
         isSystemUser = true;

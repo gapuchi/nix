@@ -163,6 +163,21 @@
         "type": "github"
       }
     },
+    "nix-private": {
+      "locked": {
+        "lastModified": 1793370928,
+        "narHash": "sha256-rY/V9kDJ9TkhZ9Pa2DcXm3G7SehkRjKT/5H+UlN4ze4=",
+        "owner": "gapuchi",
+        "repo": "nix-private",
+        "rev": "f7f631ff918d911fb379622c0157e0446747c8db",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gapuchi",
+        "repo": "nix-private",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1787070829,
@@ -267,6 +282,7 @@
         "league-bot": "league-bot",
         "mafia-bot": "mafia-bot",
         "nix-darwin": "nix-darwin",
+        "nix-private": "nix-private",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-tdarr": "nixpkgs-tdarr",
         "rummy": "rummy",

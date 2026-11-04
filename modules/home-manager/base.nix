@@ -1,4 +1,8 @@
-{ ... }:
+{ inputs, ... }:
+
+let
+  identity = inputs.nix-private.identity;
+in
 {
   flake.modules.homeManager.base =
     {
@@ -22,11 +26,11 @@
         git = {
           name = lib.mkOption {
             type = lib.types.str;
-            default = "gapuchi";
+            default = identity.git.personal.name;
           };
           email = lib.mkOption {
             type = lib.types.str;
-            default = "arjun.adhia@gmail.com";
+            default = identity.git.personal.email;
           };
         };
       };

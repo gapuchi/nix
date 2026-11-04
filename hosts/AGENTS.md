@@ -19,7 +19,7 @@ A host file builds one output (`nixosSystem` / `darwinSystem` / `homeManagerConf
 
 Home server. `modules/hosts/calculus/default.nix` selects `gapuchiServer` and the lab modules. Those lab modules are single-host features selected only here.
 
-Snowy (`devices.snowy`) is the NFS library, mounted here and on haddock at the same path. qBittorrent runs inside the Mullvad namespace (`vpnNamespaces.mullvad`): a dropped tunnel has no route out, and Caddy reaches the WebUI at `192.168.15.1:8090` because port mappings are PREROUTING-only. The arr apps stay on the host network and import from that download directory. Tdarr's server runs here; the worker is on haddock, so nothing transcodes while that PC is off.
+Snowy (`inputs.nix-private.devices.snowy`) is the NFS library, mounted here and on haddock at the same path. qBittorrent runs inside the Mullvad namespace (`vpnNamespaces.mullvad`): a dropped tunnel has no route out, and Caddy reaches the WebUI at `192.168.15.1:8090` because port mappings are PREROUTING-only. The arr apps stay on the host network and import from that download directory. Tdarr's server runs here; the worker is on haddock, so nothing transcodes while that PC is off.
 
 ### `haddock` (Linux desktop)
 
@@ -35,13 +35,13 @@ Standalone Home Manager (`homeConfigurations."arjun@arjun-gt"`) using `gapuchiTe
 
 ## Add a new site behind Caddy
 
-Caddy on `calculus` serves `*.lab.adhia.net` with a Let's Encrypt cert via Cloudflare DNS-01 (token in the `caddy-dns-token` secret). 80/443 are only reachable over Tailscale.
+Caddy on `calculus` serves hosts under `inputs.nix-private.lab.domain` with a Let's Encrypt cert via Cloudflare DNS-01 (token in the `caddy-dns-token` secret in nix-private). 80/443 are only reachable over Tailscale.
 
-A name is not reachable until every item below is in the same change. Caddy alone does not create the DNS name.
+A name is not reachable until every item below is in the same change. Caddy alone does not create the DNS name. Follow the existing `site` / `href` helpers that read `lab.domain`.
 
 1. Listen on `127.0.0.1` and an unused port. Check `modules/nixos/caddy.nix` and `modules/nixos/gatus.nix` before picking one.
-2. Add `virtualHosts."<name>.lab.adhia.net"` in `modules/nixos/caddy.nix` with `reverse_proxy 127.0.0.1:<port>` and `${tls}`.
-3. Add `"<name>.lab.adhia.net,${calculusHostname}"` to `cnameRecords` in `modules/nixos/pihole.nix`.
+2. Add a `virtualHosts` entry in `modules/nixos/caddy.nix` with `reverse_proxy 127.0.0.1:<port>` and `${tls}`.
+3. Add a matching `cnameRecords` entry in `modules/nixos/pihole.nix`.
 4. Add a link in `modules/nixos/homepage.nix`.
 5. Add a loopback check in `modules/nixos/gatus.nix`.
 

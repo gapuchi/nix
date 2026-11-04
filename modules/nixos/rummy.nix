@@ -6,8 +6,8 @@
       points-rummy = inputs.rummy.packages.${pkgs.stdenv.hostPlatform.system}.default;
     in
     {
-      age.secrets.rummy-env.file = ../../secrets/rummy.env.age;
-      age.secrets.rummy-google-sa.file = ../../secrets/rummy-google-sa.age;
+      age.secrets.rummy-env.file = "${inputs.nix-private}/secrets/rummy.env.age";
+      age.secrets.rummy-google-sa.file = "${inputs.nix-private}/secrets/rummy-google-sa.age";
 
       systemd.services.points-rummy = {
         description = "Points Rummy score sheet";

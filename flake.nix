@@ -23,6 +23,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Private: agenix files + evaluation-time identity / lab topology.
+    # Requires a GitHub token with read access, e.g.:
+    #   nix.conf: access-tokens = github.com=<PAT>
+    nix-private.url = "github:gapuchi/nix-private";
+
     vpn-confinement.url = "github:Maroka-chan/VPN-Confinement";
 
     mafia-bot = {

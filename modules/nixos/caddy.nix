@@ -1,9 +1,14 @@
-{ ... }:
+{ inputs, ... }:
+
+let
+  lab = inputs.nix-private.lab;
+  site = name: "${name}.${lab.domain}";
+in
 {
   flake.modules.nixos.caddy =
     { pkgs, config, ... }:
     let
-      # Wildcard cert for *.lab.adhia.net via Let's Encrypt DNS-01 (Cloudflare).
+      # Wildcard cert for *.${lab.domain} via Let's Encrypt DNS-01 (Cloudflare).
       tls = ''
         tls {
           dns cloudflare {env.CF_API_TOKEN}
@@ -18,7 +23,7 @@
           hash = "sha256-tubXIDCJnO2mvdnPlZclwDhNGaeeYLSt7lnni3+pXDo=";
         };
         virtualHosts = {
-          "home.lab.adhia.net".extraConfig = ''
+          "${site "home"}".extraConfig = ''
             handle /calculus.jpeg {
               root * ${./assets}
               file_server
@@ -26,59 +31,59 @@
             reverse_proxy localhost:8082
             ${tls}
           '';
-          "plex.lab.adhia.net".extraConfig = ''
+          "${site "plex"}".extraConfig = ''
             reverse_proxy localhost:32400
             ${tls}
           '';
-          "jellyfin.lab.adhia.net".extraConfig = ''
+          "${site "jellyfin"}".extraConfig = ''
             reverse_proxy 127.0.0.1:8096
             ${tls}
           '';
-          "qbittorrent.lab.adhia.net".extraConfig = ''
+          "${site "qbittorrent"}".extraConfig = ''
             reverse_proxy 192.168.15.1:8090
             ${tls}
           '';
-          "prowlarr.lab.adhia.net".extraConfig = ''
+          "${site "prowlarr"}".extraConfig = ''
             reverse_proxy 127.0.0.1:9696
             ${tls}
           '';
-          "sonarr.lab.adhia.net".extraConfig = ''
+          "${site "sonarr"}".extraConfig = ''
             reverse_proxy 127.0.0.1:8989
             ${tls}
           '';
-          "radarr.lab.adhia.net".extraConfig = ''
+          "${site "radarr"}".extraConfig = ''
             reverse_proxy 127.0.0.1:7878
             ${tls}
           '';
-          "overseerr.lab.adhia.net".extraConfig = ''
+          "${site "overseerr"}".extraConfig = ''
             reverse_proxy 127.0.0.1:5055
             ${tls}
           '';
-          "tdarr.lab.adhia.net".extraConfig = ''
+          "${site "tdarr"}".extraConfig = ''
             reverse_proxy 127.0.0.1:8265
             ${tls}
           '';
-          "pihole.lab.adhia.net".extraConfig = ''
+          "${site "pihole"}".extraConfig = ''
             reverse_proxy localhost:8080
             ${tls}
           '';
-          "hass.lab.adhia.net".extraConfig = ''
+          "${site "hass"}".extraConfig = ''
             reverse_proxy 127.0.0.1:8123
             ${tls}
           '';
-          "gatus.lab.adhia.net".extraConfig = ''
+          "${site "gatus"}".extraConfig = ''
             reverse_proxy 127.0.0.1:8085
             ${tls}
           '';
-          "rummy.lab.adhia.net".extraConfig = ''
+          "${site "rummy"}".extraConfig = ''
             reverse_proxy localhost:3000
             ${tls}
           '';
         };
       };
 
-      # Cloudflare API token (Zone:DNS:Edit on adhia.net) as `CF_API_TOKEN=...`.
-      age.secrets.caddy-dns-token.file = ../../secrets/caddy-dns-token.age;
+      # Cloudflare API token (Zone:DNS:Edit) as `CF_API_TOKEN=...`.
+      age.secrets.caddy-dns-token.file = "${inputs.nix-private}/secrets/caddy-dns-token.age";
       systemd.services.caddy.serviceConfig.EnvironmentFile = config.age.secrets.caddy-dns-token.path;
 
       # 80/443 are only reachable over Tailscale.

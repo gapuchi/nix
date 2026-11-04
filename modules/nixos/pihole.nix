@@ -1,8 +1,9 @@
-{ ... }:
+{ inputs, ... }:
 
 let
-  devices = import ../_lib/devices.nix;
-  calculusHostname = "calculus.home.arpa";
+  devices = inputs.nix-private.devices;
+  lab = inputs.nix-private.lab;
+  site = name: "${name}.${lab.domain}";
 in
 {
   flake.modules.nixos.pihole =
@@ -45,23 +46,23 @@ in
             listeningMode = "ALL";
             hosts = [
               "${devices.router.ip} router"
-              "${devices.calculus.tailscaleIp} calculus ${calculusHostname}"
+              "${devices.calculus.tailscaleIp} calculus ${lab.calculusHostname}"
               "${devices.snowy.ip} snowy"
             ];
             cnameRecords = [
-              "home.lab.adhia.net,${calculusHostname}"
-              "pihole.lab.adhia.net,${calculusHostname}"
-              "plex.lab.adhia.net,${calculusHostname}"
-              "jellyfin.lab.adhia.net,${calculusHostname}"
-              "qbittorrent.lab.adhia.net,${calculusHostname}"
-              "prowlarr.lab.adhia.net,${calculusHostname}"
-              "sonarr.lab.adhia.net,${calculusHostname}"
-              "radarr.lab.adhia.net,${calculusHostname}"
-              "overseerr.lab.adhia.net,${calculusHostname}"
-              "tdarr.lab.adhia.net,${calculusHostname}"
-              "hass.lab.adhia.net,${calculusHostname}"
-              "gatus.lab.adhia.net,${calculusHostname}"
-              "rummy.lab.adhia.net,${calculusHostname}"
+              "${site "home"},${lab.calculusHostname}"
+              "${site "pihole"},${lab.calculusHostname}"
+              "${site "plex"},${lab.calculusHostname}"
+              "${site "jellyfin"},${lab.calculusHostname}"
+              "${site "qbittorrent"},${lab.calculusHostname}"
+              "${site "prowlarr"},${lab.calculusHostname}"
+              "${site "sonarr"},${lab.calculusHostname}"
+              "${site "radarr"},${lab.calculusHostname}"
+              "${site "overseerr"},${lab.calculusHostname}"
+              "${site "tdarr"},${lab.calculusHostname}"
+              "${site "hass"},${lab.calculusHostname}"
+              "${site "gatus"},${lab.calculusHostname}"
+              "${site "rummy"},${lab.calculusHostname}"
             ];
             rateLimit = {
               count = 0;
@@ -74,8 +75,8 @@ in
           };
           dhcp = {
             active = true;
-            start = "192.168.1.100";
-            end = "192.168.1.254";
+            start = lab.dhcp.start;
+            end = lab.dhcp.end;
             router = devices.router.ip;
             hosts = [ "${devices.snowy.mac},${devices.snowy.ip},snowy" ];
           };

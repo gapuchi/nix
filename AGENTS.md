@@ -9,9 +9,11 @@ Unify machine setup with **Nix** across NixOS and macOS. Prefer small, correct c
 
 ## Project overview
 
-Personal Nix configuration for several machines. **Flakes** are the entry point (`flake.nix`, pinned by `flake.lock`); **Home Manager** owns user config, **nix-darwin** owns macOS systems, **agenix** manages secrets. `just` runs common tasks and `direnv` loads the dev shell on `cd`.
+Personal Nix configuration for several machines. **Flakes** are the entry point (`flake.nix`, pinned by `flake.lock`); **Home Manager** owns user config, **nix-darwin** owns macOS systems, **agenix** manages secrets. Encrypted secrets and evaluation-time private values live in the private flake [`gapuchi/nix-private`](https://github.com/gapuchi/nix-private) (`inputs.nix-private`). `just` runs common tasks and `direnv` loads the dev shell on `cd`.
 
-The flake is built with **flake-parts** + **import-tree**: `flake.nix` is tiny and `inputs.import-tree ./modules` auto-imports `modules/**/*.nix` (directories named with a leading `_`, like `_lib`, are skipped). There is no manual import list — adding a file under `modules/` is enough to load it.
+The flake is built with **flake-parts** + **import-tree**: `flake.nix` is tiny and `inputs.import-tree ./modules` auto-imports `modules/**/*.nix` (directories named with a leading `_` are skipped). There is no manual import list — adding a file under `modules/` is enough to load it.
+
+Fetching `nix-private` needs a GitHub token with read access to that repo (`access-tokens = github.com=<PAT>` in `nix.conf`, or `NIX_CONFIG`).
 
 ## Two tiers
 
@@ -22,7 +24,7 @@ This is the boundary agents must respect. Module files do **not** produce machin
 | **Module library** | `modules/{nixos,darwin,home-manager}/` | Register named modules into `config.flake.modules.{nixos,darwin,homeManager}.<name>` |
 | **Host wiring** | `modules/hosts/<host>/default.nix` | Build `flake.{nixosConfigurations,darwinConfigurations,homeConfigurations}` by selecting registered modules + setting `my.*` options |
 | **Flake plumbing** | `modules/{options,systems,devshell}.nix` | flake-parts setup, supported systems, dev shell |
-| **Shared helpers** | `modules/_lib/*.nix` | Plain attrsets (`ssh-keys.nix`, `devices.nix`), `import`ed directly — not flake modules. Paths under `/_` are not auto-imported by import-tree. |
+| **Private flake** | `inputs.nix-private` ([gapuchi/nix-private](https://github.com/gapuchi/nix-private)) | Encrypted `.age` files plus evaluation-time `identity`, `sshKeys`, `devices`, `lab` |
 
 Within each class directory:
 
@@ -60,13 +62,24 @@ When adding packages or home options, respect the target:
 | **Linux server** | NixOS, headless | No desktop environment. **Do not** add packages whose main purpose is a GUI. |
 | **Mac** | nix-darwin or standalone Home Manager | **Do not** add packages whose main purpose is a GUI. |
 
-## Secrets (agenix)
+## Secrets and private values (`nix-private`)
 
-Plaintext secrets, private keys, and credential env files must never be committed. A line in `secrets.nix` alone does nothing — Nix must reference the `.age` file. Workflow:
+Encrypted secrets and evaluation-time private values live in [gapuchi/nix-private](https://github.com/gapuchi/nix-private) — not in this public repo. Plaintext secrets, private keys, and credential env files must never be committed anywhere.
 
-1. Add a rule in `secrets.nix`: `secrets/<name>.age` → `publicKeys` (SSH keys from `_lib/ssh-keys.nix` allowed to decrypt).
-2. Create/edit the encrypted file from the dev shell: `agenix -e secrets/<name>.age` (verify with `agenix -d`).
-3. Wire it where used: `age.secrets.<name>.file = ../../secrets/<name>.age;` and consume `config.age.secrets.<name>.path`. The agenix module must be imported for that target (`inputs.agenix.{nixosModules,homeManagerModules}.default`).
+| Kind | How public nix reads it |
+|------|-------------------------|
+| Encrypted `.age` | `age.secrets.<name>.file = "${inputs.nix-private}/secrets/<name>.age";` then `config.age.secrets.<name>.path` |
+| Identity / git | `inputs.nix-private.identity` |
+| SSH authorized keys | `inputs.nix-private.sshKeys` |
+| LAN topology | `inputs.nix-private.devices` |
+| Lab domain / DHCP | `inputs.nix-private.lab` |
+
+Edit secrets **in the nix-private checkout** (agenix is in this repo's dev shell):
+
+1. Add a rule in nix-private `secrets.nix`: `secrets/<name>.age` → `publicKeys` (keys from nix-private `ssh-keys.nix`).
+2. `agenix -e secrets/<name>.age` (verify with `agenix -d`).
+3. Wire the path in this repo as above; import `inputs.agenix.{nixosModules,homeManagerModules}.default` on the target.
+4. Commit/push nix-private, then from this repo: `nix flake update nix-private`.
 
 ## Common tasks
 
@@ -77,7 +90,7 @@ Plaintext secrets, private keys, and credential env files must never be committe
 | Add a package for a user | `modules/home-manager/base.nix` (`home.packages`) or the relevant HM feature/bundle |
 | Add a NixOS service | New `modules/nixos/<svc>.nix`; import it in `modules/hosts/<host>/default.nix` |
 | Add a machine | New `modules/hosts/<host>/default.nix` (+ `hosts/<host>/hardware-configuration.nix` for NixOS); see `hosts/AGENTS.md` |
-| Add a secret | `secrets.nix` + `secrets/<name>.age` + `age.secrets` reference (see above) |
+| Add a secret or private value | nix-private (see above), then `age.secrets` / attr reference here + `nix flake update nix-private` |
 | Add a site behind Caddy | `hosts/AGENTS.md` → Caddy section |
 
 ## What not to do
@@ -86,7 +99,7 @@ Plaintext secrets, private keys, and credential env files must never be committe
 - Don't read `my.*` to branch behavior across hosts; hosts select modules. Single-host features may hardcode lab facts; don't pretend they're portable when they aren't.
 - Don't have a host reach into a feature's internals — go through `my.*` options and `homeImports`.
 - Don't add GUI packages to server or macOS targets (see machine categories).
-- Don't commit plaintext secrets or key material; don't add a `secrets.nix` rule without a corresponding `age.secrets` reference.
+- Don't commit plaintext secrets, key material, or put `.age` files / identity / lab topology back in this public repo.
 - Don't restate module settings in `AGENTS.md` or `hosts/AGENTS.md`. A host note is for a constraint the code does not make obvious (qBittorrent is inside the Mullvad namespace, so Caddy cannot use localhost; the Tdarr worker only runs while haddock is on the home LAN). Ports, paths, umasks, queue limits, and a list of every service belong in the Nix.
 
 ## Running checks

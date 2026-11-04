@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 let
-  devices = import ../_lib/devices.nix;
+  devices = inputs.nix-private.devices;
 in
 {
   flake.modules.nixos.qbittorrent =
@@ -16,7 +16,7 @@ in
     {
       imports = [ inputs.vpn-confinement.nixosModules.default ];
 
-      age.secrets.mullvad-wg.file = ../../secrets/mullvad-wg.age;
+      age.secrets.mullvad-wg.file = "${inputs.nix-private}/secrets/mullvad-wg.age";
 
       vpnNamespaces.${vpn} = {
         enable = true;

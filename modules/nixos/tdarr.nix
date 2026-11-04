@@ -1,7 +1,7 @@
 { inputs, lib, ... }:
 
 let
-  devices = import ../_lib/devices.nix;
+  devices = inputs.nix-private.devices;
   webUIPort = 8265;
   serverPort = 8266;
   tdarrPackage =
