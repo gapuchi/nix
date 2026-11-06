@@ -1,5 +1,7 @@
 os := `uname -s`
-switch_cmd := if os == "Darwin" { "sudo darwin-rebuild switch" } else { "sudo nixos-rebuild switch" }
+# darwin-rebuild fetches as root and then sets HOME=/var/root, so the user
+# nix.conf is never read. sudo would also drop NIX_CONFIG from direnv.
+switch_cmd := if os == "Darwin" { "sudo --preserve-env=NIX_CONFIG darwin-rebuild switch" } else { "sudo --preserve-env=NIX_CONFIG nixos-rebuild switch" }
 version_cmd := if os == "Darwin" { "darwin-version" } else { "nixos-version" }
 
 alias s := switch
