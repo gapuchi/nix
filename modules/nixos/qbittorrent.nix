@@ -9,18 +9,18 @@ in
     let
       webuiPort = 8090;
       torrentingPort = 50413;
-      vpn = "mullvad";
+      vpn = "proton";
       downloadDir = "${devices.snowy.mountPoint}/downloads";
       incompleteDir = "/var/lib/qBittorrent/.incomplete";
     in
     {
       imports = [ inputs.vpn-confinement.nixosModules.default ];
 
-      age.secrets.mullvad-wg.file = "${inputs.nix-private}/secrets/mullvad-wg.age";
+      age.secrets.proton-wg.file = "${inputs.nix-private}/secrets/proton-wg.age";
 
       vpnNamespaces.${vpn} = {
         enable = true;
-        wireguardConfigFile = config.age.secrets.mullvad-wg.path;
+        wireguardConfigFile = config.age.secrets.proton-wg.path;
         accessibleFrom = [
           "192.168.0.0/16"
           "100.64.0.0/10"

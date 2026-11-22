@@ -19,7 +19,7 @@ A host file builds one output (`nixosSystem` / `darwinSystem` / `homeManagerConf
 
 Home server. `modules/hosts/calculus/default.nix` selects `gapuchiServer` and the lab modules. Those lab modules are single-host features selected only here.
 
-Snowy (`inputs.nix-private.devices.snowy`) is the NFS library, mounted here and on haddock at the same path. qBittorrent runs inside the Mullvad namespace (`vpnNamespaces.mullvad`): a dropped tunnel has no route out, and Caddy reaches the WebUI at `192.168.15.1:8090` because port mappings are PREROUTING-only. The arr apps stay on the host network and import from that download directory. Tdarr's server runs here; the worker is on haddock, so nothing transcodes while that PC is off.
+Snowy (`inputs.nix-private.devices.snowy`) is the NFS library, mounted here and on haddock at the same path. qBittorrent runs inside the Proton namespace (`vpnNamespaces.proton`): a dropped tunnel has no route out, and Caddy reaches the WebUI at `192.168.15.1:8090` because port mappings are PREROUTING-only. The arr apps stay on the host network and import from that download directory. Tdarr's server runs here; the worker is on haddock, so nothing transcodes while that PC is off.
 
 ### `haddock` (Linux desktop)
 
@@ -41,4 +41,4 @@ A name is not reachable until every item below is in the same change. Caddy alon
 4. Add a link in `modules/nixos/homepage.nix`.
 5. Add a loopback check in `modules/nixos/gatus.nix`.
 
-qBittorrent is the exception: it runs inside the Mullvad namespace, so Caddy uses `reverse_proxy 192.168.15.1:8090`. Leave this file alone unless a service breaks that loopback pattern.
+qBittorrent is the exception: it runs inside the Proton namespace, so Caddy uses `reverse_proxy 192.168.15.1:8090`. Leave this file alone unless a service breaks that loopback pattern.
